@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 16:52:47 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/21 17:56:57 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/21 18:29:57 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ char    *do_if_u(unsigned u, char *str)
     return (str);
 }
 
-char *do_if_X(int x, char *str, int base)
+char *do_if_X(int x, char *str)
 {
     char *s_num;
 
@@ -179,7 +179,7 @@ char *do_if_X(int x, char *str, int base)
     return (str);
 }
 
-char *do_if_O(int o, char *str, int base)
+char *do_if_O(int o, char *str)
 {
     char *s_num;
 
@@ -234,13 +234,13 @@ int *ft_printf(char *apFormat, ...)
         else if (*p == 'x')
         {
             ival = va_arg(ap, int);
-            result = do_if_X(ival, result, 16);
+            result = do_if_X(ival, result);
             continue;
         }
         else if (*p == 'o')
         {
             ival = va_arg(ap, int);
-            result = do_if_O(ival, result, 8);
+            result = do_if_O(ival, result);
             continue;
         }
         else  if (*p == 'f')
@@ -274,14 +274,15 @@ int *ft_printf(char *apFormat, ...)
 
 int main(void)
 {
-    int a = 4;
-    double b = 4.222;
-    char *str = "abcdefg";
-    unsigned int d1 = 4294967295;
-    char sym = 'G';
+    int a = -4;
+   // char *str = "abcdefg";
+   // unsigned int d1 = 4294967295;
+   // char sym = 'G';
     
-    ft_printf("%% %u", d1);
-    printf("\n%% %u", d1);
+    printf("%d", ft_printf("%x", 42));
+    printf("\n");
+    printf("%d", printf("%x", 42));
+   // printf("\n%% %d", a);
     //printf("%s", y);
     //printf("\n%p", &a);
     return 0;
