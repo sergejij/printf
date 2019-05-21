@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 16:52:47 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/21 14:22:36 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:56:57 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "./libft/libft.h"
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putpointer(char *str)
-{
-    while (str++)
-	    write(1, str, 1);
-}
 
 void	ft_putnbr(int n)
 {
@@ -102,21 +91,77 @@ char		*ft_itoa_base(int n, int base)
 	}
 	return (result);
 }
-
+/*
 char *do_if_d(int d, char *str)
 {
     int len;
     char *s_num;
     int size;
-    int i = 0;
-
-    size =  ft_discharge(d);
-    len = ft_lennum(d);
+    int i;
+    
+    i = 0;
+    size = ft_discharge(d);
+    len = ft_strlen(d);
     s_num = (char*)malloc(sizeof(char) * (len + 1));
     while (size > 0)
     {
-        s_num[i] = (d / size) + 48;
+        if (d < 0)
+            s_num[i] = (d / size * -1) + 48;
+        else
+            s_num[i] = (d / size) + 48;
         d %= size;
+        size /= 10;
+        i++;
+    }
+    s_num[i] = '\0';
+    str = ft_strjoin(str, s_num);
+    return (str);
+}*/
+
+unsigned int	ft_discharge_u(unsigned int n)
+{
+	unsigned int	res;
+
+	res = 1;
+	while (n / 10)
+	{
+		res *= 10;
+		n /= 10;
+	}
+	return (res);
+}
+
+int		ft_lennum_u(unsigned int num)
+{
+	int len;
+
+	len = 0;
+
+	if (num == 0)
+		return (1);
+	while (num != 0)
+	{
+		len++;
+		num /= 10;
+	}
+	return (len);
+}
+
+char    *do_if_u(unsigned u, char *str)
+{
+    int len;
+    char *s_num;
+    int size;
+    int i;
+    
+    i = 0;
+    size =  ft_discharge_u(u);
+    len = ft_lennum_u(u);
+    s_num = (char*)malloc(sizeof(char) * (len + 1));
+    while (size > 0)
+    {
+        s_num[i] = (u / size) + 48;
+        u %= size;
         size /= 10;
         i++;
     }
@@ -155,22 +200,37 @@ int *ft_printf(char *apFormat, ...)
     double dval = 0;
     char *sval;
     char cval;
-    char *pval;
+    int pval;
+    unsigned int uval;
+
     while (*(++p))
     {
-        if (*p == '%')
+        if (*p == '%' && *(p - 1) != '%')
             continue;
         if (*p == 'p')
         {
-            pval = va_arg(ap, char*);
+            pval = va_arg(ap, int);
+            char *s = ft_itoa_base(pval, 16);
+            if (ft_strlen(s) == 7)
+                s = ft_strjoin("0x10" , s);
+            else
+                s = ft_strjoin("0x7fff" , s);
+            printf("%s", s);
+           // printf("%s", s);
             continue;
         }
-        if (*p == 'd')
+        if (*p == 'u')
+        {
+             uval = va_arg(ap, unsigned int);
+             result = do_if_u(uval, result);
+             continue;   
+        }
+       /* if (*p == 'd' || *p == 'i')
         {
             ival = va_arg(ap, int);
             result = do_if_d(ival, result);
             continue;
-        }
+        }*/
         else if (*p == 'x')
         {
             ival = va_arg(ap, int);
@@ -217,9 +277,11 @@ int main(void)
     int a = 4;
     double b = 4.222;
     char *str = "abcdefg";
-    unsigned int d1 = 123;
+    unsigned int d1 = 4294967295;
     char sym = 'G';
-    ft_printf("%d - %d - %o - %c - %s", a, a, a + 1245, sym, str);
+    
+    ft_printf("%% %u", d1);
+    printf("\n%% %u", d1);
     //printf("%s", y);
     //printf("\n%p", &a);
     return 0;
