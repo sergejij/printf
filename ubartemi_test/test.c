@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 16:52:47 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/21 18:29:57 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/22 13:13:10 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char		*ft_itoa_base(int n, int base)
 	}
 	return (result);
 }
-/*
+
 char *do_if_d(int d, char *str)
 {
     int len;
@@ -101,7 +101,7 @@ char *do_if_d(int d, char *str)
     
     i = 0;
     size = ft_discharge(d);
-    len = ft_strlen(d);
+    len = ft_lennum(d);
     s_num = (char*)malloc(sizeof(char) * (len + 1));
     while (size > 0)
     {
@@ -116,7 +116,7 @@ char *do_if_d(int d, char *str)
     s_num[i] = '\0';
     str = ft_strjoin(str, s_num);
     return (str);
-}*/
+}
 
 unsigned int	ft_discharge_u(unsigned int n)
 {
@@ -202,6 +202,7 @@ int *ft_printf(char *apFormat, ...)
     char cval;
     int pval;
     unsigned int uval;
+    char *flags;
 
     while (*(++p))
     {
@@ -225,12 +226,12 @@ int *ft_printf(char *apFormat, ...)
              result = do_if_u(uval, result);
              continue;   
         }
-       /* if (*p == 'd' || *p == 'i')
+     if (*p == 'd' || *p == 'i')
         {
             ival = va_arg(ap, int);
             result = do_if_d(ival, result);
             continue;
-        }*/
+        }
         else if (*p == 'x')
         {
             ival = va_arg(ap, int);
@@ -261,11 +262,19 @@ int *ft_printf(char *apFormat, ...)
             ft_strncat(result, sval, ft_strlen(sval));
             continue;
         }
-        else
+        if (*p == '#')
+            ft_strncat(flags, '#', 1);
+        else if (*p == '#')
+            ft_strncat(flags, '#', 1);
+        else if (*p == '#')
+            ft_strncat(flags, '#', 1);
+        else if (*p == '#')
+            ft_strncat(flags, '#', 1);
+        /*else
         {
             ft_strncat(result, p, 1);
             continue;
-        }
+        }*/
     }
     ft_putstr(result);
     va_end(ap);
@@ -275,13 +284,13 @@ int *ft_printf(char *apFormat, ...)
 int main(void)
 {
     int a = -4;
-   // char *str = "abcdefg";
+    char str[10] = "abcdefg";
    // unsigned int d1 = 4294967295;
    // char sym = 'G';
     
-    printf("%d", ft_printf("%x", 42));
-    printf("\n");
-    printf("%d", printf("%x", 42));
+    //ft_printf("%x", 42);
+   // printf("\n");
+    printf("%p\n%p", &a, &str);
    // printf("\n%% %d", a);
     //printf("%s", y);
     //printf("\n%p", &a);
