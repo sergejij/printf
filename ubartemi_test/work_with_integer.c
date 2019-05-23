@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/22 17:10:21 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/23 17:21:05 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,31 +34,63 @@ int ft_is_type(char c)
     return (0);
 }
 
+//  не всегда компилится без ширины, один раз из трех работает, че за хрень
 void ft_add_integer(char **result, int int_arg, t_prinlist *lst)
 {
     int len;
-    char *tmp;
 
     len =  ft_lennum(int_arg);
-    tmp = *result + (lst->width - len);
-    if (lst->width && ((lst->flag | ZERO) == ZERO) && lst->width > len) // zero
+    // чет я херню всякую делаю!
+    if (lst->width && ((lst->flag & 4) == 4)) // -
+    {
+        if (lst->width && ((lst->flag & 8) == 8))
+        {
+            ft_strncat(*result, "+", 1);
+            *result = ft_strjoin(*result, ft_itoa(int_arg));
+            if (lst->width == 0)
+            {
+                *result = ft_strjoin(*result, ft_itoa(int_arg));
+                return ;
+            }
+            while (lst->width > len++ + 1) // из-за + 1 не выводит без ширины печатать
+                *result = ft_strjoin(*result, ".");
+            return ;
+        }
+        *result = ft_strjoin(*result, ft_itoa(int_arg));
+        while (lst->width > len++)
+            *result = ft_strjoin(*result, " ");
+    }
+    else if (lst->width && ((lst->flag & 8) == 8)) // +
+    {
+        if (lst->width == 0)
+        {
+            ft_strncat(*result, "+", 1);
+            *result = ft_strjoin(*result, ft_itoa(int_arg));
+            return ;
+        }
+        while (lst->width > len++)
+            *result = ft_strjoin(*result, " ");
+        ft_strncat(*result, "+", 1);
+        *result = ft_strjoin(*result, ft_itoa(int_arg));
+    }
+    else if (lst->width && ((lst->flag & ZERO) == ZERO)) // zero
     {
         while (lst->width > len++)
-            write(1, "0", 1);
-        ft_putstr(ft_itoa(int_arg));
-        //while (lst->width > len++)
-        //ft_memset(*result, 48, lst->width - len);
-        //tmp = ft_strjoin(tmp, ft_itoa(int_arg));
+            *result = ft_strjoin(*result, "0");
+        *result = ft_strjoin(*result, ft_itoa(int_arg));
     }
-    if (lst->width && ((lst->flag | 4) == 4))
+    else
     {
-        
+        if (lst->width == 0)
+        {
+            *result = ft_strjoin(*result, ft_itoa(int_arg));
+            return ;
+        }
+        while (lst->width > len++)
+            *result = ft_strjoin(*result, " ");
+         *result = ft_strjoin(*result, ft_itoa(int_arg));
     }
-    if (lst->width && ((lst->flag | 8) == 8))
-    {
-
-    }
-    *result = ft_strjoin(*result, ft_itoa(int_arg));
+    return ;
 }
 
 int ft_analise_types(char *format, char *result, int int_arg, t_prinlist *lst)
@@ -66,7 +98,7 @@ int ft_analise_types(char *format, char *result, int int_arg, t_prinlist *lst)
     if(*format == 'd')
     {
         ft_add_integer(&result, int_arg, lst);
-        //ft_putstrr(result);
+        ft_putstrr(result);
     }
     return 1;
 }
@@ -134,7 +166,7 @@ int ft_printf(const char *apformat, ...)
 int main(void)
 {
     int a = 5;
-    ft_printf("%019d", a);
-    printf("\n%019d", a);
+    ft_printf("%d", a);
+    printf("\n%d", a);
     return (0);
 }
