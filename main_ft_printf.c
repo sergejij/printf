@@ -1,4 +1,3 @@
-
 #include "ft_printf.h"
 
 int g_sym_count = 0;
@@ -62,14 +61,15 @@ int ft_printf(const char *apformat, ...)
     const char *p_apFormat = apformat;
     int flag;
     t_prinlist *lst;
+    char *tmp;
 
     char *result = (char *)malloc(sizeof(char) * 100);
+    tmp = result;
     while(*p_apFormat)
     {
         //идем про форматирующей строке
         if (*p_apFormat == '%')
         {
-
             // делаем структуру:
             lst = (t_prinlist *)malloc(sizeof(t_prinlist));
             lst->pricision = 0;
@@ -93,19 +93,23 @@ int ft_printf(const char *apformat, ...)
         }
         p_apFormat++;
     }
-    return g_sym_count;
+    ft_strdel(&tmp);
+    free(lst);
+    return (g_sym_count);
 }
-
+/*
 int main()
 {
     int i = 5;
+    char *tmp;
     char *s = (char*)malloc(sizeof(4));
+    tmp = s;
     s = "abc";
     float g = 123.223;
-   // int *a = &i;
+    // int *a = &i;
     unsigned long a = 9223372036854775807;
     //printf("\n%d", ft_printf("test %s", "huest"));
-    ft_printf("%s%d%40p", s, i, &s);
-    printf("\n%s%d%40p", s, i, &s);
+    ft_printf("%-100p", &s);
+    free(tmp);
     return  0;
 }
