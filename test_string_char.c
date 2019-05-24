@@ -10,11 +10,13 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
     len = ft_strlen(str_arg);
     if(lst->pricision && lst->pricision < len)//обрезаем строку
     {
+        tmp = str_arg;
         str_arg = ft_strsub(str_arg, 0, lst->pricision);
         len = ft_strlen(str_arg);
     }
     if(lst->width > len && ((lst->flag & MINUS) == MINUS))// сдвигаем влево
     {
+        tmp = result;
         result = ft_strjoin(result, str_arg);
         tmp = result + len;
         ft_memset(tmp, '.', lst->width - len);
@@ -27,7 +29,5 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
     }
     else
         result = ft_strjoin(result, str_arg);
-    g_sym_count += ft_strlen(result);
     return (result);
 }
-
