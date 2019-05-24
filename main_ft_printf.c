@@ -96,7 +96,7 @@ int ft_printf(const char *apformat, ...)
 
 int main()
 {
-    printf("%d", ft_printf("test%s", "huest"));
+    printf("\n%d", ft_printf("test %s", "huest"));
     //printf("aaa%-10.3sbbb\n", "12345");
     return  0;
 }
