@@ -31,5 +31,9 @@ int ft_is_type(char c);
 void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst);
 char *ft_add_string(char *result, char *str_arg, t_prinlist *lst);
 void ft_add_integer(char **result, int arg, t_prinlist *lst);
+void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst);
+char		*ft_itoa_base_ul(unsigned long n);
+int		ft_lennum_base(unsigned long num);
+
 
 #endif //PRINTF_FT_PRINTF_H

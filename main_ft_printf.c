@@ -1,4 +1,3 @@
-
 #include "ft_printf.h"
 
 int g_sym_count = 0;
@@ -12,16 +11,13 @@ int ft_is_type(char c)
 
 void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
 {
-    if(*format == 's')
-    {
+    if (*format == 's')
         result = ft_add_string(result, va_arg(ap, char*), lst);
-        ft_putstr(result);
-    }
-    if(*format == 'd')
-    {
+    else if (*format == 'd')
         ft_add_integer(&result, va_arg(ap, int), lst);
-        ft_putstr(result);
-    }
+    else if (*format == 'p')
+        ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
+    ft_putstr(result);
 }
 
 int ft_analise_flags(char *format, t_prinlist *lst)
@@ -65,14 +61,15 @@ int ft_printf(const char *apformat, ...)
     const char *p_apFormat = apformat;
     int flag;
     t_prinlist *lst;
+    char *tmp;
 
     char *result = (char *)malloc(sizeof(char) * 100);
+    tmp = result;
     while(*p_apFormat)
     {
         //идем про форматирующей строке
         if (*p_apFormat == '%')
         {
-
             // делаем структуру:
             lst = (t_prinlist *)malloc(sizeof(t_prinlist));
             lst->pricision = 0;
@@ -96,14 +93,57 @@ int ft_printf(const char *apformat, ...)
         }
         p_apFormat++;
     }
-    return g_sym_count;
+    ft_strdel(&tmp);
+    free(lst);
+    return (g_sym_count);
 }
-
-/*int main()
+/*
+int main()
 {
     int i = 5;
-  //  char s[]= "abs";
+    char *tmp;
+    char *s = (char*)malloc(sizeof(4));
+    tmp = s;
+    s = "abc";
+    float g = 123.223;
+    // int *a = &i;
+    unsigned long a = 9223372036854775807;
     //printf("\n%d", ft_printf("test %s", "huest"));
-    ft_printf("%d\n", i);
+    ft_printf("%-100p", &s);
+    free(tmp);
+    return  0;
+}
+
+int main()
+{
+    int i = 5;
+   // char *s = (char*)malloc(sizeof(4));
+   // s = "abc";
+   // float g = 123.223;
+   // int *a = &i;
+   // unsigned long a = 9223372036854775807;
+    //printf("\n%d", ft_printf("test %s", "huest"));
+    printf("-%d", ft_printf("\n%-+10d\n",i));
+    printf("-%d", printf("\n%-+10d\n", i));
+
+    printf("\n");
+
+    ft_printf("%+10d\n",i);
+    printf("%+10d\n", i);
+
+    printf("\n");
+
+    ft_printf("%-10\n",i);
+    printf("%-10d\n", i);
+
+    printf("\n");
+
+    ft_printf("%+010d\n",i);
+    printf("%+010d\n", i);
+
+    printf("\n");
+
+    ft_printf("%d\n",i);
+    printf("%d\n", i);
     return  0;
 }*/

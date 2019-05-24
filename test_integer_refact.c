@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/24 18:26:31 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/24 19:30:16 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 //  не всегда компилится без ширины, один раз из трех работает, че за хрень
 
 #include "ft_printf.h"
+extern int g_sym_count;
 
 void ft_add_integer(char **result, int arg, t_prinlist *lst)
 {
@@ -24,10 +25,16 @@ void ft_add_integer(char **result, int arg, t_prinlist *lst)
     len =  ft_lennum(arg);
     if (((lst->flag & MINUS) == MINUS))
     {
-        *result = ft_itoa(arg);
-        ft_memset(*result + len, ' ', lst->width - len);
+        if(lst->width > len)
+            ft_memset(*result, '.', lst->width - len);
+        tmp = ft_itoa(arg);
         if (((lst->flag & PLUS) == PLUS))
-            *result = ft_strjoin("+", *result);
+        {
+            tmp = ft_strjoin("+", tmp);
+            len++;
+            (*result)[lst->width - len] = '\0';
+        }
+        *result = ft_strjoin(tmp, *result);
     }
     else if (((lst->flag & PLUS) == PLUS)) // +
     {
@@ -40,9 +47,9 @@ void ft_add_integer(char **result, int arg, t_prinlist *lst)
                 ft_memset(*result, '0', lst->width - len);
                 *result = ft_strjoin(*result, ft_itoa(arg));
                 *result = ft_strjoin("+", *result);
-                return; ;
+                return;
             }
-            ft_memset(*result, ' ', lst->width - len);
+            ft_memset(*result, '.', lst->width - len);
             tmp = ft_strjoin("+", ft_itoa(arg));
             *result = ft_strjoin(*result, tmp);
         }
@@ -58,8 +65,9 @@ void ft_add_integer(char **result, int arg, t_prinlist *lst)
     else
     {
         if(lst->width > len)
-            ft_memset(*result, ' ', lst->width - len);
+            ft_memset(*result, '.', lst->width - len);
         *result = ft_strjoin(*result, ft_itoa(arg));
     }
+
 }
 

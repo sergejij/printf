@@ -6,29 +6,28 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
 {
     char *tmp;
     size_t len;
-    char *arg_cpy = ft_strdup(str_arg);
 
-    len = ft_strlen(arg_cpy);
+    len = ft_strlen(str_arg);
     if(lst->pricision && lst->pricision < len)//обрезаем строку
     {
-        ft_memset(arg_cpy + lst->pricision, '\0', len - lst->pricision);
-        len = ft_strlen(arg_cpy);
+        tmp = str_arg;
+        str_arg = ft_strsub(str_arg, 0, lst->pricision);
+        len = ft_strlen(str_arg);
     }
-    if(lst->width > len && ((lst->flag & 4) == 4))// сдвигаем влево
+    if(lst->width > len && ((lst->flag & MINUS) == MINUS))// сдвигаем влево
     {
-        result = ft_strjoin(result, arg_cpy);
+        tmp = result;
+        result = ft_strjoin(result, str_arg);
         tmp = result + len;
         ft_memset(tmp, '.', lst->width - len);
     }
     else if(lst->width && lst->width > len) // сдвигаем вправо
     {
         ft_memset(result, '.', lst->width - len);
-        tmp = result + len;
-        tmp = ft_strcpy(tmp, arg_cpy);
+        tmp = result + (lst->width - len);
+        tmp = ft_strcpy(tmp, str_arg);
     }
     else
-        result = ft_strjoin(result, arg_cpy);
-    g_sym_count += ft_strlen(result);
+        result = ft_strjoin(result, str_arg);
     return (result);
 }
-

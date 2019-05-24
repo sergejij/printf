@@ -6,7 +6,7 @@
 /*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:59:55 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/04/15 14:31:00 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/24 16:52:29 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char		*ft_itoa(int n)
 	else
 		number = n;
 	ft_record(number, result, len);
+	result[len + 1] = '\0';
 	return (result);
 }
