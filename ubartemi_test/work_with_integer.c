@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/23 17:21:05 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/24 11:58:53 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,54 +41,72 @@ void ft_add_integer(char **result, int int_arg, t_prinlist *lst)
 
     len =  ft_lennum(int_arg);
     // чет я херню всякую делаю!
-    if (lst->width && ((lst->flag & 4) == 4)) // -
+    if (lst->width == 0)
+        lst->width = 1;
+    if (((lst->flag & 4) == 4)) // -
     {
-        if (lst->width && ((lst->flag & 8) == 8))
+        if (((lst->flag & 8) == 8)) // +
         {
             ft_strncat(*result, "+", 1);
             *result = ft_strjoin(*result, ft_itoa(int_arg));
-            if (lst->width == 0)
+            /*if (lst->width == 0)
             {
                 *result = ft_strjoin(*result, ft_itoa(int_arg));
                 return ;
-            }
+            }*/
             while (lst->width > len++ + 1) // из-за + 1 не выводит без ширины печатать
-                *result = ft_strjoin(*result, ".");
+                *result = ft_strjoin(*result, " ");
             return ;
         }
         *result = ft_strjoin(*result, ft_itoa(int_arg));
         while (lst->width > len++)
             *result = ft_strjoin(*result, " ");
     }
-    else if (lst->width && ((lst->flag & 8) == 8)) // +
+    else if (((lst->flag & 8) == 8)) // +
     {
+        if (((lst->flag & ZERO) == ZERO))
+        {
+            ft_strncat(*result, "+", 1);
+            while (lst->width > len++ + 1)
+                *result = ft_strjoin(*result, "0");
+            *result = ft_strjoin(*result, ft_itoa(int_arg));
+            return ;
+        }
         if (lst->width == 0)
         {
             ft_strncat(*result, "+", 1);
             *result = ft_strjoin(*result, ft_itoa(int_arg));
             return ;
         }
-        while (lst->width > len++)
+        while (lst->width > len++ + 1)
             *result = ft_strjoin(*result, " ");
         ft_strncat(*result, "+", 1);
         *result = ft_strjoin(*result, ft_itoa(int_arg));
     }
-    else if (lst->width && ((lst->flag & ZERO) == ZERO)) // zero
+    else if (((lst->flag & ZERO) == ZERO)) // zero
     {
+        if ((lst->flag & 8) == 8) // +
+        {
+            ft_strncat(*result, "+", 1);
+            while (lst->width > len++)
+                *result = ft_strjoin(*result, "0");
+            *result = ft_strjoin(*result, ft_itoa(int_arg));
+            return ;
+        }
         while (lst->width > len++)
             *result = ft_strjoin(*result, "0");
         *result = ft_strjoin(*result, ft_itoa(int_arg));
     }
     else
     {
-        if (lst->width == 0)
+        /*if (lst->width == 0)
         {
             *result = ft_strjoin(*result, ft_itoa(int_arg));
             return ;
-        }
+        }*/
         while (lst->width > len++)
             *result = ft_strjoin(*result, " ");
-         *result = ft_strjoin(*result, ft_itoa(int_arg));
+        *result = ft_strjoin(*result, ft_itoa(int_arg));
     }
     return ;
 }
@@ -152,10 +170,10 @@ int ft_printf(const char *apformat, ...)
         if (*p_apFormat == '%')
         {
             lst = (t_prinlist *)malloc(sizeof(t_prinlist));
-            flag = ft_analise_flags((char *)p_apFormat, lst);
+            flag = ft_analise_flags((char*)p_apFormat, lst);
             while(!(ft_is_type(*p_apFormat)))
                 p_apFormat++;
-            ft_analise_types((char *)p_apFormat, result, va_arg(ap, int), lst);
+            ft_analise_types((char*)p_apFormat, result, va_arg(ap, int), lst);
             continue ;
         }
         p_apFormat++;
@@ -165,8 +183,8 @@ int ft_printf(const char *apformat, ...)
 
 int main(void)
 {
-    int a = 5;
-    ft_printf("%d", a);
-    printf("\n%d", a);
+    int a = 1305;
+    ft_printf("%1d", a);
+    printf("\n%1d", a);
     return (0);
 }
