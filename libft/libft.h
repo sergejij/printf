@@ -6,7 +6,7 @@
 /*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:39:58 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/16 18:33:59 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:38:58 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 size_t				ft_count_word(char *s, char c);
-int					ft_lennum(int num);
+size_t				ft_lennum(int num);
 long int			ft_discharge(int num);
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));

@@ -10,11 +10,16 @@ int ft_is_type(char c)
     return (0);
 }
 
-void ft_analise_types(char *format, char *result, char *str_arg, t_prinlist *lst)
+void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
 {
     if(*format == 's')
     {
-        result = ft_add_string(result, str_arg, lst);
+        result = ft_add_string(result, va_arg(ap, char*), lst);
+        ft_putstr(result);
+    }
+    if(*format == 'd')
+    {
+        ft_add_integer(&result, va_arg(ap, int), lst);
         ft_putstr(result);
     }
 }
@@ -26,13 +31,13 @@ int ft_analise_flags(char *format, t_prinlist *lst)
     while(*format && !(ft_is_type(*format)))
     {
         if (*format == '#')
-            flag = (flag | 1);
+            flag = (flag | HASH);
         else if (*format == '0')
-            flag = flag | 2;
+            flag = flag | ZERO;
         else if (*format == '-')
-            flag = flag | 4;
+            flag = flag | MINUS;
         else if (*format == '+')
-            flag = flag | 8;
+            flag = flag | PLUS;
         else if (ft_isdigit(*format))//записываем ширину
         {
             lst->width = ft_atoi(format);
@@ -79,7 +84,7 @@ int ft_printf(const char *apformat, ...)
             //пропускаем все флаги(мы их записали в структуру) и идем работать с аргументом
             while(!(ft_is_type(*p_apFormat)))
                 p_apFormat++;
-            ft_analise_types((char *)p_apFormat, result + ft_strlen(result), va_arg(ap, char*), lst);
+            ft_analise_types((char *)p_apFormat, result + ft_strlen(result), ap, lst);
             p_apFormat++; //пропускам букву (s / d/ i и тд)
             continue ;
         }
@@ -94,9 +99,11 @@ int ft_printf(const char *apformat, ...)
     return g_sym_count;
 }
 
-int main()
+/*int main()
 {
-    printf("\n%d", ft_printf("test %s", "huest"));
-    //printf("aaa%-10.3sbbb\n", "12345");
+    int i = 5;
+  //  char s[]= "abs";
+    //printf("\n%d", ft_printf("test %s", "huest"));
+    ft_printf("%d\n", i);
     return  0;
-}
+}*/

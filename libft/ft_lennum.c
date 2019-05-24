@@ -6,15 +6,15 @@
 /*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:59:11 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/04/15 14:11:43 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:38:10 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_lennum(int num)
+size_t		ft_lennum(int num)
 {
-	int len;
+	size_t len;
 
 	len = 0;
 	if (num < 0)

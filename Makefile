@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-SRC = test_string_char.c
+SRC = main_ft_printf.c test_string_char.c test_integer.c
 
 OBJ = $(SRC:.c=.o) 
 

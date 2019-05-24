@@ -1,1 +1,0 @@
-http://microsin.net/programming/arm/secrets-of-printf.html
