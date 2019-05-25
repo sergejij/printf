@@ -19,11 +19,11 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
         tmp = result;
         result = ft_strjoin(result, str_arg);
         tmp = result + len;
-        ft_memset(tmp, '.', lst->width - len);
+        ft_memset(tmp, ' ', lst->width - len);
     }
     else if(lst->width && lst->width > len) // сдвигаем вправо
     {
-        ft_memset(result, '.', lst->width - len);
+        ft_memset(result, ' ', lst->width - len);
         tmp = result + (lst->width - len);
         tmp = ft_strcpy(tmp, str_arg);
     }

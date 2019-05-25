@@ -1,3 +1,4 @@
+
 #include "ft_printf.h"
 
 int g_sym_count = 0;
@@ -18,6 +19,7 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     ft_putstr(result);
+    g_sym_count += ft_strlen(result);
 }
 
 int ft_analise_flags(char *format, t_prinlist *lst)
@@ -34,6 +36,8 @@ int ft_analise_flags(char *format, t_prinlist *lst)
             flag = flag | MINUS;
         else if (*format == '+')
             flag = flag | PLUS;
+        else if (*format == ' ')
+            flag = flag | SPACE;
         else if (ft_isdigit(*format))//записываем ширину
         {
             lst->width = ft_atoi(format);
@@ -63,26 +67,30 @@ int ft_printf(const char *apformat, ...)
     t_prinlist *lst;
     char *tmp;
 
-    char *result = (char *)malloc(sizeof(char) * 100);
-    tmp = result;
+    char *result;
     while(*p_apFormat)
     {
         //идем про форматирующей строке
         if (*p_apFormat == '%')
         {
+            result = (char *)malloc(sizeof(char) * 100);
+            //ft_strclr(result);
+            tmp = result;
             // делаем структуру:
             lst = (t_prinlist *)malloc(sizeof(t_prinlist));
             lst->pricision = 0;
             lst->width = 0;
 
             //идем анализировать наличие всех флагов и спецификаторов
-            flag = ft_analise_flags((char *)p_apFormat, lst);
+            flag = ft_analise_flags((char*)p_apFormat, lst);
 
             //пропускаем все флаги(мы их записали в структуру) и идем работать с аргументом
             while(!(ft_is_type(*p_apFormat)))
                 p_apFormat++;
-            ft_analise_types((char *)p_apFormat, result + ft_strlen(result), ap, lst);
+            ft_analise_types((char*)p_apFormat, result + ft_strlen(result), ap, lst);
             p_apFormat++; //пропускам букву (s / d/ i и тд)
+            free(lst);
+            ft_strdel(&tmp);
             continue ;
         }
         else
@@ -93,23 +101,5 @@ int ft_printf(const char *apformat, ...)
         }
         p_apFormat++;
     }
-    ft_strdel(&tmp);
-    free(lst);
     return (g_sym_count);
-}
-/*
-int main()
-{
-    int i = 5;
-    char *tmp;
-    char *s = (char*)malloc(sizeof(4));
-    tmp = s;
-    s = "abc";
-    float g = 123.223;
-    // int *a = &i;
-    unsigned long a = 9223372036854775807;
-    //printf("\n%d", ft_printf("test %s", "huest"));
-    ft_printf("%-100p", &s);
-    free(tmp);
-    return  0;
 }

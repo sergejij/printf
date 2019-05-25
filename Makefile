@@ -6,13 +6,13 @@
 #    By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 18:01:17 by ubartemi          #+#    #+#              #
-#    Updated: 2019/05/24 19:40:02 by aestella         ###   ########.fr        #
+#    Updated: 2019/05/25 15:25:02 by ubartemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRC = main_ft_printf.c test_string_char.c test_integer.c
+SRC = main_ft_printf.c test_integer_refact.c test_pointer.c test_string_char.c
 
 OBJ = $(SRC:.c=.o) 
 
@@ -22,8 +22,8 @@ all: $(NAME)
 
 $(NAME):
 	cd ./libft && make
-	gcc -c -Wextra -Wall -Werror $(SRC)
-	ar rc $(NAME) test.o libft/*.o 
+	gcc -c -Wextra -Wall -Werror $(SRC) -I ft_printf.h
+	ar rc $(NAME) $(OBJ) libft/*.o 
 
 clean:
 	rm -f $(OBJ)

@@ -12,10 +12,11 @@
 #include <string.h>
 #include "./libft/libft.h"
 
-#define HASH 1
+#define HASH 1 
 #define ZERO 2
 #define MINUS 4
 #define PLUS 8
+#define SPACE 16
 
 typedef struct  s_prinlist
 {

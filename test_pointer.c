@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:24:43 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/24 19:56:31 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/25 15:28:02 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,14 @@ void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst)
     {
         *result = ft_strjoin(*result, new_result);
         tmp = *result + len;
-        ft_memset(tmp, '.', lst->width - len);
+        ft_memset(tmp, ' ', lst->width - len);
     }
     else if (lst->width && lst->width > len) // сдвигаем вправо
     {
-        ft_memset(*result, '.', lst->width - len);
+        ft_memset(*result, ' ', lst->width - len);
         tmp = *result + (lst->width - len);
         tmp = ft_strcpy(tmp, new_result);
-        //ft_strdel(&new_result);
     }
     else
-    {
-        //ft_strdel(result);
-        *result = new_result; 
-    }
+        *result = new_result;
 }

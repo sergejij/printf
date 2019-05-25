@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memset.c                                           :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:55:00 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/24 19:40:02 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/25 16:50:45 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	*ft_memset(void *destination, int c, size_t n)
 	size_t			counter;
 	unsigned char	*arr;
 
-	if(!n || !destination || !c)
-        return (NULL);
 	arr = (unsigned char*)destination;
 	counter = 0;
 	while (counter < n)
