@@ -1,4 +1,3 @@
-
 #include "ft_printf.h"
 
 extern int g_sym_count;
