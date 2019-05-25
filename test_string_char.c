@@ -7,6 +7,8 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
     char *tmp;
     size_t len;
 
+    if(!str_arg)
+        str_arg = ft_strdup("(null)");
     len = ft_strlen(str_arg);
     if(lst->pricision && lst->pricision < len)//обрезаем строку
     {
@@ -30,4 +32,22 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
     else
         result = ft_strjoin(result, str_arg);
     return (result);
+}
+
+void ft_add_char(char **result, char chr_arg, t_prinlist *lst)
+{
+    if (chr_arg == 0)
+    {
+        write(1, "\0", 1);
+    }
+    if(lst->width > 1)
+    {
+        *result = ft_memset(*result, ' ', lst->width);
+        if((lst->flag & MINUS) == MINUS)
+            (*result)[0] = chr_arg;
+        else
+            (*result)[lst->width - 1] = chr_arg;
+    }
+    else
+        (*result)[lst->width] = chr_arg; // мб просто от 0 написать?
 }

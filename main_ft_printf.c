@@ -18,8 +18,16 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
         ft_add_integer(&result, va_arg(ap, int), lst);
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
+    else if(*format == 'c')
+        ft_add_char(&result, va_arg(ap, int), lst);
+
+  //  if(!result)
+    //    result = ft_strdup("(null)");
+
+
     ft_putstr(result);
     g_sym_count += ft_strlen(result);
+
 }
 
 int ft_analise_flags(char *format, t_prinlist *lst)
@@ -74,7 +82,7 @@ int ft_printf(const char *apformat, ...)
         if (*p_apFormat == '%')
         {
             result = (char *)malloc(sizeof(char) * 100);
-            //ft_strclr(result);
+            ft_strclr(result);
             tmp = result;
             // делаем структуру:
             lst = (t_prinlist *)malloc(sizeof(t_prinlist));
