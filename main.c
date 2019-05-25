@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:20:57 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/25 18:22:12 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/25 19:46:07 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main()
 {
-    int i = 5;
+    int i = 4242;
     char *tmp;
     char *s = (char*)malloc(sizeof(4));
     tmp = s;
@@ -23,8 +23,8 @@ int main()
    // int *a = &i;
     unsigned long a = 9223372036854775807;
     //printf("\n%d", ft_printf("test %s", "huest"));
-    /*printf("\n%d\n", */ft_printf("%14d",  i);
-    /*printf("\n%d\n", */printf("\n%14d", i);
+    printf("\n%d\n", ft_printf("%+10.5d",  i));
+    printf("\n%d\n", printf("%+10.5d", i));
     free(tmp);
     return  0;
 }

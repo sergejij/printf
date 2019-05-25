@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/25 18:25:12 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/25 19:54:26 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,13 @@ void    ft_pricision_minus(char **result, int arg, t_prinlist *lst, size_t len)
         (*result)[lst->pricision] = '\0';
 }
 
-void    ft_pricision(char **result, int arg, t_prinlist *lst, size_t len)
+void    ft_pricision(char **result, t_prinlist *lst, size_t len)
 {
-    char *tmp;
-    
-    tmp = ft_itoa(arg);
-    if (lst->width > len)
+    if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
+    else if (lst->width < lst->pricision)
+        ft_memset(*result, '0', lst->pricision - len);
     ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
-    *result = ft_strjoin(*result, tmp);
-    free(tmp);
 }
 
 void    ft_recording(char **result, int arg, t_prinlist *lst, char fill)
@@ -47,58 +44,67 @@ void    ft_recording(char **result, int arg, t_prinlist *lst, char fill)
 
     len = ft_lennum(arg);
     if (lst->pricision > len)
-        ft_pricision(result, arg, lst, len);
+        ft_pricision(result, lst, len);
     else if (lst->width > len)
         ft_memset(*result, fill, lst->width - len);
     *result = ft_strjoin(*result, ft_itoa(arg));
 }
 
+void    ft_plus(char **result, int arg, t_prinlist *lst, size_t len)
+{
+    char *tmp;
+    *result = ft_itoa(arg);
+    if(lst->width > len)
+    { //ft_strcpy(*result + lst->pricision  - len, ft_itoa(arg));
+        if (((lst->flag & ZERO) == ZERO) && lst->width > len)
+        {
+            ft_memset(*result, '0', lst->width - len);
+            ft_strcpy(*result + lst->width - len, ft_itoa(arg));
+            *result = ft_strjoin("+", *result);
+            return;
+        }
+        ft_memset(*result, ' ', lst->width - len);
+        tmp = ft_strjoin("+", ft_itoa(arg));
+        // тут надо править! при  printf("\n%d\n", ft_printf("%+10.5d",  i)); не заполняет нуляями
+        ft_strcpy(*result + lst->width - len, tmp);
+    }
+    else
+    {
+        tmp = *result;
+        *result = ft_strjoin("+", *result);
+        ft_strdel(&tmp);
+    }
+}
+
+void    ft_minus(char **result, int arg, t_prinlist *lst, size_t len)
+{
+    if (lst->pricision > len)
+        ft_pricision_minus(result, arg, lst, len);
+    else
+    {
+        if (((lst->flag & PLUS) == PLUS))
+        {
+            ft_strcpy(*result, "+");
+            ft_strcpy(*result + 1, ft_itoa(arg));
+            ft_memset(*result + len + 1, ' ', lst->width - len);
+            return ;
+        }
+        ft_strcpy(*result, ft_itoa(arg));
+        ft_memset(*result + len, ' ', lst->width - len);
+    }
+}
+
 void ft_add_integer(char **result, int arg, t_prinlist *lst)
 {
     size_t len;
-    char *tmp;
     
     len = ft_lennum(arg);
     if ((lst->flag & MINUS) == MINUS)
-    {        
-        if (lst->pricision > len)
-        {
-            ft_pricision_minus(result, arg, lst, len);
-            return ;
-        }
-        else if(lst->width > len)
-            ft_memset(*result, ' ', lst->width - len);
-        else if (((lst->flag & PLUS) == PLUS))
-        {
-            tmp = ft_strjoin("+", tmp);
-            len++;
-            (*result)[lst->width - len] = '\0';
-        }
-        *result = ft_strjoin(tmp, *result);
-    }
+        ft_minus(result, arg, lst, len);
     else if (((lst->flag & PLUS) == PLUS)) // +
-    {
-        len++;
-        *result = ft_itoa(arg);
-        if(lst->width > len)
-        {
-            if (((lst->flag & ZERO) == ZERO) && lst->width > len)
-            {
-                ft_memset(*result, '0', lst->width - len);
-                *result = ft_strjoin(*result, ft_itoa(arg));
-                *result = ft_strjoin("+", *result);
-                return;
-            }
-            ft_memset(*result, ' ', lst->width - len);
-            tmp = ft_strjoin("+", ft_itoa(arg));
-            *result = ft_strjoin(*result, tmp);
-        }
-        else
-            *result = ft_strjoin("+", *result);
-    }
+        ft_plus(result, arg, lst, len + 1); // + 1 так как + это тоже часть числа 
     else if (((lst->flag & ZERO) == ZERO)) // zero
-        ft_pricision(result, arg, lst, '0');
+        ft_recording(result, arg, lst, '0');
     else
-        ft_pricision(result, arg, lst, ' ');
-    
+        ft_recording(result, arg, lst, ' ');
 }
