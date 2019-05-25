@@ -5,7 +5,7 @@ int g_sym_count = 0;
 
 int ft_is_type(char c)
 {
-    if (c == 's' || c == 'c' || c == 'p' || c == 'i' || c == 'd')
+    if (c == 's' || c == 'c' || c == 'p' || c == 'i' || c == 'd' || c == '%')
         return (1);
     return (0);
 }
@@ -20,8 +20,9 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     else if(*format == 'c')
         ft_add_char(&result, va_arg(ap, int), lst);
-
-  //  if(!result)
+    else if (*format == '%')
+        ft_add_char(&result, '%', lst);
+    //  if(!result)
     //    result = ft_strdup("(null)");
 
 
@@ -93,6 +94,7 @@ int ft_printf(const char *apformat, ...)
             flag = ft_analise_flags((char*)p_apFormat, lst);
 
             //пропускаем все флаги(мы их записали в структуру) и идем работать с аргументом
+            p_apFormat++;
             while(!(ft_is_type(*p_apFormat)))
                 p_apFormat++;
             ft_analise_types((char*)p_apFormat, result + ft_strlen(result), ap, lst);
