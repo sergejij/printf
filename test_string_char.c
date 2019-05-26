@@ -39,6 +39,7 @@ void ft_add_char(char **result, char chr_arg, t_prinlist *lst)
     if (chr_arg == 0)
     {
         write(1, "\0", 1);
+        g_sym_count += 1;
     }
     if(lst->width > 1)
     {

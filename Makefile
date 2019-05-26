@@ -6,13 +6,14 @@
 #    By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 18:01:17 by ubartemi          #+#    #+#              #
-#    Updated: 2019/05/25 18:29:31 by aestella         ###   ########.fr        #
+#    Updated: 2019/05/26 17:31:58 by ubartemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
-SRC = main_ft_printf.c test_integer_refact.c test_pointer.c test_string_char.c
+SRC = main_ft_printf.c test_integer_refact.c test_pointer.c \
+		test_string_char.c test_hex.c
 
 OBJ = $(SRC:.c=.o) 
 

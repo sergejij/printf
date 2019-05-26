@@ -36,6 +36,9 @@ void ft_add_integer(char **result, int arg, t_prinlist *lst);
 void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst);
 char		*ft_itoa_base_ul(unsigned long n);
 int		ft_lennum_base(unsigned long num);
+void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym);
+char		*ft_itoa_base_hex(int n);
+size_t  ft_lennum_hex(int num);
 
 
 #endif //PRINTF_FT_PRINTF_H

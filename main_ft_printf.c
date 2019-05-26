@@ -5,7 +5,7 @@ int g_sym_count = 0;
 
 int ft_is_type(char c)
 {
-    if (c == 's' || c == 'c' || c == 'p' || c == 'i' || c == 'd' || c == '%')
+    if (c == 's' || c == 'c' || c == 'p' || c == 'i' || c == 'd' || c == '%' || c == 'x' || c == 'X')
         return (1);
     return (0);
 }
@@ -20,12 +20,12 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     else if(*format == 'c')
         ft_add_char(&result, va_arg(ap, int), lst);
+    else if(*format == 'x' || *format == 'X')
+        ft_add_hex(&result, va_arg(ap, int), lst, *format);
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     //  if(!result)
     //    result = ft_strdup("(null)");
-
-
     ft_putstr(result);
     g_sym_count += ft_strlen(result);
 
