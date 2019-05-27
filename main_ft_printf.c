@@ -87,12 +87,26 @@ int ft_analise_flags(char *format, t_prinlist *lst)
     return (flag);
 }
 
+t_prinlist *make_struct_for_flags(char *format)
+{
+    t_prinlist *new;
+
+    new = NULL;
+    if(!(new = (t_prinlist *)malloc(sizeof(t_prinlist))))
+        return  (NULL);
+    new->pricision = 0;
+    new->width = 0;
+    new->modifier = 0;
+    ft_analise_flags(format, new);
+    return  (new);
+
+}
+
 int ft_printf(const char *apformat, ...)
 {
     va_list ap;         //указатель va_list | poit on next unnamed argument
     va_start(ap, apformat);    // устанавливаем указатель
     const char *p_apFormat = apformat;
-    int flag;
     t_prinlist *lst;
     char *tmp;
 
@@ -106,15 +120,7 @@ int ft_printf(const char *apformat, ...)
             ft_strclr(result);
             tmp = result;
             // делаем структуру:
-            lst = (t_prinlist *)malloc(sizeof(t_prinlist));
-            lst->pricision = 0;
-            lst->width = 0;
-            lst->modifier = 0;
-
-            //идем анализировать наличие всех флагов и спецификаторов
-            flag = ft_analise_flags((char*)p_apFormat, lst);
-
-            //пропускаем все флаги(мы их записали в структуру) и идем работать с аргументом
+            lst = make_struct_for_flags((char *)p_apFormat);
             p_apFormat++;
             while(!(ft_is_type((char*)p_apFormat, lst)))
                 p_apFormat++;
