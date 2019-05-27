@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/27 12:11:42 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:18:27 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
     char *tmp;
     size_t len;
     
+    if (arg == 0)
+    {
+        *result = "0";
+        return ;
+    }
     len = ft_lennum(arg);
     str = ft_itoa_hex(arg, sym);
     tmp = str;
