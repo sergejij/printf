@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/26 18:56:32 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:11:42 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,31 @@ char		*ft_itoa_hex(int n, char sym)
     }
 }*/
 
+void ft_hex_zero(char **str, t_prinlist *lst, size_t len)
+{
+    char *tmp;
+    char tmp2[lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0) + 1];
+
+    if (lst->width > len)
+    {
+        tmp = *str;
+        ft_memset(tmp2, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
+        *str = ft_strjoin(tmp2, *str);
+        ft_strdel(&tmp);
+    }
+}
+
 void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
 {
     // не заполняет нулями, не работает с отрицательными числами, не работает с #
     //size_t len;
     char *str;
-    //char *tmp;
+    char *tmp;
+    size_t len;
     
+    len = ft_lennum(arg);
     str = ft_itoa_hex(arg, sym);
+    tmp = str;
     //len = ft_lennum_hex(arg);
     /*if ((lst->flag & HASH) == HASH)
     {
@@ -93,5 +110,12 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
         str = ft_strjoin("0x", str);
         ft_strdel(&tmp);
     }*/ // такой кастыль не подходит
-    *result = ft_add_string(*result, str, lst);
+    if ((lst->flag & ZERO) == ZERO)
+        ft_hex_zero(&str, lst, len);
+        //str = ft_strjoin(sym == 'x' ? "0x" : "0X", str);
+    if ((lst->flag & HASH) == HASH)
+        str = ft_strjoin(sym == 'x' ? "0x" : "0X", str); // тернарники огонь
+    if (lst->pricision == 0)
+        *result = ft_add_string(*result, str, lst);
+    //printf("%s", str);
 }
