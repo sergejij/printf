@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/27 12:18:27 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:56:50 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,41 @@ size_t  ft_lennum_hex(int num)
 	}
 	return (len);
 }
+/*
+unsigned int reverse(unsigned int x){
+    unsigned i,temp,bit,reversed;
+	reversed =0;
+
+// loop for each bit	
+	for(i=0; i<32; i++){
+		temp =0;
+		bit =0;
+		// shift to the least sig bit
+		temp = x >> (31-i);
+		// bit mask to clear the other bits
+		bit = temp & 1;
+		// move the bit to the reversed spot
+		bit = bit << i;
+		// add together to get reversed bits
+		reversed += bit;
+	}
+
+	return reversed;
+
+}
+int     ft_reverse_bits(int n)
+{
+    unsigned int res;
+    int i;
+
+    i = 8;
+    while (i > 0)
+    {
+        n ^= i;
+        i--; 
+    }
+    return (n);
+}*/
 
 char		*ft_itoa_hex(int n, char sym)
 {
@@ -39,7 +74,7 @@ char		*ft_itoa_hex(int n, char sym)
         a = "0123456789abcdef";
     else 
         a = "0123456789ABCDEF";
-	len = ft_lennum(n);
+	len = n < 0 ? 8 : ft_lennum(n);
 	counter = 0;
 	result = (char*)malloc(sizeof(char) * (len + 1));
 	if (!result)
@@ -89,6 +124,21 @@ void ft_hex_zero(char **str, t_prinlist *lst, size_t len)
     }
 }
 
+void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
+{
+    char *tmp;
+
+    tmp = (char*)malloc(sizeof(char) + (lst->pricision - len));
+    /*if (lst->width > len && lst->width > lst->pricision)
+        ft_memset(*result, ' ', lst->width - lst->pricision);
+    else */if (lst->width < lst->pricision)
+    {
+        ft_memset(tmp, '0', lst->pricision - len);
+        *result = ft_strjoin(tmp, str);
+    }
+    //ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
+}
+
 void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
 {
     // не заполняет нулями, не работает с отрицательными числами, не работает с #
@@ -102,7 +152,7 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
         *result = "0";
         return ;
     }
-    len = ft_lennum(arg);
+    len = arg < 0 ? 8 : ft_lennum(arg);
     str = ft_itoa_hex(arg, sym);
     tmp = str;
     //len = ft_lennum_hex(arg);
@@ -120,7 +170,9 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
         //str = ft_strjoin(sym == 'x' ? "0x" : "0X", str);
     if ((lst->flag & HASH) == HASH)
         str = ft_strjoin(sym == 'x' ? "0x" : "0X", str); // тернарники огонь
-    if (lst->pricision == 0)
-        *result = ft_add_string(*result, str, lst);
-    //printf("%s", str);
+    if (lst->pricision < len)
+        *result = ft_add_string(*result, str, lst, 16);
+    else
+        ft_pricision_hex(result, lst, len, str);
+        //printf("%s", str);
 }

@@ -2,7 +2,7 @@
 
 extern int g_sym_count;
 
-char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
+char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys)
 {
     char *tmp;
     size_t len;
@@ -10,7 +10,7 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst)
     if(!str_arg)
         str_arg = ft_strdup("(null)");
     len = ft_strlen(str_arg);
-    if(lst->pricision && lst->pricision < len)//обрезаем строку
+    if(lst->pricision && lst->pricision < len && numSys != 16)//обрезаем строку
     {
         tmp = str_arg;
         str_arg = ft_strsub(str_arg, 0, lst->pricision);
