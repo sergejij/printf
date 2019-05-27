@@ -14,6 +14,23 @@
 
 extern int g_sym_count;
 
+void ft_change_type_int(int *arg, t_prinlist *lst) {
+    short new_arg_h = 0;
+    char new_arg_hh = 0;
+
+    if((lst->modifier & H) == H)
+    {
+        new_arg_h = *arg;
+        *arg = new_arg_h;
+    }
+    else if((lst->modifier & HH) == HH)
+    {
+        new_arg_hh = *arg;
+        *arg = new_arg_hh;
+    }
+}
+
+
 void    ft_pricision_minus(char **result, int arg, t_prinlist *lst, size_t len)
 {
     ft_memset(*result, '0', lst->pricision  - len);
@@ -147,6 +164,8 @@ void ft_add_integer(char **result, int arg, t_prinlist *lst)
 {
     size_t len;
 
+    if(lst->modifier)
+        ft_change_type_int(&arg, lst);
     len = ft_lennum(arg);
     if ((lst->flag & MINUS) == MINUS)
         ft_minus(result, arg, lst, len);

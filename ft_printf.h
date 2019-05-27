@@ -17,18 +17,24 @@
 #define MINUS 4
 #define PLUS 8
 #define SPACE 16
+#define H 1
+#define L_ONE 2
+#define HH 4
+#define LL 8
 
 typedef struct  s_prinlist
 {
     int flag;
+    int modifier;
     size_t width;
     size_t pricision;
+
 }               t_prinlist;
 
 
 int ft_printf(const char *apformat, ...);
 int ft_analise_flags(char *format, t_prinlist *lst);
-int ft_is_type(char c);
+int ft_is_type(char *c, t_prinlist *lst);
 void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst);
 char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys);
 void ft_add_char(char **result, char chr_arg, t_prinlist *lst);
@@ -39,6 +45,8 @@ int		ft_lennum_base(unsigned long num);
 void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym);
 char		*ft_itoa_base_hex(int n);
 size_t  ft_lennum_hex(int num);
+
+void ft_change_type_int(int *arg, t_prinlist *lst);
 
 
 #endif //PRINTF_FT_PRINTF_H
