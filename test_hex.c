@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/28 13:55:31 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:09:44 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,11 +128,28 @@ void ft_hex_zero(char **str, t_prinlist *lst, size_t len)
 void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
 {
     char *tmp;
+    //char *spaces;
 
-    tmp = (char*)malloc(sizeof(char) + (lst->pricision - len));
-    if (lst->width > len && lst->width > lst->pricision)
+    tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
+    /*if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
-    else if (lst->width < lst->pricision)
+    else */
+    if (lst->width > lst->pricision + len)
+    {
+        //spaces = (char*)malloc(sizeof(char) * (lst->width - lst->pricision));
+        ft_memset(tmp, ' ', lst->width - lst->pricision);
+        if ((lst->flag & MINUS) == MINUS)
+        {
+            
+            *result = ft_strjoin(ft_strjoin("0", str), tmp);
+        }
+        else
+        { 
+            ft_memset(tmp + lst->width - lst->pricision, '0', lst->pricision - len);
+            *result = ft_strjoin(tmp, str);
+        }
+    }
+    else
     {
         ft_memset(tmp, '0', lst->pricision - len);
         *result = ft_strjoin(tmp, str);

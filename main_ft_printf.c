@@ -7,7 +7,7 @@ int g_sym_count = 0;
 int ft_is_type(char *c, t_prinlist *lst)
 {
     if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd'
-    || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o')
+    || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u')
         return (1);
     else if(*c == 'h' && lst->modifier != HH)
     {
@@ -43,6 +43,8 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
         ft_add_hex(&result, va_arg(ap, int), lst, *format);
     else if(*format == 'o')
         ft_add_octal(&result, va_arg(ap, int), lst);
+    //else if(*format == 'u')
+    //    ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     if(!result)

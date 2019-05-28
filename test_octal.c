@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/28 13:53:05 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:11:00 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,18 @@ void ft_octal_zero(char **str, t_prinlist *lst, size_t len)
 
     tmp = (char*)malloc(sizeof(char) * (lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0)));
     tmp2 = *str;
-    if (lst->width > len && (lst->flag & ZERO) != ZERO)
+    if (lst->width > len && (lst->flag & ZERO) == ZERO)
     {
-        ft_memset(tmp, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
-        ft_strcpy(tmp + lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0), *str);
+        if ((lst->flag & MINUS) == MINUS)
+        {
+            ft_strcpy(tmp, *str);
+            ft_memset(tmp + len, ' ', lst->width - len - ((lst->flag & HASH) == HASH ? 2 : 0));
+        }
+        else
+        {
+            ft_memset(tmp, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
+            ft_strcpy(tmp + lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0), *str);
+        }
         *str = tmp;
     }
     else if (lst->width > len)

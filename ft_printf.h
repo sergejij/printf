@@ -48,6 +48,6 @@ size_t  ft_lennum_hex(int num);
 void ft_add_octal(char **result, int arg, t_prinlist *lst);
 void ft_change_type_int(int *arg, t_prinlist *lst);
 void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str);
-
+void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym);
 
 #endif //PRINTF_FT_PRINTF_H
