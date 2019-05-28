@@ -6,14 +6,14 @@
 #    By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 18:01:17 by ubartemi          #+#    #+#              #
-#    Updated: 2019/05/26 17:31:58 by ubartemi         ###   ########.fr        #
+#    Updated: 2019/05/28 12:38:58 by ubartemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 SRC = main_ft_printf.c test_integer_refact.c test_pointer.c \
-		test_string_char.c test_hex.c
+		test_string_char.c test_hex.c test_octal.c 
 
 OBJ = $(SRC:.c=.o) 
 

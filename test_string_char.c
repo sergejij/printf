@@ -18,10 +18,9 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys)
     }
     if(lst->width > len && ((lst->flag & MINUS) == MINUS))// сдвигаем влево
     {
-        tmp = result;
-        result = ft_strjoin(result, str_arg);
-        tmp = result + len;
-        ft_memset(tmp, ' ', lst->width - len);
+        ft_strcpy(result, str_arg);
+        //result = ft_strjoin(result, str_arg);
+        ft_memset(result + len, ' ', lst->width - len);
     }
     else if(lst->width && lst->width > len) // сдвигаем вправо
     {

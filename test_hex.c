@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/27 17:56:50 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/28 13:55:31 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char		*ft_itoa_hex(int n, char sym)
         a = "0123456789abcdef";
     else 
         a = "0123456789ABCDEF";
-	len = n < 0 ? 8 : ft_lennum(n);
+	len = n < 0 ? 8 : ft_lennum_hex(n);
 	counter = 0;
 	result = (char*)malloc(sizeof(char) * (len + 1));
 	if (!result)
@@ -113,14 +113,15 @@ char		*ft_itoa_hex(int n, char sym)
 void ft_hex_zero(char **str, t_prinlist *lst, size_t len)
 {
     char *tmp;
-    char tmp2[lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0) + 1];
-
+    
+    tmp = (char*)malloc(sizeof(char) * (lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0)));
     if (lst->width > len)
     {
-        tmp = *str;
-        ft_memset(tmp2, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
-        *str = ft_strjoin(tmp2, *str);
-        ft_strdel(&tmp);
+        ft_memset(tmp, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
+        ft_strcpy(tmp + lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0), *str);
+        *str = tmp;
+        //*str = ft_strjoin(tmp2, *str);
+        //ft_strdel(&tmp);
     }
 }
 
@@ -129,9 +130,9 @@ void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
     char *tmp;
 
     tmp = (char*)malloc(sizeof(char) + (lst->pricision - len));
-    /*if (lst->width > len && lst->width > lst->pricision)
+    if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
-    else */if (lst->width < lst->pricision)
+    else if (lst->width < lst->pricision)
     {
         ft_memset(tmp, '0', lst->pricision - len);
         *result = ft_strjoin(tmp, str);
@@ -152,7 +153,7 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
         *result = "0";
         return ;
     }
-    len = arg < 0 ? 8 : ft_lennum(arg);
+    len = arg < 0 ? 8 : ft_lennum_hex(arg);
     str = ft_itoa_hex(arg, sym);
     tmp = str;
     //len = ft_lennum_hex(arg);
@@ -165,7 +166,7 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
         str = ft_strjoin("0x", str);
         ft_strdel(&tmp);
     }*/ // такой кастыль не подходит
-    if ((lst->flag & ZERO) == ZERO)
+    if ((lst->flag & ZERO) == ZERO  && (lst->flag & MINUS) != MINUS)
         ft_hex_zero(&str, lst, len);
         //str = ft_strjoin(sym == 'x' ? "0x" : "0X", str);
     if ((lst->flag & HASH) == HASH)
