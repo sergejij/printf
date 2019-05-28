@@ -34,8 +34,11 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys)
     return (result);
 }
 
-void ft_add_char(char **result, char chr_arg, t_prinlist *lst)
+void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst)
 {
+    char chr_arg;
+
+    chr_arg = (char)chr_arg_int;
     if (chr_arg == 0)
     {
         write(1, "\0", 1);

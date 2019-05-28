@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 
 SRC = main_ft_printf.c test_integer_refact.c test_pointer.c \
-		test_string_char.c test_hex.c
+		test_string_char.c test_hex.c test_long.c
 
 OBJ = $(SRC:.c=.o) 
 

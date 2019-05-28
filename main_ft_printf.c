@@ -37,7 +37,12 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     else if (*format == 'd')
-        ft_add_integer(&result, va_arg(ap, int), lst);
+    {
+        if (lst->modifier == L_ONE || lst->modifier == LL)
+            ft_long_to_str(&result, va_arg(ap, long long int), lst);
+        else
+            ft_add_integer(&result, va_arg(ap, int), lst);
+    }
     else if(*format == 'x' || *format == 'X')
         ft_add_hex(&result, va_arg(ap, int), lst, *format);
     //else if(*format == 'o')

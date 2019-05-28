@@ -21,10 +21,10 @@ int main()
     s = "abc";
     //float g = 123.223;
    // int *a = &i;
-    //unsigned long a = 9223372036854775807;
+    long long a = -922337203685477510;
     //printf("\n%d", ft_printf("test %s", "huest"));
-    printf("\n%d\n", ft_printf("%.2x", i));
-    printf("\n%d\n", printf("%.2x", i));
+    printf("\n%d\n", ft_printf("%-.5lld", a));
+    printf("\n%d\n", printf("%-.5lld", a));
     free(tmp);
     return  0;
 }
