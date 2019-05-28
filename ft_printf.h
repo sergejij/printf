@@ -46,9 +46,18 @@ int		ft_lennum_base(unsigned long num);
 void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym);
 char		*ft_itoa_base_hex(int n);
 size_t  ft_lennum_hex(int num);
-
+void ft_add_octal(char **result, int arg, t_prinlist *lst);
 void ft_change_type_int(int *arg, t_prinlist *lst);
 void ft_long_to_str(char **result, long long int arg, t_prinlist *lst);
+
+
+void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len);
+void    ft_minus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
+void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill);
+void    ft_recording_negative_l(char **result, char *arg, t_prinlist *lst, char fill);
+void    ft_pricision_l(char **result, t_prinlist *lst, size_t len);
+void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len);
+void    ft_plus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
 
 
 

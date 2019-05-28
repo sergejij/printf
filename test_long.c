@@ -35,19 +35,20 @@ void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len)
     if(lst->width > len)
     { //ft_strcpy(*result + lst->pricision  - len, ft_itoa(arg));
 
-        if (((lst->flag & ZERO) == ZERO) && lst->width > len)
+        if ((((lst->flag & ZERO) == ZERO) && lst->width > len))
         {
             ft_memset(*result, '0', lst->width - len);
-            ft_strcpy(*result + lst->width - len, arg);
+            ft_strcpy((*result) + lst->width - len, arg);
             *result = ft_strjoin("+", *result);
             return;
         }
         ft_memset(*result, ' ', lst->width - len);
         tmp = ft_strjoin("+", arg);
         // тут надо править! при  printf("\n%d\n", ft_printf("%+10.5d",  i)); не заполняет нуляями
-        ft_strcpy(*result + lst->width - len, tmp);
+        ft_strcpy((*result) + lst->width - len, tmp);
+        return;
     }
-    else if (*arg != '-')
+     if (*arg != '-')
     {
         tmp = *result;
         *result = ft_strjoin("+", arg);
@@ -59,7 +60,7 @@ void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len)
 void    ft_pricision_l(char **result, t_prinlist *lst, size_t len)
 {
     if (lst->width > len && lst->width > lst->pricision)
-        ft_memset(*result, '.', lst->width - lst->pricision);
+        ft_memset(*result, ' ', lst->width - lst->pricision);
     else if (lst->width < lst->pricision)
         ft_memset(*result, '0', lst->pricision - len);
     ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
@@ -71,7 +72,7 @@ void    ft_recording_negative_l(char **result, char *arg, t_prinlist *lst, char 
     lst->len -=1;
     if (lst->pricision > lst->len)
         ft_pricision_l(result, lst, lst->len);
-    if (lst->width > lst->len && fill == '.')
+    if (lst->width > lst->len && fill == ' ')
     {
       //  ft_memset(*result, fill, lst->width - lst->len);
         (*result)[lst->width - lst->pricision] = '-';
@@ -80,7 +81,7 @@ void    ft_recording_negative_l(char **result, char *arg, t_prinlist *lst, char 
     }
     (*result)[0] = '-';
     if (lst->width > lst->len)
-        ft_memset(*result + 1, fill, lst->width - lst->len);
+        ft_memset((*result) + 1, fill, lst->width - (lst->len + 1));
     *result = ft_strjoin(*result, ++arg);
 }
 
@@ -118,15 +119,15 @@ void    ft_minus_negative_l(char **result, char *arg, t_prinlist *lst, size_t le
         if (((lst->flag & PLUS) == PLUS) && (*arg != '-'))
         {
             ft_strcpy(*result, "+");
-            ft_strcpy(*result + 1, arg);
-            ft_memset(*result + len + 1, ' ', lst->width - len);
+            ft_strcpy((*result) + 1, arg);
+            ft_memset((*result) + len + 1, ' ', lst->width - len);
             (*result)[lst->width] = '\0';
             return ;
         }
         ft_strcpy(*result, arg);
         if(lst->width > len)
         {
-            ft_memset(*result + len, ' ', lst->width - len);
+            ft_memset((*result) + lst->len, ' ', lst->width - len);
             (*result)[lst->width] = '\0';
         }
     }
@@ -180,7 +181,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
     else if (((lst->flag & ZERO) == ZERO)) // zero
         ft_recording_l(result, cpy_num, lst, '0');
     else
-        ft_recording_l(result, cpy_num, lst, '.');
+        ft_recording_l(result, cpy_num, lst, ' ');
 }
 
 
