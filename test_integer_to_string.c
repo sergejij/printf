@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_integer_refact.c                              :+:      :+:    :+:   */
+/*   test_integer_to_string.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/28 12:10:22 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/29 14:38:50 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, arg, lst, lst->len);
     else if (((lst->flag & PLUS) == PLUS)) // +
-        ft_plus_l(result, arg, lst, lst->len + 1); // + 1 так как + это тоже часть числа
+        ft_plus_l(result, arg, lst, lst->len); // + 1 так как + это тоже часть числа
     else if (((lst->flag & ZERO) == ZERO)) // zero
         ft_recording_l(result, arg, lst, '0');
     else

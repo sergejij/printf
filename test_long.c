@@ -2,10 +2,19 @@
 
 void    ft_plus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len)
 {
-   // char *tmp;
+    char *tmp;
 
     if (lst->width > len)
     {
+        if (lst->pricision >= len && (lst->flag & ZERO) != ZERO)
+        {
+            tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
+            tmp = ft_memset(tmp, '0', lst->pricision - len);
+            arg = ft_strjoin(tmp, arg);
+            ft_memset(*result, ' ', lst->width - (lst->pricision + 1));
+            tmp = ft_strjoin("+", arg);
+            ft_strcpy((*result) + lst->width - (lst->pricision + 1), tmp);
+        }
         if (((lst->flag & ZERO) == ZERO) && lst->width > len)
         {
             (*result)[0] = '-';
@@ -29,23 +38,34 @@ void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len)
 
     if (*arg == '-')
     {
-        ft_plus_negative_l(result, arg, lst, len - 1);
+        ft_plus_negative_l(result, arg, lst, len);
         return ;
     }
     if(lst->width > len)
     { //ft_strcpy(*result + lst->pricision  - len, ft_itoa(arg));
-
-        if ((((lst->flag & ZERO) == ZERO) && lst->width > len))
+        if (lst->pricision >= len && (lst->flag & ZERO) != ZERO)
         {
-            ft_memset(*result, '0', lst->width - len);
-            ft_strcpy((*result) + lst->width - len, arg);
+            tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
+            tmp = ft_memset(tmp, '0', lst->pricision - len);
+            arg = ft_strjoin(tmp, arg);
+            ft_memset(*result, ' ', lst->width - (lst->pricision + 1));
+            tmp = ft_strjoin("+", arg);
+            ft_strcpy((*result) + lst->width - (lst->pricision + 1), tmp);
+        }
+        else if ((((lst->flag & ZERO) == ZERO) && lst->width > len))
+        {
+            ft_memset(*result, '0', lst->width - (len + 1));
+            ft_strcpy((*result) + lst->width - (len + 1), arg);
             *result = ft_strjoin("+", *result);
             return;
         }
-        ft_memset(*result, ' ', lst->width - len);
-        tmp = ft_strjoin("+", arg);
+        else
+        {
+            ft_memset(*result, ' ', lst->width - len);
+            tmp = ft_strjoin("+", arg);
         // тут надо править! при  printf("\n%d\n", ft_printf("%+10.5d",  i)); не заполняет нуляями
-        ft_strcpy((*result) + lst->width - len, tmp);
+            ft_strcpy((*result) + lst->width - len, tmp);
+        }
         return;
     }
      if (*arg != '-')
@@ -57,31 +77,34 @@ void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len)
   //  *result = arg;
 }
 
-void    ft_pricision_l(char **result, t_prinlist *lst, size_t len)
+void    ft_pricision_l(char **result, t_prinlist *lst, size_t len, char *arg)
 {
     if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
     else if (lst->width < lst->pricision)
-        ft_memset(*result, '0', lst->pricision - len);
+        ft_memset(*result, '0', arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len);
     ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
 }
 
 void    ft_recording_negative_l(char **result, char *arg, t_prinlist *lst, char fill)
 {
-    lst->pricision += 1;
-    lst->len -=1;
+    //lst->pricision += 1;
+    //lst->len -=1;
+    char *tmp;
+
     if (lst->pricision > lst->len)
-        ft_pricision_l(result, lst, lst->len);
+        ft_pricision_l(result, lst, lst->len, arg);
     if (lst->width > lst->len && fill == ' ')
     {
-      //  ft_memset(*result, fill, lst->width - lst->len);
-        (*result)[lst->width - lst->pricision] = '-';
+        ft_memset(*result, fill, lst->width - lst->len);
+        (*result)[lst->width - lst->len] = '-';
         *result = ft_strjoin(*result, ++arg);
         return ;
     }
-    (*result)[0] = '-';
+    tmp = ft_strdup("-");
     if (lst->width > lst->len)
-        ft_memset((*result) + 1, fill, lst->width - (lst->len + 1));
+        ft_memset((*result), fill, lst->width - lst->len);
+    *result = ft_strjoin(tmp, *result);
     *result = ft_strjoin(*result, ++arg);
 }
 
@@ -93,7 +116,7 @@ void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill)
         return;
     }
     else if (lst->pricision > lst->len)
-        ft_pricision_l(result, lst, lst->len);
+        ft_pricision_l(result, lst, lst->len, arg);
     else if (lst->width > lst->len)
         ft_memset(*result, fill, lst->width - lst->len);
     *result = ft_strjoin(*result, arg);
@@ -143,10 +166,12 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
     }
     if (lst->pricision > len)
     {
-        ft_memset(*result, '0', lst->pricision  - len);
-        ft_strcpy(*result + lst->pricision  - len, arg);
+        if ((lst->flag & PLUS) == PLUS)
+            (*result)[0] = '+';
+        ft_memset((*result)[0] == '+' ? *result + 1 : *result, '0', lst->pricision  - len);
+        ft_strcpy(((*result)[0] == '+' ? *result + 1 : *result) + lst->pricision  - len, arg);
         if (lst->width > lst->pricision)
-        {    ft_memset(*result + lst->pricision, ' ', lst->width - lst->pricision);
+        {    ft_memset(((*result)[0] == '+' ? *result + 1 : *result) + lst->pricision, ' ', lst->width - lst->pricision);
             (*result)[lst->width] = '\0';
         }
         else
@@ -177,7 +202,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, cpy_num, lst, lst->len);
     else if (((lst->flag & PLUS) == PLUS)) // +
-        ft_plus_l(result, cpy_num, lst, lst->len + 1); // + 1 так как + это тоже часть числа
+        ft_plus_l(result, cpy_num, lst, lst->len + 1); // + 1 так как + это тоже часть числа cpy_num[0] == '-' ? 0 : 1
     else if (((lst->flag & ZERO) == ZERO)) // zero
         ft_recording_l(result, cpy_num, lst, '0');
     else
@@ -224,6 +249,3 @@ void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, lst);
 }
-
-
-

@@ -55,9 +55,10 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_minus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill);
 void    ft_recording_negative_l(char **result, char *arg, t_prinlist *lst, char fill);
-void    ft_pricision_l(char **result, t_prinlist *lst, size_t len);
+void    ft_pricision_l(char **result, t_prinlist *lst, size_t len, char *arg);
 void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_plus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
+void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str);
 
 
 

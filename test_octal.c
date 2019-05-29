@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/28 15:11:00 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/29 16:34:02 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_itoa_octal(int n)
     char *a;
 
     a = "0123456789abcdef";;
-	len = n < 0 ? 8 : ft_lennum_octal(n);
+	len = n < 0 ? 11 : ft_lennum_octal(n);
 	counter = 0;
 	result = (char*)malloc(sizeof(char) * (len + 1));
 	if (!result)
@@ -114,7 +114,7 @@ void ft_add_octal(char **result, int arg, t_prinlist *lst)
     if ((lst->flag & HASH) == HASH)
         str = ft_strjoin("0", str); // тернарники огонь
     if (lst->pricision < len)
-        *result = ft_add_string(*result, str, lst, 16);
+        *result = ft_add_string(*result, str, lst, 8);
     else
         ft_pricision_hex(result, lst, len, str);
         //printf("%s", str);
