@@ -85,6 +85,8 @@ int ft_analise_flags(char *format, t_prinlist *lst)
         else if (*format == '.')//записываем точность
         {
             lst->pricision = (size_t)ft_atoi(++format);
+            if (lst->pricision == 0)
+                flag = flag | ZERO_PRIC;
             while(ft_isdigit(*format))
                 format++;
             continue ;

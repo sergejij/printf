@@ -17,6 +17,7 @@
 #define MINUS 4
 #define PLUS 8
 #define SPACE 16
+#define ZERO_PRIC 32
 #define H 1
 #define L_ONE 2
 #define HH 4
