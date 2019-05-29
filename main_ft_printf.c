@@ -50,10 +50,13 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
         ft_add_octal(&result, va_arg(ap, int), lst);
     else if(*format == 'u')
     {
-        if (lst->modifier == L_ONE || lst->modifier == LL)//позже убрать второй Л мы используем только 1
-            ft_long_to_str(&result, va_arg(ap, long long int), lst);
+        if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
+            ft_add_unsigned(&result, va_arg(ap, unsigned long int), lst);
+        else if (lst->modifier == LL)
+            ft_add_unsigned(&result, va_arg(ap, unsigned long long int), lst);
         else
             ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
+
     }
 
     else if (*format == '%')

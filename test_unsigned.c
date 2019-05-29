@@ -6,18 +6,17 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 17:34:49 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/29 19:58:09 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 
-
-void ft_add_unsigned(char **result, unsigned int arg, t_prinlist *lst)
+void ft_add_unsigned(char **result, unsigned long long int arg, t_prinlist *lst)
 {
     int piece;
-    unsigned int del;
+    unsigned long long int del;
     char **new_res;
     int i;
     char *tmp = *result;
@@ -40,6 +39,8 @@ void ft_add_unsigned(char **result, unsigned int arg, t_prinlist *lst)
         ft_strcat(*result, new_res[i]);
         tmp = *result + 5; //без тмп не компилилось(
     }
+    if ((lst->flag & PLUS) == PLUS)
+        lst->flag = lst->flag ^ PLUS;
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, lst);
 }
