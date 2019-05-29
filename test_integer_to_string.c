@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 16:52:00 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/29 18:05:47 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
         ft_change_type_int(&arg_int, lst);
     arg = ft_itoa(arg_int);
     len = ft_strlen(arg);
+    if(*arg == '0' && len == 1)
+    {
+        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            *arg = '\0';
+            len = 0;
+        }
+    }
     lst->len = len;
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, arg, lst, lst->len);
