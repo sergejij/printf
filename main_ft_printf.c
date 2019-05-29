@@ -48,8 +48,14 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
         ft_add_hex(&result, va_arg(ap, int), lst, *format);
     else if(*format == 'o')
         ft_add_octal(&result, va_arg(ap, int), lst);
-    //else if(*format == 'u')
-    //    ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
+    else if(*format == 'u')
+    {
+        if (lst->modifier == L_ONE || lst->modifier == LL)//позже убрать второй Л мы используем только 1
+            ft_long_to_str(&result, va_arg(ap, long long int), lst);
+        else
+            ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
+    }
+
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     if(!result)

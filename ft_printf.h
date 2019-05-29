@@ -59,7 +59,7 @@ void    ft_pricision_l(char **result, t_prinlist *lst, size_t len, char *arg);
 void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_plus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str);
-
-
+void ft_add_unsigned(char **result, unsigned int arg, t_prinlist *lst);
+void ft_transform_int_result(char **result, t_prinlist *lst);
 
 #endif //PRINTF_FT_PRINTF_H
