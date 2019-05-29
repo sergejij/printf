@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:20:57 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 19:48:46 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/29 17:59:38 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,14 @@ int main()
    // ft_printf("%-+10.5d\n", 4242);
    // printf("%-+10.5d\n", 4242);
 
-   int c = -42;
-   unsigned long long b = (unsigned long long)c;
+    //printf("___________________\n");
+    ft_printf("%5.o\n",  0);
+    printf("%5.o\n", 0);
+    //printf("___________________\n");
 
-
-    ft_printf("%lu\n", -42);
-   // printf("%lu\n", -42);
-    printf("___________________\n");
+   // ft_printf("%03.2d\n", -1);
+    //printf("%03.2d\n", -1);
+   //printf("___________________\n");
 
 
     /*ft_printf("%5d\n", 42);

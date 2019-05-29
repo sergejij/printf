@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/26 16:58:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/28 16:09:44 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:11:29 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,32 +165,30 @@ void ft_add_hex(char **result, int arg, t_prinlist *lst, char sym)
     char *tmp;
     size_t len;
     
+    len = arg < 0 ? 8 : ft_lennum_hex(arg);
+    str = ft_itoa_hex(arg, sym);
+    tmp = str;
+    if(*str == '0' && len == 1)
+    {
+        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            *str = '\0';
+            len = 0;
+            return ;
+        }
+    }
     if (arg == 0)
     {
         *result = "0";
         return ;
     }
-    len = arg < 0 ? 8 : ft_lennum_hex(arg);
-    str = ft_itoa_hex(arg, sym);
-    tmp = str;
-    //len = ft_lennum_hex(arg);
-    /*if ((lst->flag & HASH) == HASH)
-    {
-        tmp = str;
-        if (arg < 0)
-            str = ft_strjoin("0xffff", str);
-        else
-        str = ft_strjoin("0x", str);
-        ft_strdel(&tmp);
-    }*/ // такой кастыль не подходит
     if ((lst->flag & ZERO) == ZERO  && (lst->flag & MINUS) != MINUS)
         ft_hex_zero(&str, lst, len);
-        //str = ft_strjoin(sym == 'x' ? "0x" : "0X", str);
     if ((lst->flag & HASH) == HASH)
         str = ft_strjoin(sym == 'x' ? "0x" : "0X", str); // тернарники огонь
     if (lst->pricision < len)
         *result = ft_add_string(*result, str, lst, 16);
     else
         ft_pricision_hex(result, lst, len, str);
-        //printf("%s", str);
+
 }
