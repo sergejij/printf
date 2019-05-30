@@ -36,16 +36,25 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys)
 void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst)
 {
     char chr_arg;
+    char *tmp;
 
+    tmp = (char*)malloc(sizeof(char) + lst->width - 1);
     chr_arg = (char)chr_arg_int;
     if (chr_arg == 0)
     {
+        if(lst->width > 1)
+        {
+            ft_memset(tmp, ' ', lst->width - 1);
+            write(1, tmp, lst->width - 1);
+            g_sym_count += lst->width - 1;
+        }
         write(1, "\0", 1);
         g_sym_count += 1;
+        return;
     }
     if(lst->width > 1)
     {
-        *result = ft_memset(*result, ' ', lst->width);
+        ft_memset(*result, ' ', lst->width);
         if((lst->flag & MINUS) == MINUS)
             (*result)[0] = chr_arg;
         else

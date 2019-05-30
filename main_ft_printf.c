@@ -70,6 +70,7 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
         ft_add_char(&result, '%', lst);
     if(!result)
         result = ft_strdup("(null)");
+   // if()
     ft_putstr(result);
     g_sym_count += ft_strlen(result);
 

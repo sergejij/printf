@@ -82,7 +82,11 @@ void    ft_pricision_l(char **result, t_prinlist *lst, size_t len, char *arg)
     if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
     else if (lst->width < lst->pricision)
+    {
         ft_memset(*result, '0', arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len);
+        (*result)[arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len] = '\0';
+    }
+
     ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
 }
 
