@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 15:20:57 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 17:59:38 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/05/30 13:29:53 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main()
 {
-    int i = 4242;
+    int i = 42;
     char *tmp;
     char *s = (char*)malloc(sizeof(4));
     tmp = s;
@@ -34,8 +34,8 @@ int main()
    // printf("%-+10.5d\n", 4242);
 
     //printf("___________________\n");
-    ft_printf("%5.o\n",  0);
-    printf("%5.o\n", 0);
+    //ft_printf("%f\n",  i);
+    printf("%.20f\n", 3.3);
     //printf("___________________\n");
 
    // ft_printf("%03.2d\n", -1);

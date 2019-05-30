@@ -45,7 +45,14 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
             ft_add_integer(&result, va_arg(ap, int), lst);
     }
     else if(*format == 'x' || *format == 'X')
-        ft_add_hex(&result, va_arg(ap, int), lst, *format);
+    {
+        if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
+            ft_add_hex_str(&result, va_arg(ap, long int), lst, *format);
+        else if (lst->modifier == LL)
+            ft_add_hex_str(&result, va_arg(ap, long long int), lst, *format);
+        else
+            ft_add_hex_str(&result, va_arg(ap, int), lst, *format);
+    }
     else if(*format == 'o')
         ft_add_octal(&result, va_arg(ap, int), lst);
     else if(*format == 'u')

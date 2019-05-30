@@ -118,7 +118,12 @@ void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill)
     else if (lst->pricision > lst->len)
         ft_pricision_l(result, lst, lst->len, arg);
     else if (lst->width > lst->len)
+    {
+        if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO)
+            lst->len += 2;
         ft_memset(*result, fill, lst->width - lst->len);
+        (*result)[lst->width - lst->len] = '\0';
+    }
     *result = ft_strjoin(*result, arg);
 }
 
@@ -188,7 +193,8 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
             return ;
         }
         ft_strcpy(*result, arg);
-        ft_memset(*result + len, ' ', lst->width - len);
+        ft_memset(*result + len, ' ', lst->width - ((lst->flag & HASH) == HASH
+         && (lst->flag & ZERO) == ZERO ? len + 2 : len));
         (*result)[lst->width] = '\0';
     }
 }
