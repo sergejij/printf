@@ -63,4 +63,7 @@ void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str);
 void ft_add_unsigned(char **result, unsigned long long int arg, t_prinlist *lst);
 void ft_transform_int_result(char **result, t_prinlist *lst);
 
+/*      float        */
+void ft_add_float(char **result, double arg_float, t_prinlist *lst);
+
 #endif //PRINTF_FT_PRINTF_H

@@ -7,7 +7,7 @@ int g_sym_count = 0;
 int ft_is_type(char *c, t_prinlist *lst)
 {
     if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd'
-    || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u')
+    || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u' || *c == 'f')
         return (1);
     else if(*c == 'h' && lst->modifier != HH)
     {
@@ -63,9 +63,9 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
             ft_add_unsigned(&result, va_arg(ap, unsigned long long int), lst);
         else
             ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
-
     }
-
+    else if(*format == 'f')
+        ft_add_float(&result, va_arg(ap, double), lst);
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     if(!result)
@@ -143,7 +143,7 @@ int ft_printf(const char *apformat, ...)
         //идем про форматирующей строке
         if (*p_apFormat == '%')
         {
-            result = (char *)malloc(sizeof(char) * 100);
+            result = (char *)malloc(sizeof(char) * 10000);
             ft_strclr(result);
             tmp = result;
             // делаем структуру:
