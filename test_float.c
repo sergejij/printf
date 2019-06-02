@@ -6,14 +6,35 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:23:14 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/02 16:36:23 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/06/02 17:57:42 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
 
-
+static const double rounders[20 + 1] =
+        {
+                0.499,				// 0
+                0.049,				// 1
+                0.0049,				// 2
+                0.00049,				// 3
+                0.000049,			// 4
+                0.0000049,			// 5
+                0.00000049,			// 6
+                0.000000049,			// 7
+                0.0000000049,		// 8
+                0.00000000049,		// 9
+                0.000000000049,		// 10
+                0.0000000000049,		// 11
+                0.00000000000049,		// 12
+                0.000000000000049,		// 13
+                0.0000000000000049,		// 14
+                0.00000000000000049,		// 15
+                0.000000000000000049,		// 16
+                0.0000000000000000049,		// 17
+                0.00000000000000000049,		// 18
+        };
 
 char *ftoa(double f, char *result, int precision)
 {
@@ -40,7 +61,8 @@ char *ftoa(double f, char *result, int precision)
         else
             precision = 0;*/
     }
-
+    if (precision <= 18)
+        f += rounders[precision];
     intPart = f;
     f -= intPart;
     ptr = ft_itoa(intPart);
@@ -55,24 +77,28 @@ char *ftoa(double f, char *result, int precision)
         ft_strdel(&ptr);
         if (f < 0)
             f = -f;
-        while (precision--)
+        while (precision)
         {
-            if (precision == 1 && f > 0.5)  //&& (f / 10 < 0.05))
+          /*  if (precision == 1 && ((f > 0.5)  || (f > 0.5 && (f / 10 < 0.05))))
             {
-                f += 0.05; 
+                f += 0.05;
                 if(f > 0.99)
-                { 
+                {
+                    result--;
                     f /= 10.0;
-                    precision += 2;
+                    precision ++;
                     continue ;
                 }
                     
             }
+            //else if ((f > 0.5) && (f / 10 < 0.05)
+*/
                 
             f *= 10.0;
             c = f;
             *result++ = '0' + c;
             f -= c;
+            precision--;
         }
         *result = 0;
     }

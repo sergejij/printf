@@ -6,7 +6,7 @@ int g_sym_count = 0;
 
 int ft_is_type(char *c, t_prinlist *lst)
 {
-    if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd'
+    if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd' || *c == 'i'
     || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u' || *c == 'f')
         return (1);
     else if(*c == 'h' && lst->modifier != HH)
@@ -37,7 +37,7 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
         result = ft_add_string(result, va_arg(ap, char*), lst, 1);
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
-    else if (*format == 'd')
+    else if (*format == 'd' || *format == 'i')
     {
         if (lst->modifier == L_ONE || lst->modifier == LL)//позже убрать второй Л мы используем только 1
             ft_long_to_str(&result, va_arg(ap, long long int), lst);
