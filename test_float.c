@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 16:23:14 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 15:15:35 by aestella         ###   ########.fr       */
+/*   Updated: 2019/06/03 16:12:44 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ char *ft_ftoa(double f, char *result, int precision)
     intPart = f;
     if (precision < 0)
         precision = 0;
-    else if(precision == 0 && (f - intPart) == 0)
+   /* else if(precision == 0 && (f - intPart) == 0)
         precision = 6;
-    if (precision <= 18)
+   */if (precision <= 18)
     {
         if( (f - intPart) == 0.5 && (intPart % 2) == 0)
             f -= rounders[precision];
@@ -57,10 +57,10 @@ char *ft_ftoa(double f, char *result, int precision)
     }
     intPart = f;
     f -= intPart;
-    ft_ltoa(&result, intPart);
+    ptr = ft_itoa(intPart);//ft_ltoa(&result, intPart);
+    ft_strcpy(result, ptr);
     p1 = result;
-   
-    
+    p1 = result;
     if (precision)
     {
         *(result + ft_strlen(ptr)) = '.';
@@ -85,7 +85,7 @@ char *ft_ftoa(double f, char *result, int precision)
 void ft_add_float(char **result, double arg_float, t_prinlist *lst)
 {
     ft_ftoa(arg_float, *result, lst->pricision);
-    lst->pricision = 0;
+  //  lst->pricision = 0;
    // if(lst->flag || lst->width)
      //   ft_transform_int_result(result, lst);
 }

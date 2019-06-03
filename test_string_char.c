@@ -42,7 +42,18 @@ void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst)
     chr_arg = (char)chr_arg_int;
     if (chr_arg == 0)
     {
-        if(lst->width > 1)
+        if(((lst->flag & MINUS) == MINUS))
+        {
+            write(1, "\0", 1);
+            if(lst->width > 1)
+            {
+                ft_memset(tmp, ' ', lst->width - 1);
+                write(1, tmp, lst->width - 1);
+                g_sym_count += lst->width - 1;
+            }
+            return;
+        }
+        else if(lst->width > 1)
         {
             ft_memset(tmp, ' ', lst->width - 1);
             write(1, tmp, lst->width - 1);

@@ -76,6 +76,16 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
 
 }
 
+void ft_delete_excess_flags(t_prinlist *lst)
+{
+    if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & ZERO) == ZERO)
+        lst->flag = lst->flag ^ ZERO;
+    if ((lst->flag & PLUS) == PLUS && (lst->flag & SPACE) == SPACE)
+        lst->flag = lst->flag ^ SPACE;
+    if ((lst->flag & MINUS) == MINUS && (lst->flag & ZERO) == ZERO)
+        lst->flag = lst->flag ^ ZERO;
+}
+
 int ft_analise_flags(char *format, t_prinlist *lst)
 {
     int flag = 0;
@@ -111,6 +121,7 @@ int ft_analise_flags(char *format, t_prinlist *lst)
         format++;
     }
     lst->flag = flag;
+    ft_delete_excess_flags(lst);
     return (flag);
 }
 

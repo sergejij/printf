@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/30 14:00:05 by aestella         ###   ########.fr       */
+/*   Updated: 2019/06/03 17:02:07 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
         ft_recording_l(result, arg, lst, '0');
     else
         ft_recording_l(result, arg, lst, ' ');
-    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_int >=0 && lst->width < len)
+    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_int >=0 && lst->width <= len)
         *result = ft_strjoin(" ", *result);
 }
