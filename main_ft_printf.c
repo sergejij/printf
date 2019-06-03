@@ -154,7 +154,7 @@ int ft_printf(const char *apformat, ...)
             ft_analise_types((char*)p_apFormat, result + ft_strlen(result), ap, lst);
             p_apFormat++; //пропускам букву (s / d/ i и тд)
             free(lst);
-            ft_strdel(&tmp);
+           // ft_strdel(&tmp);
             continue ;
         }
         else

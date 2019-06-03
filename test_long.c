@@ -219,8 +219,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
         ft_recording_l(result, cpy_num, lst, ' ');
 }
 
-
-void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
+void ft_ltoa(char **result, long long arg)
 {
     int piece;
     int del;
@@ -256,6 +255,11 @@ void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
         ft_strcat(*result, new_res[i]);
         tmp = *result + 5; //без тмп не компилилось(
     }
+}
+
+void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
+{
+    ft_ltoa(result, arg);
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, lst);
 }

@@ -65,5 +65,6 @@ void ft_transform_int_result(char **result, t_prinlist *lst);
 
 /*      float        */
 void ft_add_float(char **result, double arg_float, t_prinlist *lst);
+void ft_ltoa(char **result, long long arg);
 
 #endif //PRINTF_FT_PRINTF_H
