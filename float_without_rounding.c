@@ -196,8 +196,6 @@ void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_
 
     currNum = NULL;
     len_int_part = 0;
-    if(!pricision)
-        pricision = 6;
     if(!(*float_part))
     {
         ft_strcpy(float_part, "0.");
@@ -207,7 +205,6 @@ void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_
     ft_plus_int(int_part, currNum, Len);
     int_part[Len->lenOfResult] = '.';
     len_int_part = Len->lenOfResult;
-
     ft_strcat(int_part, float_part + 2);
     ft_roundering(int_part, pricision, Len);
     int_part[len_int_part + pricision + 1] = '\0';
@@ -288,7 +285,7 @@ unsigned long ft_make_mantissa(long double nbr)
     return (mantissa);
 }
 
-void ft_parse_double(char **result, long double arg_double, size_t pricision)
+void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
 {
     char *tmp_result;
     unsigned long mantissa = 0;
@@ -316,10 +313,20 @@ void ft_parse_double(char **result, long double arg_double, size_t pricision)
     exponent ^= 16384;
     if(exponent == 32767)
         exponent = -1;
-    tmp_result = ft_add_double(mantissa, exponent, pricision);
+    if(lst->pricision == 0 && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
+        lst->pricision = 6;
+    tmp_result = ft_add_double(mantissa, exponent, lst->pricision);
     if (sign < 0)
         ft_strcpy((*result) + 1, tmp_result);
     else
         ft_strcpy(*result, tmp_result);
     ft_strdel(&tmp_result);
+
+    lst->pricision = 0;
+    if(lst->flag || lst->width)
+        ft_transform_int_result(result, lst);
+    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_double >=0 && lst->width <= lst->len)
+        *result = ft_strjoin(" ", *result);
+   // if ((lst->flag & HASH) == HASH)
+
 }

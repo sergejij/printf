@@ -76,6 +76,6 @@ size_t  ft_lennum_hex(long long int num);
 
                         /*      float        */
 void ft_ltoa(char **result, long long arg);
-void ft_parse_double(char **result, long double arg_double, size_t pricision);
+void ft_parse_double(char **result, long double arg_double, t_prinlist *lst);
 
 #endif //PRINTF_FT_PRINTF_H
