@@ -170,8 +170,24 @@ void ft_print_bits(unsigned long a, int bits)
             ft_putchar(' ');
     }
 }
+void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_len *Len)
+{
+    char *currNum;
 
-char *ft_add_double(unsigned long mantissa, short exponent)
+    currNum = NULL;
+    if(!pricision)
+        pricision = 6;
+    if(!(*float_part))
+    {
+        ft_strcpy(float_part, "0.");
+        ft_memset(float_part + 2, '0', pricision);
+    }
+    currNum = ft_strsub(float_part, 0, 1);
+    ft_plus_int(int_part, currNum, Len);
+    int_part[Len->lenOfResult] = '.';
+    ft_strncat(int_part, float_part + 2, pricision);
+}
+char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
 {
     unsigned long cpyMantissa = mantissa;
     unsigned long oneLeftOne = 0x8000000000000000;
@@ -212,13 +228,7 @@ char *ft_add_double(unsigned long mantissa, short exponent)
         cpyMantissa <<= 1;
         exponent--;
     }
-    if((*float_part))
-    {
-        currNum = ft_strsub(float_part, 0, 1);
-        ft_plus_int(int_part, currNum, Len);
-        int_part[Len->lenOfResult] = '.';
-        ft_strcat(int_part, float_part + 2);
-    }
+    ft_pasteIntPlusFloat(int_part, float_part, pricision, Len);
     return (int_part);
 }
 
@@ -252,11 +262,11 @@ unsigned long ft_make_mantissa(long double nbr)
     return (mantissa);
 }
 
-void ft_parse_double(char **result, long double arg_double)
+void ft_parse_double(char **result, long double arg_double, size_t pricision)
 {
     unsigned long mantissa = 0;
     unsigned char memoryPointer;
-    short exponent = 0;
+    unsigned short exponent = 0;
     int sign = 0;
 
     //определяем знак
@@ -286,7 +296,7 @@ void ft_parse_double(char **result, long double arg_double)
     ft_putchar('\n');
     ft_putnbr(exponent);
     ft_putchar('\n');*/
-    *result = ft_add_double(mantissa, exponent);
+    *result = ft_add_double(mantissa, exponent, pricision);
  //   printf("my nbr is       %s\n", result);
  //   printf("nbr original is %.60Lf", arg_double);
 }
