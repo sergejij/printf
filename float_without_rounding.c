@@ -146,6 +146,11 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
         ft_memset((curretNum) + (Len->lenOfCurrentNbr),'0', (Len->lenOfPower - Len->lenOfCurrentNbr));
         Len->lenOfCurrentNbr += Len->lenOfPower - Len->lenOfCurrentNbr;
     }
+    if(Len->lenOfCurrentNbr > Len->lenOfPower)
+    {
+        ft_memset((powerTwo) + (Len->lenOfPower),'0', (Len->lenOfCurrentNbr - Len->lenOfPower));
+        Len->lenOfPower += Len->lenOfCurrentNbr - Len->lenOfPower;
+    }
     cpy_cur = ft_strsub(curretNum, 2, Len->lenOfCurrentNbr - 2);
     cpy_power = ft_strsub(powerTwo, 2, Len->lenOfPower - 2);
     ft_plus_int(cpy_cur, cpy_power, Len);
@@ -170,11 +175,27 @@ void ft_print_bits(unsigned long a, int bits)
             ft_putchar(' ');
     }
 }
+void ft_roundering(char *currResult, size_t pricision, t_len *Len)
+{
+    char *rounder;
+
+    rounder = (char *)malloc(sizeof(char) * Len->lenOfPower);
+    ft_strcpy(rounder, "0.");
+    ft_memset(rounder + 2, '0', pricision);
+    rounder[pricision + 2] = '5';
+    rounder[pricision + 3] = '\0';
+
+    if((currResult[pricision + 1] - '0') % 2 != 0 || (currResult[pricision + 2] - '0') >= 5)
+        ft_plus_float(currResult, rounder, Len);
+}
+
 void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_len *Len)
 {
     char *currNum;
+    int len_int_part;
 
     currNum = NULL;
+    len_int_part = 0;
     if(!pricision)
         pricision = 6;
     if(!(*float_part))
@@ -185,8 +206,13 @@ void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_
     currNum = ft_strsub(float_part, 0, 1);
     ft_plus_int(int_part, currNum, Len);
     int_part[Len->lenOfResult] = '.';
-    ft_strncat(int_part, float_part + 2, pricision);
+    len_int_part = Len->lenOfResult;
+
+    ft_strcat(int_part, float_part + 2);
+    ft_roundering(int_part, pricision, Len);
+    int_part[len_int_part + pricision + 1] = '\0';
 }
+
 char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
 {
     unsigned long cpyMantissa = mantissa;
@@ -195,7 +221,6 @@ char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
     char *float_part;
     char *currNum;
     t_len *Len;
-
     Len = malloc(sizeof(t_len));
     int_part = ft_strnew(100);
     float_part = ft_strnew(100);
@@ -229,6 +254,7 @@ char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
         exponent--;
     }
     ft_pasteIntPlusFloat(int_part, float_part, pricision, Len);
+
     return (int_part);
 }
 
@@ -291,6 +317,9 @@ void ft_parse_double(char **result, long double arg_double, size_t pricision)
     if(exponent == 32767)
         exponent = -1;
     tmp_result = ft_add_double(mantissa, exponent, pricision);
-    ft_strcpy((*result) + 1, tmp_result);
+    if (sign < 0)
+        ft_strcpy((*result) + 1, tmp_result);
+    else
+        ft_strcpy(*result, tmp_result);
     ft_strdel(&tmp_result);
 }
