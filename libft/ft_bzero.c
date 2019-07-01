@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 16:09:57 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/06 18:22:05 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 void	ft_bzero(void *s, size_t n)
 {
-	size_t			counter;
-	unsigned char	*arr;
+	unsigned char c;
+	unsigned char *new_s;
 
-	arr = (unsigned char*)s;
-	counter = 0;
-	while (counter < n)
+	c = '\0';
+	new_s = (unsigned char *)s;
+	while (n > 0)
 	{
-		arr[counter] = 0;
-		counter++;
+		*new_s = c;
+		new_s++;
+		n--;
 	}
 }

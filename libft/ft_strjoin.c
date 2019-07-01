@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 13:31:06 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/12 19:39:04 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,19 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*dest;
-	unsigned int	l1;
-	unsigned int	l2;
-	unsigned int	i;
+	size_t	lens1;
+	size_t	lens2;
+	char	*str;
 
-	i = 0;
-	if (s1 == NULL || s2 == NULL)
+	str = NULL;
+	if (!s1 || !s2)
 		return (NULL);
-	l1 = ft_strlen(s1);
-	l2 = ft_strlen(s2);
-	dest = (char*)malloc(sizeof(*dest) * (l1 + l2 + 1));
-	if (dest == NULL)
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	str = (char *)malloc((lens1 + lens2 + 1) * sizeof(char));
+	if (!str)
 		return (NULL);
-	while (i < l1)
-		dest[i++] = *s1++;
-	while (i - l1 < l2)
-		dest[i++] = *s2++;
-	dest[i] = '\0';
-	return (dest);
+	ft_strcpy(str, s1);
+	ft_strcat(str, s2);
+	return (str);
 }

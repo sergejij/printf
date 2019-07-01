@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_discharge.c                                     :+:      :+:    :+:   */
+/*   ft_list_last.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/15 15:16:11 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/03/13 20:16:33 by aestella          #+#    #+#             */
+/*   Updated: 2019/04/22 21:30:13 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long int	ft_discharge(int n)
+t_list	*ft_lstlast(t_list *last_list, t_list *new)
 {
-	long int	res;
-
-	res = 1;
-	while (n / 10)
+	if (last_list && new)
 	{
-		res *= 10;
-		n /= 10;
+		new = last_list->next;
+		return (new);
 	}
-	return (res);
+	else
+		return (NULL);
 }

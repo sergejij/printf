@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 SRC = main_ft_printf.c test_integer_to_string.c test_pointer.c \
         test_string_char.c test_hex_str.c  test_long.c test_octal.c \
-        test_unsigned.c test_float.c
+        test_unsigned.c test_float.c float_without_rounding.c
 
 
 OBJ = $(SRC:.c=.o) 

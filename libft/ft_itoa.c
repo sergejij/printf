@@ -3,48 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/15 12:59:55 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/18 11:30:57 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_record(unsigned int number, char *result, int len)
+static size_t	class(int n)
 {
-	if (number == 0)
-		result[0] = number + '0';
-	while (number > 0)
+	int		i;
+
+	i = 1;
+	if (n < 0)
+		n = (n * -1) * 10;
+	while (n >= 10)
 	{
-		result[len - 1] = number % 10 + '0';
-		number /= 10;
-		len--;
+		n = n / 10;
+		i++;
 	}
+	return ((size_t)i);
 }
 
-char		*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
-	int				len;
-	int				counter;
-	unsigned int	number;
-	char			*result;
+	char	*res;
+	char	buf;
+	size_t	len;
 
-	len = ft_lennum(n);
-	counter = 0;
-	result = (char*)malloc(sizeof(char) * (len + 1));
-	if (!result)
-		return (0);
-	result[len] = '\0';
+	len = class(n);
+	if (!(res = ft_strnew(len)))
+		return (NULL);
 	if (n < 0)
 	{
-		result[counter] = '-';
-		number = n * (-1);
-		counter++;
+		if (n == -2147483648)
+		{
+			ft_strcpy(res, "-2147483648");
+			return (res);
+		}
+		res[0] = '-';
+		n = n * -1;
 	}
-	else
-		number = n;
-	ft_record(number, result, len);
-	return (result);
+	while (len > 0 && res && res[len - 1] != '-')
+	{
+		buf = (n % 10) + '0';
+		res[len - 1] = buf;
+		n = n / 10;
+		len--;
+	}
+	return (res);
 }

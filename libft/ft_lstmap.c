@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 17:09:09 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/21 16:10:46 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,28 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *tmp;
-	t_list *p_start;
+	t_list *temp;
+	t_list *begin;
 
-	if (!lst || !f || !(tmp = (t_list*)malloc(sizeof(*lst))))
+	if (!lst || !f)
 		return (NULL);
-	tmp = f(lst);
-	p_start = tmp;
+	temp = f(lst);
+	begin = temp;
 	while (lst->next)
 	{
 		lst = lst->next;
-		if (!(tmp->next = f(lst)))
+		temp->next = f(lst);
+		if (!(temp->next))
 		{
-			while (p_start)
+			while (begin)
 			{
-				free(p_start);
-				p_start = p_start->next;
+				free(begin);
+				begin = begin->next;
 			}
-			free(tmp->next);
-			lst = NULL;
-			return (0);
+			begin = NULL;
+			return (NULL);
 		}
-		tmp = tmp->next;
+		temp = temp->next;
 	}
-	tmp = f(lst);
-	return (p_start);
+	return (begin);
 }

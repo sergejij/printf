@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lennum.c                                        :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/15 11:59:11 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/22 21:30:36 by aestella          #+#    #+#             */
+/*   Updated: 2019/04/22 21:32:31 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_lennum(int num)
+int		ft_lstsize(t_list *begin_list)
 {
-	size_t len;
+	int		i;
+	t_list	*temp;
 
-	len = 0;
-	if (num < 0)
-		len++;
-	if (num == 0)
-		return (1);
-	while (num != 0)
+	if (!begin_list)
+		return (0);
+	i = 0;
+	temp = begin_list;
+	while (temp != 0)
 	{
-		len++;
-		num /= 10;
+		temp = temp->next;
+		i++;
 	}
-	return (len);
+	return (i);
 }

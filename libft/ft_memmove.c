@@ -3,41 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 17:16:35 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/11 17:44:31 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			counter;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	unsigned char *d;
+	unsigned char *s;
 
-	str2 = (unsigned char*)src;
-	str1 = (unsigned char*)dst;
-	counter = 0;
-	if (str2 > str1)
+	if (dst == src)
+		return (dst);
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	if (s < d)
 	{
-		while (counter < len)
+		s = s + len - 1;
+		d = d + len - 1;
+		while (len > 0)
 		{
-			str1[counter] = str2[counter];
-			counter++;
+			*d-- = *s--;
+			len--;
 		}
 	}
-	else
-	{
-		counter += len;
-		while (counter != 0)
+	else if (s > d)
+		while (len > 0)
 		{
-			str1[counter - 1] = str2[counter - 1];
-			counter--;
+			*d++ = *s++;
+			len--;
 		}
-	}
 	return (dst);
 }

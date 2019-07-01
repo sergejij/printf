@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strcat.c                                           :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 13:10:35 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/11 16:53:40 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int	counter1;
-	int	counter2;
+	char	*buff;
+	int		i;
+	int		j;
 
-	counter1 = 0;
-	counter2 = 0;
-	while (s1[counter1] != '\0')
-		counter1++;
-	while (s2[counter2] != '\0')
-		s1[counter1++] = s2[counter2++];
-	s1[counter1] = '\0';
+	buff = s1;
+	i = 0;
+	j = 0;
+	while (s1[i])
+		i++;
+	while (s2[j])
+	{
+		buff[i] = s2[j];
+		i++;
+		j++;
+	}
+	buff[i] = '\0';
 	return (s1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 12:33:32 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/12 20:03:10 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,23 @@
 
 char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	size_t	counter;
-	char	*new_str;
+	char	*new_string;
+	size_t	i;
 
-	counter = 0;
-	new_str = (char*)malloc(len + 1);
-	if (!new_str || !s)
-		return (0);
-	while (len && s[counter] != '\0')
+	i = 0;
+	new_string = NULL;
+	if (!s)
+		return (NULL);
+	if (!(new_string = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	ft_memset(new_string, '1', len);
+	while (i < len && s[start])
 	{
-		new_str[counter++] = s[start++];
-		len--;
+		new_string[i] = s[start];
+		i++;
+		start++;
 	}
-	new_str[counter] = '\0';
-	return (new_str);
+	new_string[i] = '\0';
+	return (new_string);
 }
+

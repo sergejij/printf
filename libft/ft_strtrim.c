@@ -3,48 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 14:18:18 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/13 18:57:22 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	ft_cpy(char *dst, unsigned char *src, int start, int len)
+char	*ft_strtrim(char const *s)
 {
-	int		counter;
-
-	counter = 0;
-	while (src[counter] != '\0' && len >= start)
-		dst[counter++] = src[start++];
-	dst[counter] = '\0';
-}
-
-char			*ft_strtrim(char const *s)
-{
-	int		counter;
-	char	*str;
-	int		len;
+	char			*new_str;
+	unsigned int	b;
+	size_t			end;
 
 	if (!s)
-		return (0);
-	len = ft_strlen((char*)s) - 1;
-	counter = 0;
-	while (ft_isspace(s[counter]) && s[counter] != '\0')
-		counter++;
-	while (len > 0 && (s[len] == ' ' || s[len] == '\n' || s[len] == '\t'))
-		len--;
-	if (len <= 0)
+		return (NULL);
+	b = 0;
+	end = ft_strlen(s);
+	while (s[b] == ' ' || s[b] == ',' || s[b] == '\n' || s[b] == '\t')
+		b++;
+	if (s[b] == '\0')
 	{
-		str = (char*)malloc(sizeof(char) * 1);
-		str[0] = '\0';
-		return (str);
+		new_str = ft_strnew(0);
+		return (new_str);
 	}
-	str = (char*)malloc(sizeof(char) * len - counter + 2);
-	if (!str && len > counter)
-		return (str);
-	ft_cpy(str, (unsigned char*)s, counter, len);
-	return (str);
+	while (s[end] == ' ' || s[end] == ',' || s[end] == '\n'
+			|| s[end] == '\t' || s[end] == '\0')
+		end--;
+	new_str = ft_strnew(end - b + 1);
+	if (!new_str)
+		return (NULL);
+	new_str = ft_strsub(s, b, end - b + 1);
+	return (new_str);
 }

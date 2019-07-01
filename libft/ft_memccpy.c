@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memccpy.c                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 15:25:52 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/06 19:43:36 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t			counter;
-	unsigned char	*src_c;
-	unsigned char	*dst_c;
-	unsigned char	c_c;
+	unsigned char *s;
+	unsigned char *d;
 
-	c_c = (unsigned char)c;
-	counter = 0;
-	src_c = (unsigned char*)src;
-	dst_c = (unsigned char*)dst;
-	if (n < 1)
-		return (0);
-	while (src_c[counter] != c_c && counter < n)
+	s = (unsigned char *)src;
+	d = (unsigned char *)dst;
+	while (n > 0)
 	{
-		dst_c[counter] = src_c[counter];
-		counter++;
-	}
-	counter = counter == n ? counter - 1 : counter;
-	if (src_c[counter] == c_c)
-	{
-		dst_c[counter] = src_c[counter];
-		return (&dst[counter + 1]);
+		*d = *s;
+		if (*s == (unsigned char)c)
+		{
+			d++;
+			return (d);
+		}
+		d++;
+		s++;
+		n--;
 	}
 	return (NULL);
 }

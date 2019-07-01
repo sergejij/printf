@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl.c                                       :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/11 16:52:23 by aestella          #+#    #+#             */
-/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/22 19:43:33 by aestella          #+#    #+#             */
+/*   Updated: 2019/04/22 20:28:48 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putendl(char const *s)
+char	*ft_strrev(char *s)
 {
-	if (!s)
-		return ;
-	ft_putstr(s);
-	ft_putchar('\n');
+    char	buff;
+    size_t	len;
+    size_t		i;
+    size_t  len_inf;
+
+    if (!*s)
+        return (NULL);
+    len_inf = ft_strlen(s);
+    len = len_inf - 1;
+    i = 0;
+    while (i < len)
+    {
+        buff = s[i];
+        s[i] = s[len];
+        s[len] = buff;
+        i++;
+        len--;
+    }
+    s[len_inf] = '\0';
+    return (s);
 }

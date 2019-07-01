@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_memchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/10 12:57:01 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/07 13:20:03 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <string.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t				counter;
-	unsigned char		*s1;
-	unsigned char		b;
+	unsigned char *new_s;
+	unsigned char new_c;
 
-	if (n == 0)
-		return (NULL);
-	s1 = (unsigned char*)s;
-	b = (unsigned char)c;
-	counter = 0;
-	while (s1[counter] != b && counter < n - 1)
-		counter++;
-	if (s1[counter] == b)
-		return ((void*)&(s1[counter]));
-	return (0);
+	new_c = (unsigned char)c;
+	new_s = (unsigned char *)s;
+	while (n > 0)
+	{
+		if (*new_s == new_c)
+			return (new_s);
+		new_s++;
+		n--;
+	}
+	return (NULL);
 }

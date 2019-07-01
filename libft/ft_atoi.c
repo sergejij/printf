@@ -3,38 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 16:02:17 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/11 16:33:35 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+static int		ft_isspace(char c)
 {
-	int				counter;
-	long long int	result;
-	int				sign;
+	if (c == ' ' || c == '\t' || c == '\n'
+			|| c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	else
+		return (0);
+}
 
-	sign = 1;
-	result = 0;
-	counter = 0;
-	while ((str[counter] > 7 && str[counter] < 14) || str[counter] == ' ')
-		counter++;
-	if (str[counter] == '-')
-		sign = -1;
-	if (str[counter] == '-' || str[counter] == '+')
-		counter++;
-	while (str[counter] > 47 && str[counter] < 58)
+int				ft_atoi(const char *str)
+{
+	int			i;
+	int			neg;
+	long int	res;
+
+	i = 0;
+	res = 0;
+	neg = 1;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		if (str[i++] == '-')
+			neg = -1;
+	while (str[i] > '\0')
 	{
-		result = (result * 10) + (int)str[counter] - 48;
-		if (sign == -1 && result < 0)
-			return (0);
-		if (sign == 1 && result < 0)
+		if (!(ft_isdigit(str[i])))
+			break ;
+		if (res * 10 / 10 != res && neg == 1)
 			return (-1);
-		counter++;
+		else if (res * 10 / 10 != res && neg == -1)
+			return (0);
+		res = res * 10 + (str[i] - '0');
+		i++;
 	}
-	return (result * sign);
+	return (res * neg);
 }

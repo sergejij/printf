@@ -3,83 +3,91 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/13 18:26:29 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/18 14:45:38 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	void	ft_malloc_for_el(char **arr_str, char *s, char c)
+static int		word_count(char const *s, char c)
 {
-	size_t	i;
-	size_t	counter2;
-	size_t	count_el;
+	int	w;
+	int	i;
 
-	count_el = 0;
+	w = 0;
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
-		counter2 = 0;
-		if ((s[i - 1] == c && s[i] != c) || ((s[0] != c) && (i == 0)))
-		{
-			while (s[i] != c && s[i] != '\0')
-			{
-				counter2++;
-				i++;
-			}
-			arr_str[count_el] = (char*)malloc(sizeof(char) * counter2 + 1);
-			if (!arr_str[count_el])
-				while (count_el > 0)
-					free(arr_str[count_el-- - 1]);
-			count_el++;
-			i--;
-		}
+		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+			w++;
 		i++;
 	}
+	return (w);
 }
 
-static	void	ft_write_arr(char **arr_str, char *s, char c)
+static int		word_size(const char *s, char c)
 {
-	size_t	counter;
-	size_t	j;
-	size_t	i;
+	int i;
 
-	j = 0;
 	i = 0;
-	counter = 0;
-	while (s[counter] != '\0')
+	while (*s == c && *s != '\0')
+		s++;
+	while (*s != c && *s != '\0')
 	{
-		if ((s[counter - 1] == c && s[counter] != c)
-				|| ((s[0] != c) && (counter == '\0')))
+		s++;
+		i++;
+	}
+	return (i);
+}
+
+static char		*word_allocation(char **arr, char *word, int size)
+{
+	int i;
+
+	i = 0;
+	word = (char *)malloc(sizeof(char) * (size + 1));
+	if (!word)
+	{
+		while (arr[i])
 		{
-			while (s[counter] != c && s[counter] != '\0')
-				arr_str[i][j++] = s[counter++];
-			arr_str[i][j] = '\0';
-			counter--;
+			free(arr[i]);
 			i++;
 		}
-		counter++;
-		j = 0;
+		free(arr);
+		arr = NULL;
+		return (NULL);
 	}
-	arr_str[i] = NULL;
+	return (word);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**arr_str;
+	char	**res;
+	int		w_count;
+	int		i;
+	int		j;
 
-	if (!s)
+	j = 0;
+	if (!s || !c)
 		return (NULL);
-	arr_str = (char**)malloc(sizeof(char*) * (ft_count_word((char*)s, c) + 1));
-	if (!arr_str)
+	w_count = word_count(s, c);
+	if (!(res = (char **)malloc(sizeof(char *) * (w_count + 1))))
+		return (NULL);
+	while (j < w_count)
 	{
-		free(arr_str);
-		return (0);
+		i = 0;
+		if (!(res[j] = word_allocation(res, res[j], word_size(s, c))))
+			return (NULL);
+		while (*s == c && s != '\0')
+			s++;
+		while (*s != c && *s)
+			res[j][i++] = *s++;
+		res[j][i] = '\0';
+		j++;
 	}
-	ft_malloc_for_el(arr_str, (char*)s, c);
-	ft_write_arr(arr_str, (char*)s, c);
-	return (arr_str);
+	res[j] = 0;
+	return (res);
 }

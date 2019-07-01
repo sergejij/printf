@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/07 15:21:33 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/12 16:51:59 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	res;
-	size_t	counter1;
-	size_t	counter2;
+	size_t	i;
+	size_t	j;
 
-	counter1 = 0;
-	counter2 = 0;
-	res = 0;
-	while (dst[counter1] != '\0')
-		counter1++;
-	if (counter1 < size)
+	i = 0;
+	while (i < size && dst[i])
+		i++;
+	if (size == i)
+		return (size + ft_strlen(src));
+	j = 0;
+	while (size > (i + j + 1) && src[j])
 	{
-		while (counter1 < (size - 1) && src[counter2] != '\0')
-			dst[counter1++] = src[counter2++];
-		dst[counter1] = '\0';
-		while (src[counter2++] != '\0')
-			counter1++;
-		return (counter1);
+		dst[i + j] = src[j];
+		j++;
 	}
-	dst[counter1] = '\0';
-	while (src[res] != '\0')
-		res++;
-	return (res + size);
+	dst[i + j] = '\0';
+	if (size == (i + j + 1))
+	{
+		while (src[j])
+			j++;
+	}
+	return (i + j);
 }

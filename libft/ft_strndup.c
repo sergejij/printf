@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/18 22:23:25 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/02 17:39:29 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *s1, size_t n)
+char	*ft_strndup(const char *src, size_t n)
 {
-	char			*s2;
-	unsigned int	counter;
+	int		i;
+	size_t	len;
+	char	*new;
 
-	s2 = (char*)malloc(sizeof(char) * (n + 1));
-	if (!s2)
+	if (!src || !(n + 1))
 		return (NULL);
-	counter = 0;
-	while (s1[counter] && counter < n)
+	i = 0;
+	len = ft_strlen(src);
+	if (len < n)
+		n = len;
+	new = (char *)malloc((n + 1) * sizeof(char));
+	if (new == NULL)
+		return (0);
+	i = 0;
+	while (src[i] && n > 0)
 	{
-		s2[counter] = s1[counter];
-		counter++;
+		new[i] = src[i];
+		i++;
+		n--;
 	}
-	s2[counter] = '\0';
-	return (s2);
+	new[i] = '\0';
+	return (new);
 }

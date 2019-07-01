@@ -65,7 +65,7 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
             ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
     }
     else if(*format == 'f')
-        ft_add_float(&result, va_arg(ap, double), lst);
+        ft_parse_double(&result, va_arg(ap, double));
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     if(!result)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnew.c                                        :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 17:03:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/11 16:41:32 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 
 char	*ft_strnew(size_t size)
 {
-	char	*str;
-	size_t	counter;
+	char *temp;
 
-	counter = 0;
-	if (size == (size_t)-1)
+	temp = NULL;
+	if (!(size + 1))
 		return (NULL);
-	str = ft_memalloc(size + 1);
-	if (!str)
+	temp = (char *)malloc((size + 1) * sizeof(char));
+	if (!temp)
 		return (NULL);
-	while (size < counter)
-	{
-		str[counter] = '\0';
-		counter++;
-	}
-	return (str);
+	ft_memset(temp, '\0', size + 1);
+	return (temp);
 }

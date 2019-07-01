@@ -3,16 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 11:54:59 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/06/03 13:56:51 by aestella         ###   ########.fr       */
+/*   Created: 2019/04/07 16:47:42 by aestella          #+#    #+#             */
+/*   Updated: 2019/06/10 14:59:17 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int t)
 {
-	return (ft_memchr(s, c, ft_strlen(s) + 1));
+	int flag;
+
+	flag = 0;
+	while (*s != '\0')
+	{
+		if (*s == t)
+		{
+			flag = 1;
+			break ;
+		}
+		s++;
+	}
+	if (t == '\0')
+		return ((char *)s++);
+	if (flag == 1)
+		return ((char *)s);
+	else
+		return (NULL);
 }
