@@ -264,6 +264,7 @@ unsigned long ft_make_mantissa(long double nbr)
 
 void ft_parse_double(char **result, long double arg_double, size_t pricision)
 {
+    char *tmp_result;
     unsigned long mantissa = 0;
     unsigned char memoryPointer;
     unsigned short exponent = 0;
@@ -273,8 +274,10 @@ void ft_parse_double(char **result, long double arg_double, size_t pricision)
     memoryPointer = *((unsigned char *)&arg_double + 9);
     sign = (memoryPointer >> 7)  == 0 ? 1 : -1;
     if(sign < 0)
+    {
         arg_double = -arg_double;
-
+        **result = '-';
+    }
     //выделяем мантиссу
     mantissa = ft_make_mantissa(arg_double);
 
@@ -287,16 +290,7 @@ void ft_parse_double(char **result, long double arg_double, size_t pricision)
     exponent ^= 16384;
     if(exponent == 32767)
         exponent = -1;
-
-    // все печатаем
-   /* ft_putchar('\n');
-    ft_print_bits(mantissa, 64);
-    ft_putchar('\n');
-    ft_print_bits(exponent, 32);
-    ft_putchar('\n');
-    ft_putnbr(exponent);
-    ft_putchar('\n');*/
-    *result = ft_add_double(mantissa, exponent, pricision);
- //   printf("my nbr is       %s\n", result);
- //   printf("nbr original is %.60Lf", arg_double);
+    tmp_result = ft_add_double(mantissa, exponent, pricision);
+    ft_strcpy((*result) + 1, tmp_result);
+    ft_strdel(&tmp_result);
 }
