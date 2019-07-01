@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 19:43:33 by aestella          #+#    #+#             */
-/*   Updated: 2019/04/22 20:28:48 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:33:30 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strrev(char *s)
 {
     char	buff;
     size_t	len;
-    size_t		i;
+    size_t	i;
     size_t  len_inf;
 
     if (!*s)
