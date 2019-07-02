@@ -104,6 +104,12 @@ void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len)
     ft_strrev(cpyPower);
     while(*tmp_curr || *cpyPower)
     {
+        if(*tmp_curr == '.' && *cpyPower == '.')
+        {
+            res[Len->lenOfCurrentNbr++] = '.' - '0';
+            tmp_curr++;
+            cpyPower++;
+        }
         if(*tmp_curr && *cpyPower)
             res[Len->lenOfCurrentNbr] = (((*cpyPower++ - '0') + (*tmp_curr++ - '0')) + flag);
         else if(!(*tmp_curr) && *cpyPower)
@@ -119,11 +125,7 @@ void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len)
         Len->lenOfCurrentNbr++;
     }
     if (flag)
-    {
-        if (Len->flagIsFloatPart)
-            res[Len->lenOfCurrentNbr++] = -2;
         res[Len->lenOfCurrentNbr++] = flag;
-    }
     Len->lenOfResult = 0;
     ft_strclr(curretNum);
     while(Len->lenOfCurrentNbr--)
@@ -192,7 +194,7 @@ void ft_makeEven(char *curretNum, char *powerTwo)
         ft_strcpy(powerTwo, tmp);
         ft_strclr(tmp);
     }
-    else
+    else if (intPowLen > intCurrLen)
     {
         ft_memset(tmp, '0', intPowLen - intCurrLen);
         ft_strcat(tmp, curretNum);
@@ -225,13 +227,14 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
         ft_memset((powerTwo) + (Len->lenOfPower),'0', (Len->lenOfCurrentNbr - Len->lenOfPower));
         Len->lenOfPower += Len->lenOfCurrentNbr - Len->lenOfPower;
     }
-    cpy_cur = ft_floatCpy(curretNum, Len->lenOfCurrentNbr, Len);
-    cpy_power = ft_floatCpy(powerTwo, Len->lenOfPower, Len);
+    cpy_cur = ft_strdup(curretNum);
+    cpy_power = ft_strdup(powerTwo);
     Len->flagIsFloatPart = 1;
     ft_plus_int(cpy_cur, cpy_power, Len);
     if(ft_strlen(cpy_cur) > (Len->lenOfCurrentNbr > Len->lenOfPower ? Len->lenOfCurrentNbr - 2 : Len->lenOfPower - 2))
         curretNum[0] = *cpy_cur;
-    curretNum = ft_floatHandleRes(curretNum, cpy_cur, Len->lenOfIntPart);
+   // curretNum = ft_floatHandleRes(curretNum, cpy_cur, Len->lenOfIntPart);
+    ft_strcpy(curretNum, cpy_cur);
 }
 
 
@@ -284,7 +287,7 @@ void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_
     int_part[len_int_part + pricision + 1] = '\0';
 }
 
-char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
+char *ft_add_double(unsigned long mantissa, short exponent, t_prinlist *lst)
 {
     unsigned long cpyMantissa = mantissa;
     unsigned long oneLeftOne = 0x8000000000000000;
@@ -326,8 +329,8 @@ char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
         cpyMantissa <<= 1;
         exponent--;
     }
-    ft_pasteIntPlusFloat(int_part, float_part, pricision, Len);
-
+    //if(lst->pricision != 0 || (lst->flag & HASH) == HASH)
+    ft_pasteIntPlusFloat(int_part, float_part, lst->pricision, Len);
     return (int_part);
 }
 
@@ -389,9 +392,14 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
     exponent ^= 16384;
     if(exponent == 32767)
         exponent = -1;
+    if(exponent == 16383)
+    {
+        ft_strcpy(*result, "nan");
+        return;
+    }
     if(lst->pricision == 0 && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
         lst->pricision = 6;
-    tmp_result = ft_add_double(mantissa, exponent, lst->pricision);
+    tmp_result = ft_add_double(mantissa, exponent, lst);
     if (sign < 0)
         ft_strcpy((*result) + 1, tmp_result);
     else
