@@ -11,6 +11,7 @@ typedef struct s_len{
     size_t lenOfResult;
     size_t lenOfPower;
     size_t lenOfIntPart;
+    int flagIsFloatPart;
 } t_len;
 
 
@@ -119,7 +120,8 @@ void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len)
     }
     if (flag)
     {
-        res[Len->lenOfCurrentNbr++] = -2;
+        if (Len->flagIsFloatPart)
+            res[Len->lenOfCurrentNbr++] = -2;
         res[Len->lenOfCurrentNbr++] = flag;
     }
     Len->lenOfResult = 0;
@@ -225,6 +227,7 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
     }
     cpy_cur = ft_floatCpy(curretNum, Len->lenOfCurrentNbr, Len);
     cpy_power = ft_floatCpy(powerTwo, Len->lenOfPower, Len);
+    Len->flagIsFloatPart = 1;
     ft_plus_int(cpy_cur, cpy_power, Len);
     if(ft_strlen(cpy_cur) > (Len->lenOfCurrentNbr > Len->lenOfPower ? Len->lenOfCurrentNbr - 2 : Len->lenOfPower - 2))
         curretNum[0] = *cpy_cur;
@@ -298,6 +301,7 @@ char *ft_add_double(unsigned long mantissa, short exponent, size_t pricision)
     Len->lenOfPower = 0;
     Len->lenOfCurrentNbr = 0;
     Len->lenOfIntPart = 0;
+    Len->flagIsFloatPart = 0;
     exponent++;
     while(cpyMantissa && exponent >= 0)
     {
