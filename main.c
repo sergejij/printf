@@ -9,15 +9,20 @@
 int main()
 {
 
-    int a = 5;
+    int a = 55;
     int a_neg = -5;
     //ft_printf("%f\n", 1234.5678);
 
-
     printf("My funk\n");
-    ft_printf("%-+.5d|%- .5d|%-0.5d|%+ .5d|%+0.5d|% 0.5d|%-+ 0.5d\n", 0, 0, 0, 0, 0, 0, 0);
+    ft_printf("|% 1ld|%01ld\n", a, a);
     printf("origin:\n");
-    printf("%-+.5d|%- .5d|%-0.5d|%+ .5d|%+0.5d|% 0.5d|%-+ 0.5d\n", 0, 0, 0, 0, 0, 0, 0);
+    printf("|% 1ld|%01ld\n", a, a);
+
+printf("\n\n\n");
+    printf("My funk\n");
+    ft_printf("%d|%-d|%+d|% d|%0d\n", 0, 0, 0, 0, 0);
+    printf("origin:\n");
+    printf("%d|%-d|%+d|% d|%0d\n", 0, 0, 0, 0, 0);
 
     printf("My funk\n");
     ft_printf("%1.d|%-1.d|%+1.d|% 1.d|%01.d\n", 0, 0, 0, 0, 0);
