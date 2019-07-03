@@ -80,9 +80,16 @@ void    ft_plus_l(char **result, char *arg, t_prinlist *lst, size_t len)
      if (*arg != '-')
     {
         tmp = *result;
-        *result = ft_strjoin("+", arg);
+        *tmp = '+';
         if(lst->pricision)
-            ft_pricision_l(result, lst, lst->len, arg);
+        {
+            ft_memset((*result) + 1, '0', arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len);
+            //(*result)[arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len] = '\0';
+            ft_strcat(*result, arg);
+        }
+        else
+            ft_strcat(*result, arg);
+
 
         //ft_strdel(&tmp);
     }
@@ -94,10 +101,11 @@ void    ft_pricision_l(char **result, t_prinlist *lst, size_t len, char *arg)
     char *tmp;
     if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
-    else if (lst->width < lst->pricision)
+    else if (lst->width < lst->pricision && lst->pricision >= len)
     {
         ft_memset(*result, '0', arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len);
         (*result)[arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len] = '\0';
+        return;
     }
     if ((lst->flag & PLUS) == PLUS)
     {
@@ -144,8 +152,14 @@ void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill)
     {
         if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO)
             lst->len += 2;
-        ft_memset(*result, fill, lst->width - lst->len);
-        (*result)[lst->width - lst->len] = '\0';
+        else if ((lst->flag & SPACE) == SPACE && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
+        {
+            **result = ' ';
+            lst->width--;
+            ft_memset((*result) + 1, fill, lst->width - lst->len);
+        }
+        else
+            ft_memset(*result, fill, lst->width - lst->len);
     }
     *result = ft_strjoin(*result, arg);
 }
@@ -199,11 +213,8 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
         ft_memset((*result)[0] == '+' ? *result + 1 : *result, '0', lst->pricision  - len);
         ft_strcpy(((*result)[0] == '+' ? *result + 1 : *result) + lst->pricision  - len, arg);
         if (lst->width > lst->pricision)
-        {    ft_memset(((*result)[0] == '+' ? *result + 1 : *result) + lst->pricision, ' ', lst->width - lst->pricision);
-            (*result)[lst->width] = '\0';
-        }
-        else
-            (*result)[lst->pricision] = '\0';
+           ft_memset(((*result)[0] == '+' ? *result + 1 : *result) + lst->pricision, ' ', lst->width - lst->pricision);
+
     }
     else
     {
@@ -213,7 +224,7 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
             ft_strcpy(*result + 1, arg);
             if (lst->width > len)
             {
-                ft_memset(*result + len + 1, ' ', lst->width - len);
+                ft_memset(*result + len + 1, ' ', lst->width - len - 1);
                 (*result)[lst->width + 1] = '\0';
             }
             return ;
@@ -223,10 +234,13 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
         {
             ft_memset(*result + len, ' ', lst->width - ((lst->flag & HASH) == HASH
             && (lst->flag & ZERO) == ZERO ? len + 2 : len));
+            if((lst->flag & SPACE) == SPACE)
+                *result = ft_strjoin(" ", *result);
             (*result)[lst->width] = '\0';
         }
 
     }
+
 }
 void ft_transform_int_result(char **result, t_prinlist *lst)
 {

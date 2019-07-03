@@ -25,8 +25,8 @@
 
 typedef struct  s_prinlist
 {
-    int flag;
-    int modifier;
+    unsigned int flag;
+    unsigned int modifier;
     size_t width;
     size_t pricision;
     size_t len;

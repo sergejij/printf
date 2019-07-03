@@ -88,7 +88,7 @@ void ft_delete_excess_flags(t_prinlist *lst)
 
 int ft_analise_flags(char *format, t_prinlist *lst)
 {
-    int flag = 0;
+    unsigned int flag = 0;
     format++;
     while(*format && !(ft_is_type(format, lst)))
     {
@@ -147,8 +147,8 @@ int ft_printf(const char *apformat, ...)
     const char *p_apFormat = apformat;
     t_prinlist *lst;
     char *tmp;
-
     char *result;
+
     while(*p_apFormat)
     {
         //идем про форматирующей строке
@@ -165,7 +165,7 @@ int ft_printf(const char *apformat, ...)
             ft_analise_types((char*)p_apFormat, result + ft_strlen(result), ap, lst);
             p_apFormat++; //пропускам букву (s / d/ i и тд)
             free(lst);
-           // ft_strdel(&tmp);
+            ft_strdel(&tmp);
             continue ;
         }
         else
