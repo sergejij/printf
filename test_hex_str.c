@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/30 13:24:37 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/04 15:18:02 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,27 +100,35 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
     len = arg < 0 ? 8 : ft_lennum_hex(arg);
     str = ft_itoa_hex(arg, sym);
     tmp = str;
-    if(*str == '0' && len == 1)
+    if(*str == '0' && len == 1 && lst->pricision == 0)
     {
-        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            memset(*result, ' ', lst->width);
+            return ;
+        }
+        else if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
         {
             *str = '\0';
             len = 0;
             if (!lst->width)
                 return ;  
         }
-        else
-        {
+        else if (!(lst->width))
+        {   
             *result = "0";
             return ;
-        }  
+        }
     }
     ft_strcpy(*result, str);
-    if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO)
+    if ((lst->flag & HASH) == HASH && /*(lst->flag & ZERO) != ZERO &&*/ *str != '0')
         *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);    
     ft_transform_int_result(result, lst);
-    if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO)
-        *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
+
+
+
+    //if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO)
+    //    *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
     
     // тернарники огонь
     /*if ((lst->flag & ZERO) == ZERO  && (lst->flag & MINUS) != MINUS)

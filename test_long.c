@@ -223,7 +223,10 @@ void    ft_recording_l(char **result, char *arg, t_prinlist *lst, char fill)
     else if (lst->width > lst->len)
     {
         if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO)
+        {
             lst->len += 2;
+            ft_memset(*result, '0', lst->width - 1);
+        }
         else if ((lst->flag & SPACE) == SPACE && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
         {
             if(lst->width > lst->pricision && lst->pricision)
