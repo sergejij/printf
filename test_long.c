@@ -52,10 +52,10 @@ void    ft_plus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len
 
             return;
         }
-        ft_memset(*result, ' ', lst->width - len);
+        ft_memset(*result, ' ', lst->width - lst->len);
        // tmp = ft_strjoin("+", arg);
         // тут надо править! при  printf("\n%d\n", ft_printf("%+10.5d",  i)); не заполняет нуляями
-        ft_strcpy(*result + lst->width - len, arg);
+        ft_strcpy(*result + lst->width - lst->len, arg);
     }
     else if (lst->pricision >= len )//&& (lst->flag & ZERO) != ZERO)
     {
@@ -353,7 +353,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, cpy_num, lst, lst->len);
     else if (((lst->flag & PLUS) == PLUS)) // +
-        ft_plus_l(result, cpy_num, lst, lst->len + 1); // + 1 так как + это тоже часть числа cpy_num[0] == '-' ? 0 : 1
+        ft_plus_l(result, cpy_num, lst, lst->len); // + 1 так как + это тоже часть числа cpy_num[0] == '-' ? 0 : 1
     else if (((lst->flag & ZERO) == ZERO)) // zero
         ft_recording_l(result, cpy_num, lst, '0');
     else
