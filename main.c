@@ -47,5 +47,10 @@ printf("\n\n\n");
 
    // printf("%+ 1.5i|%+01.5i|% 01.5i|%-+ 01.5i\n", INT_MAX, INT_MAX, INT_MAX, INT_MAX);
    // ft_printf("%+ 1.5i|%+01.5i|% 01.5i|%-+ 01.5i\n", INT_MAX, INT_MAX, INT_MAX, INT_MAX);
+    ft_printf("%-#023X\n", 0U, 0U);
+    printf("%-#023X\n", 0U, 0U);
+    printf("___________________\n");
+    //ft_printf("%x\n", 0U);
+    //printf("%x\n", 0U);
     return  0;
 }
