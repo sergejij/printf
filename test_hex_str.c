@@ -6,11 +6,27 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/04 16:54:07 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/04 17:50:11 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+void ft_change_type_hex(long long int *arg, t_prinlist *lst) {
+    unsigned short new_arg_h = 0;
+    unsigned char new_arg_hh = 0;
+
+    if((lst->modifier & H) == H)
+    {
+        new_arg_h = *arg;
+        *arg = new_arg_h;
+    }
+    else if((lst->modifier & HH) == HH)
+    {
+        new_arg_hh = *arg;
+        *arg = new_arg_hh;
+    }
+}
 
 void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
 {
@@ -96,7 +112,9 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
     char *str;
     char *tmp;
     size_t len;
-    
+
+    if(lst->modifier)
+        ft_change_type_hex(&arg, lst);
     len = arg < 0 ? 8 : ft_lennum_hex(arg);
     str = ft_itoa_hex(arg, sym);
     tmp = str;
@@ -122,6 +140,9 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
     }
     ft_strcpy(*result, str);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
+    {
+        if(lst->pricision > len)
+            ft_pricision_hex(result, lst, len, str);
         *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
     ft_transform_int_result(result, lst);
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
