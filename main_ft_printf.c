@@ -84,6 +84,8 @@ void ft_delete_excess_flags(t_prinlist *lst)
         lst->flag = lst->flag ^ SPACE;
     if ((lst->flag & MINUS) == MINUS && (lst->flag & ZERO) == ZERO)
         lst->flag = lst->flag ^ ZERO;
+    if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && lst->pricision)
+        lst->flag = lst->flag ^ ZERO;
 }
 
 int ft_analise_flags(char *format, t_prinlist *lst)
