@@ -275,7 +275,6 @@ void ft_roundering(char *currResult, size_t pricision, t_len *Len)
     ft_memset((tmp + 2), '0', pricision);
     tmp[pricision + 2] = '5';
     tmp[pricision + 3] = '\0';
- printf("%s\n", rounder);
     if((currResult[pricision + 1] - '0') % 2 != 0 || (currResult[pricision + 2] - '0') >= 5)
         ft_plus_float(currResult, rounder, Len);
 }
@@ -406,30 +405,38 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
     exponent ^= 16384;
     if(exponent == 32767)
         exponent = -1;
-
-    if(exponent == 16383)
-    {
-       /* if (mantissa > 9223372036854775807) {
-            ft_strcpy(*result, "inf");
-        }
-        else*/
-            ft_strcpy(*result, "nan");
-        return;
-    }
     if(lst->pricision == 0 && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
         lst->pricision = 6;
-    tmp_result = ft_add_double(mantissa, exponent, lst);
-    if (sign < 0)
-        ft_strcpy((*result) + 1, tmp_result);
-    else
-        ft_strcpy(*result, tmp_result);
+    if(exponent == 16383)
+    {
+        if ((arg_double != arg_double))
+        {
+            ft_strcpy(*result, "nan");
+            return;
+        }
+        else
+        {
+            sign < 0 ? ft_strcpy(*result, "-inf") : ft_strcpy(*result, "inf");
+            tmp_result = *result;
+        }
+
+    }
+    if((ft_strcmp(*result, "inf")) && (ft_strcmp(*result, "-inf")))
+    {
+        tmp_result = ft_add_double(mantissa, exponent, lst);
+        if (sign < 0)
+            ft_strcpy((*result) + 1, tmp_result);
+        else
+            ft_strcpy(*result, tmp_result);
+    }
+
    // ft_strdel(&tmp_result);
 
     lst->pricision = 0;
     if(lst->flag || lst->width)
         ft_transform_int_result(result, lst);
-    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_double >=0 && lst->width <= lst->len)
-        *result = ft_strjoin(" ", *result);
-   // if ((lst->flag & HASH) == HASH)
+//    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_double >=0 && lst->width <= lst->len)
+//        *result = ft_strjoin(" ", *result);
+//   // if ((lst->flag & HASH) == HASH)
 
 }
