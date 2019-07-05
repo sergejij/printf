@@ -10,29 +10,20 @@ int main()
 {
 
     int a = 1;
-    long long int lon = LLONG_MAX;
-    int in = 0;
-    unsigned short sh = 0;
     int a_neg = -5;
-//    ft_printf("%x\n",  a);
-//    printf("%x\n",  a);
+    //ft_printf("% 023i|%-+ 023i\n",  a, a);
+   // printf("% 023i|%-+ 023i\n", a, a);
+
+    printf("My funk\n");
+    ft_printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
+    printf("origin:\n");
+    printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
 
 
-in = lon;
-sh = lon;
-sh = in;
-
-    //printf("My funk\n\n");
-    ft_printf("%#5f|%05f\n", DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX);
-   // printf("origin:\n\n");
-    printf("%#5f|%05f\n", DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX, DBL_MAX);
-
-//    printf("3My funk\n\n");
-//    ft_printf("%f|%-f|%+f|% f|%#f|%0f\n", -INFINITY, -INFINITY, -INFINITY, -INFINITY, -INFINITY, -INFINITY);
-//    printf("origin:\n\n");
-//    printf("%f|%-f|%+f|% f|%#f|%0f\n", -INFINITY, -INFINITY, -INFINITY, -INFINITY, -INFINITY, -INFINITY);
-//
-
+    printf("3My funk\n");
+    ft_printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
+    printf("origin:\n");
+    printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
 
 //printf("\n\n\n");
 //    printf("4My funk\n");
