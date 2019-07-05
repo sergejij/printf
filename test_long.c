@@ -346,12 +346,28 @@ void    ft_minus_l(char **result, char *arg, t_prinlist *lst, size_t len)
     }
 }
 
+char	*ft_strdup1(const char *src)
+{
+    size_t	len;
+    char	*copy;
+
+    len = ft_strlen(src);
+    if (!(copy = (char *)malloc(sizeof(char) * (len + 1))))
+    {
+        printf("memory trabl _ft_strdup1");
+        return (NULL);
+    }
+
+    ft_strcpy(copy, src);
+    return (copy);
+}
+
 void ft_transform_int_result(char **result, t_prinlist *lst)
 {
     char *cpy_num;
 
     lst->len = ft_strlen(*result);
-    cpy_num = ft_strdup(*result);
+    cpy_num = ft_strdup1(*result);
     ft_strclr(*result);
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, cpy_num, lst, lst->len);
@@ -363,6 +379,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
         ft_recording_l(result, cpy_num, lst, ' ');
     if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width <= lst->len)
         *result = ft_strjoin(" ", *result);
+    ft_strdel(&cpy_num);
 }
 
 void ft_ltoa(char **result, long long arg)

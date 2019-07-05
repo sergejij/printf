@@ -15,6 +15,15 @@ typedef struct s_len{
 } t_len;
 
 
+int is_NanOrInf(char *dbl)
+{
+    if(!dbl)
+        return (0);
+    else if((ft_strcmp(dbl, "inf")) && (ft_strcmp(dbl, "-inf")) && (ft_strcmp(dbl, "nan")))
+        return (0);
+    else
+        return (1);
+}
 void ft_handle_result(int len, int *int_res, char *result)
 {
     int i;
@@ -145,8 +154,9 @@ size_t ft_checkLenOfInt(char *nbr)
     size_t i;
 
     i = 0;
-    while(nbr[i] != '.')
-        i++;
+    if(nbr && !(is_NanOrInf(nbr)))
+        while(nbr[i] != '.')
+            i++;
     return (i);
 }
 char *ft_floatCpy(char *float_str, size_t len, t_len *Len)
@@ -171,6 +181,7 @@ char *ft_floatCpy(char *float_str, size_t len, t_len *Len)
         cpy_curr[j++] = float_str[i];
         //i++;
     }
+    cpy_curr[j] = '\0';
     return (cpy_curr);
 }
 
@@ -184,6 +195,7 @@ char *ft_floatHandleRes(char *dest, char* src, size_t intLen)
     *cpy_dest++ = '.';
     while(*src)
         *cpy_dest++ = *src++;
+    *cpy_dest = '\0';
     return (dest);
 }
 
@@ -379,7 +391,7 @@ unsigned long ft_make_mantissa(long double nbr)
 
 void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
 {
-    char *tmp_result;
+    char *tmp_result = NULL;
     unsigned long mantissa = 0;
     unsigned char memoryPointer;
     unsigned short exponent = 0;
@@ -412,7 +424,15 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
         if ((arg_double != arg_double))
         {
             ft_strcpy(*result, "nan");
-            return;
+            if((lst->flag & MINUS) == MINUS)
+            {
+                lst->flag = 0;
+                lst->flag = lst->flag ^ MINUS;
+            }
+            else if(lst->flag)
+                lst->flag = 0;
+
+            tmp_result = *result;
         }
         else
         {
@@ -421,13 +441,20 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
         }
 
     }
-    if((ft_strcmp(*result, "inf")) && (ft_strcmp(*result, "-inf")))
+    if(!(is_NanOrInf(tmp_result)))
     {
         tmp_result = ft_add_double(mantissa, exponent, lst);
         if (sign < 0)
             ft_strcpy((*result) + 1, tmp_result);
         else
             ft_strcpy(*result, tmp_result);
+    }
+    if((lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & HASH) != HASH && !(is_NanOrInf(tmp_result)))
+    {
+        if( sign < 0)
+            (*result)[ft_checkLenOfInt(tmp_result) + 1] = '\0';
+        else
+            (*result)[ft_checkLenOfInt(tmp_result)] = '\0';
     }
 
    // ft_strdel(&tmp_result);

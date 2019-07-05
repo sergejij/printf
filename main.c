@@ -14,43 +14,30 @@ int main()
     //ft_printf("% 023i|%-+ 023i\n",  a, a);
    // printf("% 023i|%-+ 023i\n", a, a);
 
+
     printf("My funk\n");
-    ft_printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
+    ft_printf("%1f|%-1f|%+1f|% 1f|%#1f|%01f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
     printf("origin:\n");
-    printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
-
-
-    printf("3My funk\n");
-    ft_printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
+    printf("%1f|%-1f|%+1f|% 1f|%#1f|%01f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
+    printf("My funk\n");
+    ft_printf("% f|%#f|%0f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
     printf("origin:\n");
-    printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
+    printf("%f|%-f|%+f|% f|%#f|%0f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
+    printf("My funk\n");
+    ft_printf("%-+8.14f|%- 8.14f|%-#8.14f|%-08.14f|%-+#8.14f|%-+ #08.14f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
+    printf("origin:\n");
+    printf("%-+8.14f|%- 8.14f|%-#8.14f|%-08.14f|%-+#8.14f|%-+ #08.14f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
 
-//printf("\n\n\n");
-//    printf("4My funk\n");
-//    ft_printf("%+23.ld|% 23.ld|%023.ld\n", LLONG_MIN, LLONG_MIN, LLONG_MIN);
+    printf("My funk\n");
+    ft_printf("%5f|%-5f|%+5f|% 5f|%#5f|%05f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
+    printf("origin:\n");
+    printf("%5f|%-5f|%+5f|% 5f|%#5f|%05f\n", 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0., 0. / 0.);
+//
+// ОЧЕНЬ ВАЖНЫЙ БАГ
+//    printf("3My funk\n");
+//    ft_printf("%.lf|%-.lf|%+.lf|% .lf|%#.lf|%0.lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
 //    printf("origin:\n");
-//    printf("%+23.ld|% 23.ld|%023.ld\n", LLONG_MIN, LLONG_MIN, LLONG_MIN);
-//    printf("My funk\n");
-//    ft_printf("%+23.5ld|% 23.5ld|%023.5ld\n", LLONG_MIN, LLONG_MIN, LLONG_MIN); //
-//    printf("origin:\n");
-//    printf("%+23.5ld|% 23.5ld|%023.5ld\n", LLONG_MIN, LLONG_MIN, LLONG_MIN);
+//    printf("%.lf|%-.lf|%+.lf|% .lf|%#.lf|%0.lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
 
-//    printf("My funk\n");
-//
-//    ft_printf("%+ 23ld|%+023ld|% 023ld|%-+ 023ld\n",  LLONG_MAX, LLONG_MAX);
-//    printf("origin:\n");
-//    printf("%+ 23ld|%+023ld|% 023ld|%-+ 023ld\n",  LLONG_MAX, LLONG_MAX,);
-
-//   // ft_printf("%1.5d|%-1.5d|%+1.5d|% 1.5d|%01.5d\n", a, a, a, a, a);
-//   // printf("%1.5d|%-1.5d|%+1.5d|% 1.5d|%01.5d\n", a, a, a, a, a);
-//
-//
-//   // printf("%+ 1.5i|%+01.5i|% 01.5i|%-+ 01.5i\n", INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-//   // ft_printf("%+ 1.5i|%+01.5i|% 01.5i|%-+ 01.5i\n", INT_MAX, INT_MAX, INT_MAX, INT_MAX);
-//    ft_printf("%-#023X\n", 0U, 0U);
-//    printf("%-#023X\n", 0U, 0U);
-//    printf("___________________\n");
-//    //ft_printf("%x\n", 0U);
-//    //printf("%x\n", 0U);
     return  0;
 }
