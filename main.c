@@ -15,16 +15,16 @@ int main()
    // printf("% 023i|%-+ 023i\n", a, a);
 
     printf("My funk\n");
-    ft_printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
+    ft_printf("%lX|%-lX|%#lX|%0lX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
     printf("origin:\n");
-    printf("%+023d|% 023d|%-+ 023d\n", a, 0, 0);
+    printf("%lX|%-lX|%#lX|%0lX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
 
 
-    printf("3My funk\n");
+  /*  printf("3My funk\n");
     ft_printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
     printf("origin:\n");
     printf("%+023lld|% 023lld|%-+ 023lld\n", LLONG_MAX, LLONG_MAX, LLONG_MAX);
-
+*/
 //printf("\n\n\n");
 //    printf("4My funk\n");
 //    ft_printf("%+23.ld|% 23.ld|%023.ld\n", LLONG_MIN, LLONG_MIN, LLONG_MIN);

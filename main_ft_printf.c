@@ -47,9 +47,9 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
     else if(*format == 'x' || *format == 'X')
     {
         if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
-            ft_add_hex_str(&result, va_arg(ap, long int), lst, *format);
+            ft_add_uhex_str(&result, va_arg(ap, unsigned long int), lst, *format);
         else if (lst->modifier == LL)
-            ft_add_hex_str(&result, va_arg(ap, long long int), lst, *format);
+            ft_add_uhex_str(&result, va_arg(ap, unsigned long long int), lst, *format);
         else
             ft_add_hex_str(&result, va_arg(ap, int), lst, *format);
     }
