@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 20:11:29 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/07 15:27:46 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,32 @@ void ft_add_octal(char **result, int arg, t_prinlist *lst)
         str = ft_strjoin("0x", str);
         ft_strdel(&tmp);
     }*/ // такой кастыль не подходит
-    if(*str == '0' && len == 1)
+  /*if(*str == '0' && len == 1)
     {
         if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
         {
             *str = '\0';
             len = 0;
+        }
+    }*/
+    if(*str == '0' && len == 1 && lst->pricision == 0)
+    {
+        if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            memset(*result, ' ', lst->width);
+            return ;
+        }
+        else if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            *str = '\0';
+            len = 0;
+            if (!lst->width)
+                return ;  
+        }
+        else if (lst->width < 2)
+        {   
+            *result = "0";
+            return ;
         }
     }
     if ((lst->flag & ZERO) == ZERO)
