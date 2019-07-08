@@ -331,8 +331,11 @@ char *ft_add_double(unsigned long mantissa, short exponent, t_prinlist *lst)
     Len->lenOfIntPart = 0;
     Len->flagIsFloatPart = 0;
     exponent++;
+   // ft_print_bits(cpyMantissa, 64);
     while(cpyMantissa && exponent >= 0)
     {
+   //     ft_print_bits(cpyMantissa, 64);
+   //     write(1, "\n", 1);
         if((cpyMantissa & oneLeftOne) == oneLeftOne)
         {
             currNum = findPower(exponent);
@@ -437,6 +440,8 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
         else
         {
             sign < 0 ? ft_strcpy(*result, "-inf") : ft_strcpy(*result, "inf");
+            if((lst->flag & ZERO) == ZERO)
+                lst->flag = lst->flag ^ ZERO;
             tmp_result = *result;
         }
 

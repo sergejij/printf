@@ -34,7 +34,7 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
     if(*format == 'c')
         ft_add_char(&result, va_arg(ap, int), lst);
     else if (*format == 's')
-        result = ft_add_string(result, va_arg(ap, char*), lst, 1);
+        result = ft_add_string(&result, va_arg(ap, char*), lst, 1);
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     else if (*format == 'd' || *format == 'i')
@@ -143,15 +143,25 @@ t_prinlist *make_struct_for_flags(char *format)
 
 }
 
+void ft_free_result_and_lst(char **result, t_prinlist **lst)
+{
+    ft_strdel(&(*result));
+    free(*lst);
+    *lst = NULL;
+}
+
 int ft_printf(const char *apformat, ...)
 {
-    va_list ap;         //указатель va_list | poit on next unnamed argument
+    va_list ap;         //указатель va_list
     va_start(ap, apformat);    // устанавливаем указатель
     const char *p_apFormat = apformat;
     t_prinlist *lst;
     char *tmp;
     char *result;
 
+    result = NULL;
+    tmp = NULL;
+    lst = NULL;
     while(*p_apFormat)
     {
         //идем про форматирующей строке
@@ -165,15 +175,15 @@ int ft_printf(const char *apformat, ...)
             p_apFormat++;
             while(!(ft_is_type((char*)p_apFormat, lst)))
                 p_apFormat++;
-            ft_analise_types((char*)p_apFormat, result + ft_strlen(result), ap, lst);
+            ft_analise_types((char*)p_apFormat, result, ap, lst);
             p_apFormat++; //пропускам букву (s / d/ i и тд)
-            free(lst);
-            ft_strdel(&tmp);
+            ft_free_result_and_lst(&result, &lst);
             continue ;
         }
         else
         {
             //печатаем все что есть в форматирующей строке (кроме аргументов, их мы пропустили)
+            //надо считывать в буфер и печатать сразу блоками
             write(1, p_apFormat, 1);
             g_sym_count++;
         }

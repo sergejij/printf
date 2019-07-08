@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/29 20:11:29 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:16:37 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void ft_add_octal(char **result, int arg, t_prinlist *lst)
     if ((lst->flag & HASH) == HASH)
         str = ft_strjoin("0", str); // тернарники огонь
     if (lst->pricision < len)
-        *result = ft_add_string(*result, str, lst, 8);
+        *result = ft_add_string(result, str, lst, 8);
     else
         ft_pricision_hex(result, lst, len, str);
         //printf("%s", str);

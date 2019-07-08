@@ -367,7 +367,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
     char *cpy_num;
 
     lst->len = ft_strlen(*result);
-    cpy_num = ft_strdup1(*result);
+    cpy_num = strdup(*result);
     ft_strclr(*result);
     if ((lst->flag & MINUS) == MINUS)
         ft_minus_l(result, cpy_num, lst, lst->len);
@@ -377,7 +377,7 @@ void ft_transform_int_result(char **result, t_prinlist *lst)
         ft_recording_l(result, cpy_num, lst, '0');
     else
         ft_recording_l(result, cpy_num, lst, ' ');
-    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width <= lst->len)
+    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width < lst->len)
         *result = ft_strjoin(" ", *result);
     ft_strdel(&cpy_num);
 }

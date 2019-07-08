@@ -41,8 +41,7 @@ int ft_is_type(char *c, t_prinlist *lst);
 void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst);
 
                         /* string | char */
-
-char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys);
+                        char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys);
 void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst);
 
                     /* integer | long | long long */
