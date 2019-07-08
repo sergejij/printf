@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/08 18:16:37 by aestella         ###   ########.fr       */
+/*   Updated: 2019/05/29 20:11:29 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,16 @@ void ft_octal_zero(char **str, t_prinlist *lst, size_t len)
         }
         else
         {
-            ft_memset(tmp, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
-            ft_strcpy(tmp + lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0), *str);
+            if (tmp2[0] == '0')
+            {
+                ft_memset(tmp, '0', lst->width - len);
+                ft_strcpy(tmp + (lst->width - len), *str);
+            }
+            else
+            {
+                ft_memset(tmp, '0', lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0));
+                ft_strcpy(tmp + lst->width - len - (((lst->flag & HASH) == HASH) ? 2 : 0), *str);
+            }
         }
         *str = tmp;
     }
@@ -114,17 +122,40 @@ void ft_add_octal(char **result, int arg, t_prinlist *lst)
         str = ft_strjoin("0x", str);
         ft_strdel(&tmp);
     }*/ // такой кастыль не подходит
-    if(*str == '0' && len == 1)
+  /*if(*str == '0' && len == 1)
     {
         if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
         {
             *str = '\0';
             len = 0;
         }
+    }*/
+    if(*str == '0' && len == 1 && lst->pricision == 0)
+    {
+        if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC
+        && !((lst->flag & MINUS) == MINUS) && !((lst->flag & ZERO) == ZERO) && !(lst->width))
+        {
+            memset(*result, ' ', lst->width);
+            return ;
+        }
+        else if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
+        {
+            if (!((lst->flag & HASH) == HASH))
+            {
+                *str = '\0';
+                if (!lst->width)
+                    return ;
+            }
+        }
+        else if (lst->width < 2)
+        {
+            *result = "0";
+            return ;
+        }
     }
     if ((lst->flag & ZERO) == ZERO)
         ft_octal_zero(&str, lst, len);
-    if ((lst->flag & HASH) == HASH)
+    if ((lst->flag & HASH) == HASH && !(*str == '0' && len == 1))
         str = ft_strjoin("0", str); // тернарники огонь
     if (lst->pricision < len)
         *result = ft_add_string(result, str, lst, 8);

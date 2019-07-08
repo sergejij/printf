@@ -80,4 +80,7 @@ char		*ft_itoa_uhex(unsigned long long int n, char sym);
 void ft_ltoa(char **result, long long arg);
 void ft_parse_double(char **result, long double arg_double, t_prinlist *lst);
 
+                        /*      u        */
+void ft_change_type_u(unsigned long long *arg, t_prinlist *lst);
+
 #endif //PRINTF_FT_PRINTF_H
