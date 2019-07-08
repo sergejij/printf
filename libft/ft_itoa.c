@@ -33,6 +33,7 @@ char			*ft_itoa(int n)
 	char	buf;
 	size_t	len;
 
+	res = NULL;
 	len = class(n);
 	if (!(res = ft_strnew(len)))
 		return (NULL);

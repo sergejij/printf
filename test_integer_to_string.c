@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/05 14:07:20 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/08 18:49:23 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
     size_t len;
     char *arg;
 
-
+    arg = NULL;
     if(lst->modifier)
         ft_change_type_int(&arg_int, lst);
     arg = ft_itoa(arg_int);

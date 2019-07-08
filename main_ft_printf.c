@@ -137,6 +137,7 @@ t_prinlist *make_struct_for_flags(char *format)
     new->pricision = 0;
     new->width = 0;
     new->modifier = 0;
+    new->flag = 0;
     new->len = 0;
     ft_analise_flags(format, new);
     return  (new);
