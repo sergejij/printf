@@ -11,9 +11,20 @@ int main()
 
     int a = 1;
     int a_neg = -5;
-    ft_printf("%#.1o|%0.5o\n", 0U, 0U);
-    printf("%#.1o|%0.5o\n", 
-    0U, 0U);
+    //ft_printf("%0.5o\n", 0U);
+    //printf("%0.5o\n", 0U);
+    //printf("--------------\n");
+
+    ft_printf("%0o\n", UINT_MAX);
+    printf("%0o\n", UINT_MAX);
+    printf("--------------\n");
+
+    //ft_printf("%-#1.o|%#01.o|%-#01.o\n", 0U, 0U, 0U);
+    //printf("%-#1.o|%#01.o|%-#01.o\n", 0U, 0U, 0U);
+    //printf("--------------\n");
+
+   // ft_printf("%#023.o\n", 0U);
+   // printf("%#023.o\n", 0U);
 
 
    /* printf("My funk\n");

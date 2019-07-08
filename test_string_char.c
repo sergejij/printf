@@ -29,7 +29,7 @@ char *ft_add_string(char *result, char *str_arg, t_prinlist *lst, int numSys)
         tmp = ft_strcpy(tmp, str_arg);
     }
     else
-        result = ft_strjoin(result, str_arg);
+       result = ft_strjoin(result, str_arg);
     return (result);
 }
 

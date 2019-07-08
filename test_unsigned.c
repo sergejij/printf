@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/07 14:16:09 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:01:11 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
     }
     if ((lst->flag & PLUS) == PLUS)
         lst->flag = lst->flag ^ PLUS;
+    //if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && new_res[0] == '0')
+    //    new_res[0] = ' ';
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, lst);
 }
