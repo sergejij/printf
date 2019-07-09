@@ -54,7 +54,10 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
             ft_add_hex_str(&result, va_arg(ap, int), lst, *format);
     }
     else if(*format == 'o')
-        ft_add_octal(&result, va_arg(ap, long long), lst);
+        if (lst->modifier == L_ONE || lst->modifier == LL)
+            ft_add_octal_u(&result, va_arg(ap, unsigned long long), lst);
+        else
+            ft_add_octal(&result, va_arg(ap, unsigned int), lst);
     else if(*format == 'u')
     {
         if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
