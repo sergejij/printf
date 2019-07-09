@@ -159,45 +159,45 @@ size_t ft_checkLenOfInt(char *nbr)
             i++;
     return (i);
 }
-char *ft_floatCpy(char *float_str, size_t len, t_len *Len)
-{
-    char *cpy_curr;
-    int i;
-    int j;
+//char *ft_floatCpy(char *float_str, size_t len, t_len *Len)
+//{
+//    char *cpy_curr;
+//    int i;
+//    int j;
+//
+//    i = 0;
+//    j = 0;
+//    Len->lenOfIntPart = 0;
+//    cpy_curr = (char *)malloc(sizeof(char) * (len + 1));
+//    while(float_str[i] != '.' && float_str[i])
+//    {
+//        cpy_curr[i] = float_str[i];
+//        Len->lenOfIntPart++;
+//        i++;
+//    }
+//    j = i;
+//    while (float_str[i++])
+//    {
+//        cpy_curr[j++] = float_str[i];
+//        //i++;
+//    }
+//    cpy_curr[j] = '\0';
+//    return (cpy_curr);
+//}
 
-    i = 0;
-    j = 0;
-    Len->lenOfIntPart = 0;
-    cpy_curr = (char *)malloc(sizeof(char) * (len + 1));
-    while(float_str[i] != '.' && float_str[i])
-    {
-        cpy_curr[i] = float_str[i];
-        Len->lenOfIntPart++;
-        i++;
-    }
-    j = i;
-    while (float_str[i++])
-    {
-        cpy_curr[j++] = float_str[i];
-        //i++;
-    }
-    cpy_curr[j] = '\0';
-    return (cpy_curr);
-}
-
-char *ft_floatHandleRes(char *dest, char* src, size_t intLen)
-{
-    char *cpy_dest;
-
-    cpy_dest = dest;
-    while(intLen--)
-        *cpy_dest++ = *src++;
-    *cpy_dest++ = '.';
-    while(*src)
-        *cpy_dest++ = *src++;
-    *cpy_dest = '\0';
-    return (dest);
-}
+//char *ft_floatHandleRes(char *dest, char* src, size_t intLen)
+//{
+//    char *cpy_dest;
+//
+//    cpy_dest = dest;
+//    while(intLen--)
+//        *cpy_dest++ = *src++;
+//    *cpy_dest++ = '.';
+//    while(*src)
+//        *cpy_dest++ = *src++;
+//    *cpy_dest = '\0';
+//    return (dest);
+//}
 
 void ft_makeEven(char *curretNum, char *powerTwo)
 {
@@ -466,7 +466,7 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
 
     lst->pricision = 0;
     if(lst->flag || lst->width)
-        ft_transform_int_result(result, lst);
+        ft_transform_int_result(result, tmp_result, lst);
 //    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS && arg_double >=0 && lst->width <= lst->len)
 //        *result = ft_strjoin(" ", *result);
 //   // if ((lst->flag & HASH) == HASH)

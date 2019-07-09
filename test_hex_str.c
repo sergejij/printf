@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/08 18:24:32 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:11:20 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ void ft_add_uhex_str(char **result, unsigned long long arg, t_prinlist *lst, cha
             ft_pricision_hex(result, lst, len, str);
         *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
     }
-    ft_transform_int_result(result, lst);
+    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
     {
         if(lst->width > len)
@@ -269,7 +269,7 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
             ft_pricision_hex(result, lst, len, str);
         *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
     }
-    ft_transform_int_result(result, lst);
+    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
     {
         if(lst->width > len)

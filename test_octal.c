@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/09 18:46:12 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:11:20 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ void ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
             *result = ft_strjoin("0", *result);
 
     }
-    ft_transform_int_result(result, lst);
+    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0' && lst->width < len)
         *result = ft_strjoin("0", *result);
 
@@ -303,7 +303,7 @@ void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
             *result = ft_strjoin("0", *result);
 
     }
-    ft_transform_int_result(result, lst);
+    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0' && lst->width < len)
         *result = ft_strjoin("0", *result);
     

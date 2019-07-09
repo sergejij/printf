@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/08 18:24:32 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/09 20:23:43 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,59 @@ void ft_change_type_u(unsigned long long *arg, t_prinlist *lst)
     }
 }
 
-void ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
+int    ft_ultoa_set_piace(unsigned long long arg, char **new_res)
 {
     int piece;
     unsigned long long del;
+    int i;
+
+    del = 100000;
+    i = 0;
+    while(arg > del)
+    {
+        piece = (int)(arg % del);
+        arg /= del;
+        new_res[i] = ft_itoa(piece);
+        i++;
+    }
+    new_res[i] = ft_itoa((int)arg);
+    new_res[++i] = NULL;
+    return (i);
+}
+
+void ft_ultoa(char **result, unsigned long long arg)
+{
     char **new_res;
     int i;
     char *tmp = *result;
 
-    del = 100000;
     i = 0;
-    ft_change_type_u(&arg, lst);
     if(!(new_res = (char **)malloc(sizeof(char*) * 5)))
         return;
-    while(arg > del)
-    {
-        piece = (unsigned int)(arg % del);
-        arg /= del;
-        new_res[i] = ft_strdup(ft_itoa(piece));
-        i++;
-    }
-    new_res[i] = ft_strdup(ft_itoa((int)arg));
-    new_res[++i] = NULL;
+    i = ft_ultoa_set_piace(arg, new_res);
     while(i-- > 0)
     {
         ft_strcat(*result, new_res[i]);
         tmp = *result + 5; //без тмп не компилилось(
+        ft_strdel(&(new_res[i]));
     }
+    free(new_res);
+}
+
+void ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
+{
+    char *arg_str;
+
+    arg_str = ft_strnew(22);
+    ft_change_type_u(&arg, lst);
+    ft_ultoa(&arg_str, arg);
     if ((lst->flag & PLUS) == PLUS)
         lst->flag = lst->flag ^ PLUS;
     //if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && new_res[0] == '0')
     //    new_res[0] = ' ';
     if(lst->flag || lst->width || lst->pricision)
-        ft_transform_int_result(result, lst);
+        ft_transform_int_result(result, arg_str, lst);
+    else
+        ft_strcpy(*result, arg_str);
+    ft_strdel(&arg_str);
 }

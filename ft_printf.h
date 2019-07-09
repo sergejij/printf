@@ -48,7 +48,7 @@ void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst);
 
 void ft_add_integer(char **result, int arg, t_prinlist *lst);
 void ft_long_to_str(char **result, long long int arg, t_prinlist *lst);
-void ft_transform_int_result(char **result, t_prinlist *lst);
+void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst);
 void ft_change_type_int(int *arg, t_prinlist *lst);
 
                             /* flags */

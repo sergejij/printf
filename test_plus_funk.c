@@ -4,6 +4,8 @@
 
 #include <stdio.h>
 #include "libft/libft.h"
+#include <math.h>
+#include <limits.h>
 
 typedef struct s_len{
     size_t lenOfCurrentNbr;
@@ -157,23 +159,83 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
     printf("%s\n", curretNum);
 }
 
+
+int    ft_ltoa_set_piace(long long arg, char **new_res)
+{
+    int piece;
+    int del;
+    int i;
+
+    del = 100000;
+    i = 0;
+    while(arg > del)
+    {
+        piece = (int)(arg % del);
+        arg /= del;
+        new_res[i] = ft_itoa(piece);
+        i++;
+    }
+    new_res[i] = ft_itoa((int)arg);
+    new_res[++i] = NULL;
+    return (i);
+}
+
+void ft_ltoa(char **result, long long arg)
+{
+    char **new_res;
+    int i;
+    char *tmp = *result;
+
+    i = 0;
+    if(!(new_res = (char **)malloc(sizeof(char*) * 5)))
+        return;
+    if(arg < 0)
+    {
+        if(-9223372036854775807 > arg)
+        {
+            ft_strcpy(*result, "-9223372036854775808");
+            return;
+        }
+        **result = '-';
+        arg *= -1;
+    }
+    i = ft_ltoa_set_piace(arg, new_res);
+    while(i-- > 0)
+    {
+        ft_strcat(*result, new_res[i]);
+        tmp = *result + 5; //без тмп не компилилось(
+        ft_strdel(&(new_res[i]));
+    }
+    free(new_res);
+}
+
 int main()
 {
-    char *curr;
-    char *float_part;
-    t_len *Len;
 
-    Len = malloc(sizeof(t_len));
-    curr = ft_strnew(100);
-    float_part = ft_strnew(100);
-    ft_strclr(curr);
-    ft_strclr(float_part);
-    Len->lenOfResult = 0;
-    Len->lenOfPower = 0;
-    Len->lenOfIntPart = 0;
-    Len->lenOfCurrentNbr = 0;
-    ft_strcpy(curr, "55555.5");
-    ft_strcpy(float_part, "100000.5");
-    ft_plus_float(curr, float_part, Len);
+    long int a = LONG_MAX;
+    char *res;
+
+    res = ft_strnew(22);
+    ft_ltoa(&res, a);
+    printf("%s\n", res);
+    ft_strdel(&res);
+//    char *curr;
+//    char *float_part;
+//    t_len *Len;
+//
+//    Len = malloc(sizeof(t_len));
+//    curr = ft_strnew(100);
+//    float_part = ft_strnew(100);
+//    ft_strclr(curr);
+//    ft_strclr(float_part);
+//    Len->lenOfResult = 0;
+//    Len->lenOfPower = 0;
+//    Len->lenOfIntPart = 0;
+//    Len->lenOfCurrentNbr = 0;
+//    ft_strcpy(curr, "55555.5");
+//    ft_strcpy(float_part, "100000.5");
+//    ft_plus_float(curr, float_part, Len);
+
+
     return 0;
 }
