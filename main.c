@@ -26,6 +26,15 @@ int main()
     printf("origin:\n");
     printf("%-+23.i|%- 23.i|%-023.i|%+ 23.i|%+023.i|% 023.i|%-+ 023.i\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
 
+//     printf("My funk\n");
+//    ft_printf("%1.o|%-1.o|%#1.o|%01.o\n", 0U, 0U, 0U, 0U);
+//    printf("origin:\n");
+//     printf("%1.o|%-1.o|%#1.o|%01.o\n", 0U, 0U, 0U, 0U);
+   printf("My funk\n");
+   ft_printf("%#23.hho|\n", ULLONG_MAX);
+   printf("origin:\n");
+   printf("%#23.hho|\n", ULLONG_MAX);
+//
 //    printf("My funk\n");
 //    ft_printf("%-+23d|%- 23d|%-023d|%+ 23d|%+023d|% 023d|%-+ 023d\n", -0, -0, -0, -0, -0, -0, -0);
 //    printf("origin:\n");

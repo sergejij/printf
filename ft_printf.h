@@ -68,7 +68,7 @@ void ft_add_unsigned(char **result, unsigned long long int arg, t_prinlist *lst)
 void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst);
 void ft_add_hex_str(char **result, long long arg, t_prinlist *lst, char sym);
 void ft_add_uhex_str(char **result, unsigned long long arg, t_prinlist *lst, char sym);
-void ft_add_octal(char **result, int arg, t_prinlist *lst);
+void ft_add_octal(char **result, long long arg, t_prinlist *lst);
 char	*ft_itoa_base_ul(unsigned long n);
 int		ft_lennum_base(unsigned long num);
 char	*ft_itoa_base_hex(int n);
