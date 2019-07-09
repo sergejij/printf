@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/08 18:49:23 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:17:58 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,14 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
     }
     lst->len = len;
     if ((lst->flag & MINUS) == MINUS)
-        ft_minus_l(result, arg, lst, lst->len);
+        ft_minus(result, arg, lst, lst->len);
     else if (((lst->flag & PLUS) == PLUS)) // +
-        ft_plus_l(result, arg, lst, lst->len); // + 1 так как + это тоже часть числа
+        ft_plus(result, arg, lst, lst->len); // + 1 так как + это тоже часть числа
     else if (((lst->flag & ZERO) == ZERO)) // zero
-        ft_recording_l(result, arg, lst, '0');
+        ft_recording(result, arg, lst, '0');
     else
-        ft_recording_l(result, arg, lst, ' ');
+        ft_recording(result, arg, lst, ' ');
     if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  arg_int >=0 && lst->width <= len)
         *result = ft_strjoin(" ", *result);
+    //ft_strdel(&arg); // распечатать когда уберем все strjoin
 }
