@@ -3,45 +3,38 @@
 void    ft_recording_neg_width(char **result, char *arg, t_prinlist *lst, char fill)
 {
     if (lst->width > lst->len && fill == ' ')
-    {
         ft_memset(*result, fill, lst->width - lst->len);
-        (*result)[lst->width - lst->len] = '-';
-        *result = ft_strjoin(*result, ++arg);
-    }
     else if (lst->width > lst->len && (lst->flag & ZERO) == ZERO && lst->pricision)
-    {
         ft_memset(*result, ' ', lst->width - lst->len);
-        (*result)[lst->width - lst->len] = '-';
-        *result = ft_strjoin(*result, ++arg);
-    }
+    (*result)[lst->width - lst->len] = '-';
+    ft_strcat(*result, ++arg);
 }
 
 void    ft_recording_negative(char **result, char *arg, t_prinlist *lst, char fill)
 {
     char *tmp;
 
-    if(!(tmp = ft_strnew(lst->pricision + lst->width + lst->len + 1)))
-        exit(1);
+    tmp = NULL;
     if (lst->pricision > lst->len)
     {
         ft_pricision(result, lst, lst->len, arg);
         if(lst->width > lst->len)
-        {
-            ft_strcat(*result, arg + 1);
             return;
-        }
     }
     else if (lst->width > lst->len && (fill == ' ' || ((lst->flag & ZERO) == ZERO && lst->pricision)))
     {
         ft_recording_neg_width(result, arg, lst, fill);
         return;
     }
+    if(!(tmp = ft_strnew(lst->pricision + lst->width + lst->len + 1)))
+        exit(1);
     *tmp = '-';
     if (lst->width > lst->len)
         ft_memset((*result), fill, lst->width - lst->len);
     ft_strcat(tmp, *result);
     ft_strcpy(*result, tmp);
     ft_strcat(*result, ++arg);
+    ft_strdel(&tmp);
 }
 
 void    ft_recording_width(char **result, t_prinlist *lst, char fill)

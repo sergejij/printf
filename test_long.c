@@ -24,6 +24,8 @@ void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg)
     }
     else
         ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
+    if(lst->width > lst->len)
+        ft_strcat(*result, arg + 1);
 }
 
 
