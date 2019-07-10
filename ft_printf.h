@@ -33,6 +33,14 @@ typedef struct  s_prinlist
 
 }               t_prinlist;
 
+typedef struct s_len{
+    size_t lenOfCurrentNbr;
+    size_t lenOfResult;
+    size_t lenOfPower;
+    size_t lenOfIntPart;
+    int flagIsFloatPart;
+} t_len;
+
                         /* main function */
 
 int ft_printf(const char *apformat, ...);
@@ -80,7 +88,15 @@ char		*ft_itoa_uhex(unsigned long long int n, char sym);
 
                         /*      float        */
 void ft_ltoa(char **result, long long arg);
+char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist *lst);
 void ft_parse_double(char **result, long double arg_double, t_prinlist *lst);
+void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len);
+void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len);
+size_t ft_checkLenOfInt(char *nbr);
+int is_NanOrInf(char *dbl);
+void ft_roundering(char *currResult, size_t pricision, t_len *Len);
+void    ft_add_neg_sign(char **float_nbr, char **buff);
+
 
                         /*      u        */
 void ft_change_type_u(unsigned long long *arg, t_prinlist *lst);
