@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/09 20:12:35 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:12:49 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,46 +136,16 @@ void ft_octal_zero(char **str, t_prinlist *lst, size_t len)
 
 void ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
 {
-    // не заполняет нулями, не работает с отрицательными числами, не работает с #
-    //size_t len;
     char *str;
     char *tmp;
     size_t len;
     size_t len_all;
+    char *cpy_res;
 
-    /*if (arg == 0)
-    {
-        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && lst->width == 0)
-            return ;
-        else
-        {
-            ft_memset(*result, ' ', lst->width);
-            return ;
-        }
-    }*/
-    /*if(lst->modifier)
-        ft_change_type_oct(&arg, lst);*/
+    cpy_res = (char*)malloc(sizeof(char) * 100);
     len = ft_lennum_octal_u(arg);
     str = ft_itoa_octal(arg);
     tmp = str;
-    //len = ft_lennum_hex(arg);
-    /*if ((lst->flag & HASH) == HASH)
-    {
-        tmp = str;
-        if (arg < 0)
-            str = ft_strjoin("0xffff", str);
-        else
-        str = ft_strjoin("0x", str);
-        ft_strdel(&tmp);
-    }*/ // такой кастыль не подходит
-  /*if(*str == '0' && len == 1)
-    {
-        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
-        {
-            *str = '\0';
-            len = 0;
-        }
-    }*/
     if(*str == '0' && len == 1 && lst->pricision == 0)
     {
         if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC
@@ -199,76 +169,35 @@ void ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
             return ;
         }
     }
-    ft_strcpy(*result, tmp);
-
+    ft_strcpy(cpy_res, tmp);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
     {
         if(lst->pricision > len)
-            ft_pricision_hex(result, lst, len, str);
-        len_all = ft_strlen(*result);
+            ft_pricision_hex(cpy_res, lst, len, str);
+        len_all = ft_strlen(cpy_res);
         if (lst->pricision < len_all)
-            *result = ft_strjoin("0", *result);
+            cpy_res = ft_strjoin("0", cpy_res);
 
     }
-    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
+    ft_transform_int_result(result, cpy_res, lst);
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0' && lst->width < len)
         *result = ft_strjoin("0", *result);
-
-
-
-   /* if ((lst->flag & ZERO) == ZERO)
-        ft_octal_zero(&str, lst, len);
-    if ((lst->flag & HASH) == HASH && !(*str == '0' && len == 1))
-        str = ft_strjoin("0", str); // тернарники огонь
-    if (lst->pricision < len)
-        ft_transform_int_result(result, lst);
-    else
-        ft_transform_int_result(result, lst);*/
-        //printf("%s", str);
 }
 
 void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
 {
-    // не заполняет нулями, не работает с отрицательными числами, не работает с #
-    //size_t len;
     char *str;
     char *tmp;
     size_t len;
     size_t len_all;
-    
-    /*if (arg == 0)
-    {
-        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && lst->width == 0)
-            return ;
-        else
-        {
-            ft_memset(*result, ' ', lst->width);
-            return ;
-        }
-    }*/
+    char *cpy_res;
+
+    cpy_res = (char*)malloc(sizeof(char) * 100);
     if(lst->modifier)
         ft_change_type_oct(&arg, lst);
     len = ft_lennum_octal(arg);
     str = ft_itoa_octal(arg);
     tmp = str;
-    //len = ft_lennum_hex(arg);
-    /*if ((lst->flag & HASH) == HASH)
-    {
-        tmp = str;
-        if (arg < 0)
-            str = ft_strjoin("0xffff", str);
-        else
-        str = ft_strjoin("0x", str);
-        ft_strdel(&tmp);
-    }*/ // такой кастыль не подходит
-  /*if(*str == '0' && len == 1)
-    {
-        if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
-        {
-            *str = '\0';
-            len = 0;
-        }
-    }*/
     if(*str == '0' && len == 1 && lst->pricision == 0)
     {
         if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC
@@ -292,30 +221,17 @@ void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
             return ;
         }
     }
-    ft_strcpy(*result, tmp);
-
+    ft_strcpy(cpy_res, tmp);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
     {
         if(lst->pricision > len)
-            ft_pricision_hex(result, lst, len, str);
-        len_all = ft_strlen(*result);
+            ft_pricision_hex(cpy_res, lst, len, str);
+        len_all = ft_strlen(cpy_res);
         if (lst->pricision < len_all)
-            *result = ft_strjoin("0", *result);
+            cpy_res = ft_strjoin("0", cpy_res);
 
     }
-    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
+    ft_transform_int_result(result, cpy_res, lst);
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0' && lst->width < len)
         *result = ft_strjoin("0", *result);
-    
-   
-   
-   /* if ((lst->flag & ZERO) == ZERO)
-        ft_octal_zero(&str, lst, len);
-    if ((lst->flag & HASH) == HASH && !(*str == '0' && len == 1))
-        str = ft_strjoin("0", str); // тернарники огонь
-    if (lst->pricision < len)
-        ft_transform_int_result(result, lst);
-    else
-        ft_transform_int_result(result, lst);*/
-        //printf("%s", str);
 }

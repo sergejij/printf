@@ -19,14 +19,14 @@ int main()
 
 
      printf("My funk\n");
-    ft_printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", -0., -0., -0., -0., -0., -0.);
+    ft_printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
     printf("origin:\n");
-     printf("%.f|%-.f|%+.f|% .f|%#.f|%0.f\n", -0., -0., -0., -0., -0., -0.);
-   printf("My funk\n");
-   ft_printf("%1f|%-1f|%+1f|% 1f|%#1f|%01f\n", -0., -0., -0., -0., -0., -0.);
-   printf("origin:\n");
-   printf("%1f|%-1f|%+1f|% 1f|%#1f|%01f\n", -0., -0., -0., -0., -0., -0.);
-
+     printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+//   printf("My funk\n");
+//   ft_printf("%#23.hho|\n", ULLONG_MAX);
+//   printf("origin:\n");
+//   printf("%#23.hho|\n", ULLONG_MAX);
+//
 //    printf("My funk\n");
 //    ft_printf("%-+23d|%- 23d|%-023d|%+ 23d|%+023d|% 023d|%-+ 023d\n", -0, -0, -0, -0, -0, -0, -0);
 //    printf("origin:\n");

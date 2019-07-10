@@ -68,7 +68,8 @@ void    ft_recording_negative(char **result, char *arg, t_prinlist *lst, char fi
 void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg);
 void    ft_plus(char **result, char *arg, t_prinlist *lst, size_t len);
 void    ft_plus_negative(char **result, char *arg, t_prinlist *lst, size_t len);
-void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str);
+void    ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str);
+
 
                         /* %x %X | unsigned | octal */
 
