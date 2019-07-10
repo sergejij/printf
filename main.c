@@ -19,9 +19,9 @@ int main()
 
 
      printf("My funk\n");
-    ft_printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+    ft_printf("%#.5hhx\n", ULLONG_MAX);
     printf("origin:\n");
-     printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+     printf("%#.5hhx\n", ULLONG_MAX);
 //   printf("My funk\n");
 //   ft_printf("%#23.hho|\n", ULLONG_MAX);
 //   printf("origin:\n");

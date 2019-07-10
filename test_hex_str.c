@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/09 20:11:20 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:52:51 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ void ft_change_type_hex(long long int *arg, t_prinlist *lst) {
     }
 }
 
-void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
+void    ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 {
     char *tmp;
+    char *tmp1;
     //char *spaces;
 
     tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
+    tmp1 = result;
     /*if (lst->width > len && lst->width > lst->pricision)
         ft_memset(*result, ' ', lst->width - lst->pricision);
     else */
@@ -55,19 +57,19 @@ void    ft_pricision_hex(char **result, t_prinlist *lst, size_t len, char *str)
         ft_memset(tmp, ' ', lst->width - lst->pricision);
         if ((lst->flag & MINUS) == MINUS)
         {
-            
-            *result = ft_strjoin(ft_strjoin("0", str), tmp);
+            result = ft_strjoin(ft_strjoin("0", str), tmp);
         }
         else
         { 
             ft_memset(tmp + lst->width - lst->pricision, '0', lst->pricision - len);
-            *result = ft_strjoin(tmp, str);
+            result = ft_strjoin(tmp, str);
         }
     }
     else
     {
         ft_memset(tmp, '0', lst->pricision - len);
-        *result = ft_strjoin(tmp, str);
+        result = ft_strjoin(tmp, result);
+        ft_strcpy(tmp1, result);
     }
     //ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
 }
@@ -169,9 +171,11 @@ void ft_add_uhex_str(char **result, unsigned long long arg, t_prinlist *lst, cha
     char *str;
     char *tmp;
     size_t len;
+    char *cpy_res;
 
     //if(lst->modifier)
      //   ft_change_type_hex(&arg, lst);
+    cpy_res = (char*)malloc(sizeof(char) * 100);
     len = ft_lennum_uhex(arg);
     str = ft_itoa_uhex(arg, sym);
     tmp = str;
@@ -195,14 +199,14 @@ void ft_add_uhex_str(char **result, unsigned long long arg, t_prinlist *lst, cha
             return ;
         }
     }
-    ft_strcpy(*result, str);
+    ft_strcpy(cpy_res, str);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
     {
         if(lst->pricision > len)
-            ft_pricision_hex(result, lst, len, str);
-        *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
+            ft_pricision_hex(cpy_res, lst, len, str);
+        cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
     }
-    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
+    ft_transform_int_result(result, cpy_res, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
     {
         if(lst->width > len)
@@ -236,7 +240,9 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
     char *str;
     char *tmp;
     size_t len;
+    char *cpy_res;
 
+    cpy_res = (char*)malloc(sizeof(char) * 100);
     if(lst->modifier)
         ft_change_type_hex(&arg, lst);
     len = arg < 0 ? 8 : ft_lennum_hex(arg);
@@ -262,14 +268,14 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
             return ;
         }
     }
-    ft_strcpy(*result, str);
+    ft_strcpy(cpy_res, str);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
     {
         if(lst->pricision > len)
-            ft_pricision_hex(result, lst, len, str);
-        *result = ft_strjoin(sym == 'x' ? "0x" : "0X", *result);
+            ft_pricision_hex(cpy_res, lst, len, str);
+        cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
     }
-    ft_transform_int_result(result, str, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
+    ft_transform_int_result(result, cpy_res, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
     {
         if(lst->width > len)
