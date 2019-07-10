@@ -18,19 +18,19 @@ int main()
 
 
 
-     printf("My funk\n");
-    ft_printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-    printf("origin:\n");
-     printf("%23.5hhu|%-23.5hhu|%023.5hhu\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-//   printf("My funk\n");
-//   ft_printf("%#23.hho|\n", ULLONG_MAX);
-//   printf("origin:\n");
-//   printf("%#23.hho|\n", ULLONG_MAX);
-//
-//    printf("My funk\n");
-//    ft_printf("%-+23d|%- 23d|%-023d|%+ 23d|%+023d|% 023d|%-+ 023d\n", -0, -0, -0, -0, -0, -0, -0);
+//     printf("My funk\n");
+//    ft_printf("%#23.5hx|%#1.5hx|%#23.X|%#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, UINT_MAX, ULLONG_MAX);
 //    printf("origin:\n");
-//    printf("%-+23d|%- 23d|%-023d|%+ 23d|%+023d|% 023d|%-+ 023d\n", -0, -0, -0, -0, -0, -0, -0);
+//     printf("%#23.5hx|%#1.5hx|%#23.X|%#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, UINT_MAX, ULLONG_MAX);
+   printf("My funk\n");
+   ft_printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+   printf("origin:\n");
+   printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+//
+    printf("My funk\n");
+    ft_printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+    printf("origin:\n");
+    printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
 
 // ОЧЕНЬ ВАЖНЫЙ БАГ
 //    printf("3My funk\n");

@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/10 14:52:51 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/10 18:51:32 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,34 @@ void    ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 {
     char *tmp;
     char *tmp1;
-    //char *spaces;
+
 
     tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
     tmp1 = result;
-    /*if (lst->width > len && lst->width > lst->pricision)
-        ft_memset(*result, ' ', lst->width - lst->pricision);
-    else */
     if (lst->width > lst->pricision + len)
     {
-        //spaces = (char*)malloc(sizeof(char) * (lst->width - lst->pricision));
         ft_memset(tmp, ' ', lst->width - lst->pricision);
         if ((lst->flag & MINUS) == MINUS)
         {
-            result = ft_strjoin(ft_strjoin("0", str), tmp);
+            ft_strcpy(result, "0");
+            ft_strcat(result, str);
+            ft_strcat(result, tmp);
+            //result = ft_strjoin(ft_strjoin("0", str), tmp);
         }
         else
-        { 
+        {
             ft_memset(tmp + lst->width - lst->pricision, '0', lst->pricision - len);
-            result = ft_strjoin(tmp, str);
+
+            ft_strcpy(result, tmp);
+            ft_strcat(result, str);
         }
     }
     else
     {
         ft_memset(tmp, '0', lst->pricision - len);
-        result = ft_strjoin(tmp, result);
-        ft_strcpy(tmp1, result);
+        ft_strcpy(result, tmp);
+        ft_strcat(result, str);
     }
-    //ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
 }
 
 size_t  ft_lennum_uhex(unsigned long long int num)
@@ -273,7 +273,16 @@ void ft_add_hex_str(char **result, long long int arg, t_prinlist *lst, char sym)
     {
         if(lst->pricision > len)
             ft_pricision_hex(cpy_res, lst, len, str);
-        cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
+        if(lst->width > len && lst->pricision > len && (lst->flag & MINUS) != MINUS)
+        {
+            ft_strdel(&tmp);
+            tmp = ft_strsub(cpy_res, lst->width - lst->pricision, lst->pricision);
+            cpy_res[lst->width - lst->pricision - 2] = '\0';
+            ft_strcat(cpy_res, sym == 'x' ? "0x" : "0X");
+            ft_strcat(cpy_res, tmp);
+        }
+        else
+            cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
     }
     ft_transform_int_result(result, cpy_res, lst); // ПОМЕНЯТЬ STR ЭТО ПРОСТО ЗАГЛУШКА ЧТОБЫ СКОМПИЛИЛОСЬ
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')

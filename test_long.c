@@ -38,7 +38,10 @@ void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst)
     else if (((lst->flag & ZERO) == ZERO)) // zero
         ft_recording(result, cpy_num, lst, '0');
     else
+    {
         ft_recording(result, cpy_num, lst, ' ');
+    }
+
     if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width < lst->len)
         *result = ft_strjoin(" ", *result);
 }

@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/09 20:23:43 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/10 17:50:48 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,19 @@ void ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
     char *arg_str;
 
     arg_str = ft_strnew(22);
-    ft_change_type_u(&arg, lst);
+    if(lst->modifier)
+        ft_change_type_u(&arg, lst);
     ft_ultoa(&arg_str, arg);
     if ((lst->flag & PLUS) == PLUS)
         lst->flag = lst->flag ^ PLUS;
-    //if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && new_res[0] == '0')
-    //    new_res[0] = ' ';
+    if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && arg_str[0] == '0')
+    {
+        if(lst->width)
+            arg_str[0] = ' ';
+        else
+            arg_str[0] = '\0';
+    }
+
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, arg_str, lst);
     else

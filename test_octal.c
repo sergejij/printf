@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/10 14:12:49 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/10 15:01:13 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
     {
         if(lst->pricision > len)
-            ft_pricision_hex(cpy_res, lst, len, str);
+            ft_pricision_hex(*result, lst, len, str);
         len_all = ft_strlen(cpy_res);
         if (lst->pricision < len_all)
             cpy_res = ft_strjoin("0", cpy_res);
