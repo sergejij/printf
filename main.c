@@ -17,6 +17,12 @@ int main()
 //    printf("% 023i|%-+ 023i\n", a, a);
 
 
+ printf("My funk\n");
+ ft_printf("%.1f|%.2f|%.5f|%.12f\n", 999.99999, 999.99999, 999.99999, 999.99999, 999.99999);
+ printf("origin:\n");
+ printf("%.1f|%.2f|%.5f|%.12f\n", 999.99999, 999.99999, 999.99999, 999.99999, 999.99999);
+
+ //ОЧЕНЬ ВАЖНЫЙ БАГ
 
 //     printf("My funk\n");
 //    ft_printf("%#23.5hx|%#1.5hx|%#23.X|%#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, UINT_MAX, ULLONG_MAX);
