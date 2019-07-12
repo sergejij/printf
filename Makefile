@@ -6,7 +6,7 @@
 #    By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/05/21 18:01:17 by ubartemi          #+#    #+#              #
-#    Updated: 2019/07/09 16:21:49 by aestella         ###   ########.fr        #
+#    Updated: 2019/07/12 15:43:08 by ubartemi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 
 SRC = main_ft_printf.c test_integer_to_string.c test_pointer.c \
         test_string_char.c test_hex_str.c  test_long.c test_octal.c \
-        test_unsigned.c test_float.c test_float.c plus.c minus.c \
+        test_unsigned.c test_float.c plus.c minus.c \
         recording_other_flags.c test_float_to_string.c
 
 
