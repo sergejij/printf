@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/12 18:17:18 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/12 18:27:43 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,8 @@
 
 void	ft_change_type_hex_l(long long int *arg, t_prinlist *lst)
 {
-<<<<<<< HEAD
 	unsigned long				new_arg_l;
 	unsigned long long			new_arg_ll;
-=======
-	unsigned long		new_arg_l;
-	unsigned long long	new_arg_ll;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	new_arg_l = 0;
 	new_arg_ll = 0;
@@ -38,13 +33,8 @@ void	ft_change_type_hex_l(long long int *arg, t_prinlist *lst)
 
 void	ft_change_type_hex(long long int *arg, t_prinlist *lst)
 {
-<<<<<<< HEAD
 	unsigned short				new_arg_h;
 	unsigned char				new_arg_hh;
-=======
-	unsigned short	new_arg_h;
-	unsigned char	new_arg_hh;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	new_arg_h = 0;
 	new_arg_hh = 0;
@@ -64,11 +54,7 @@ void	ft_change_type_hex(long long int *arg, t_prinlist *lst)
 
 void	ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 {
-<<<<<<< HEAD
 	char						*tmp;
-=======
-	char	*tmp;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
 	if (lst->width > lst->pricision + len)
@@ -97,11 +83,7 @@ void	ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 
 size_t	ft_lennum_uhex(unsigned long long int num)
 {
-<<<<<<< HEAD
 	size_t						len;
-=======
-	size_t	len;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	len = 0;
 	if (num == 0)
@@ -116,11 +98,7 @@ size_t	ft_lennum_uhex(unsigned long long int num)
 
 size_t	ft_lennum_hex(long long int num)
 {
-<<<<<<< HEAD
 	size_t						len;
-=======
-	size_t	len;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	len = 0;
 	if (num == 0)
@@ -160,17 +138,10 @@ char	*ft_itoa_hex(long long int n, char sym)
 
 char	*ft_itoa_uhex(unsigned long long int n, char sym)
 {
-<<<<<<< HEAD
 	int							len;
 	unsigned long long int		number;
 	char						*result;
 	char						*a;
-=======
-	int						len;
-	unsigned long long int	number;
-	char					*result;
-	char					*a;
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 
 	a = (sym == 'x') ? "0123456789abcdef" : "0123456789ABCDEF";
 	len = ft_lennum_uhex(n);
@@ -192,7 +163,6 @@ char	*ft_itoa_uhex(unsigned long long int n, char sym)
 
 int	ft_if_zero(char **result, char *str, t_prinlist *lst)
 {
-<<<<<<< HEAD
 	if (*str == '0' && lst->len == 1 && lst->pricision == 0)
 	{
 		if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC)
@@ -222,10 +192,6 @@ void	ft_add_uhex_str2(char **result, char *str, char sym, t_prinlist *lst)
 	char						*cpy_res;
 
 	cpy_res = (char*)malloc(sizeof(char) * 100);
-=======
-	char	*tmp;
-
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 	tmp = str;
 	ft_strcpy(cpy_res, str);
 	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
@@ -247,20 +213,10 @@ void	ft_add_uhex_str2(char **result, char *str, char sym, t_prinlist *lst)
 void	ft_add_uhex_str(char **result, unsigned long long arg,
 		t_prinlist *lst, char sym)
 {
-<<<<<<< HEAD
 	char						*str;
 	char						*tmp;
 
 	lst->len = ft_lennum_uhex(arg);
-=======
-	char	*str;
-	char	*tmp;
-	size_t	len;
-	char	*cpy_res;
-
-	cpy_res = (char*)malloc(sizeof(char) * 100);
-	len = ft_lennum_uhex(arg);
->>>>>>> 0423c8f418aeb606bdd973d64c0fc9992ef7ae4d
 	str = ft_itoa_uhex(arg, sym);
 	tmp = str;
 	if ((ft_if_zero(result, str, lst)) == 0)
