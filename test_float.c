@@ -1,32 +1,6 @@
 
 #include "ft_printf.h"
 
-
-
-int is_NanOrInf(char *dbl)
-{
-    if(!dbl)
-        return (0);
-    else if((ft_strcmp(dbl, "inf")) && (ft_strcmp(dbl, "-inf")) && (ft_strcmp(dbl, "nan")))
-        return (0);
-    else
-        return (1);
-}
-
-void ft_print_bits(unsigned long a, int bits)
-{
-    unsigned long i;
-
-    i = 1;
-    i <<= (bits - 1);
-    while(bits-- > 0)
-    {
-        ft_putchar(a & i ? '1' : '0');
-        a <<= 1;
-        if (!(bits % 4))
-            ft_putchar(' ');
-    }
-}
 void ft_roundering(char *currResult, size_t pricision, t_len *Len)
 {
     char *rounder;
@@ -42,21 +16,6 @@ void ft_roundering(char *currResult, size_t pricision, t_len *Len)
     if((currResult[pricision + 1] - '0') % 2 != 0 || (currResult[pricision + 2] - '0') >= 5)
         ft_plus_float(currResult, rounder, Len);
 }
-
-
-void    ft_add_neg_sign(char **float_nbr, char **buff)
-{
-    char *tmp;
-
-    tmp = NULL;
-    **buff = '-';
-    (*buff)[1] = '\0';
-    tmp = *float_nbr;
-    ft_strcat(*buff, *float_nbr);
-    *float_nbr = *buff;
-    *buff = tmp;
-}
-
 
 unsigned long ft_make_mantissa(long double nbr)
 {
@@ -103,8 +62,10 @@ unsigned short ft_make_exponent(long double nbr)
     if(exponent == 32767)
         exponent = -1;
     if(exponent >= 16384)
+    {
         exponent = ~ exponent;
-
+        exponent += 1;
+    }
     return (exponent);
 }
 
