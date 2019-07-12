@@ -22,11 +22,13 @@
 #define L_ONE 2
 #define HH 4
 #define LL 8
+#define x 1
 
 typedef struct  s_prinlist
 {
     unsigned int flag;
     unsigned int modifier;
+    unsigned int h;
     size_t width;
     size_t pricision;
     size_t len;

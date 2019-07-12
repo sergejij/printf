@@ -6,6 +6,8 @@ int g_sym_count = 0;
 
 int ft_is_type(char *c, t_prinlist *lst)
 {
+    if(*c == 'x')
+        lst->h = x;
     if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd' || *c == 'i'
     || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u' || *c == 'f')
         return (1);

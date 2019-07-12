@@ -23,9 +23,9 @@ int main()
 //    printf("origin:\n");
 //     printf("%#23.5hx|%#1.5hx|%#23.X|%#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, UINT_MAX, ULLONG_MAX);
    printf("My funk\n");
-   ft_printf("%-#23.5hX\n", ULLONG_MAX);
+   ft_printf("%-#X|%-0X|%#0X|%-#0X\n", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX);
    printf("origin:\n");
-   printf("%-#23.5hX\n",  ULLONG_MAX);
+   printf("%-#X|%-0X|%#0X|%-#0X\n", ULONG_MAX, ULONG_MAX, ULONG_MAX, ULONG_MAX);
 //
    /* printf("My funk\n");
     ft_printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
