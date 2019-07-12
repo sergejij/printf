@@ -1,8 +1,8 @@
 {
-	"folders": [
-		{
-			"path": "."
+	"folders": [],
+	"settings": {
+		"files.associations": {
+			"math.h": "c"
 		}
-	],
-	"settings": {}
+	}
 }
