@@ -149,7 +149,8 @@ t_prinlist *make_struct_for_flags(char *format)
 
 void ft_free_result_and_lst(char **result, t_prinlist **lst)
 {
-    ft_strdel(&(*result));
+    if(*result)
+        ft_strdel(&(*result));
     free(*lst);
     *lst = NULL;
 }

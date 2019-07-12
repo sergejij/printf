@@ -102,6 +102,9 @@ unsigned short ft_make_exponent(long double nbr)
     exponent ^= 16384;
     if(exponent == 32767)
         exponent = -1;
+    if(exponent >= 16384)
+        exponent = ~ exponent;
+
     return (exponent);
 }
 
