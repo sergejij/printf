@@ -5,7 +5,9 @@ void ft_roundering(char *currResult, size_t pricision, t_len *Len)
 {
     char *rounder;
     char *tmp;
+    int rounder_nbr;
 
+    rounder_nbr = ft_checkLenOfInt(currResult) + pricision + 1;
     if(!(rounder = (char *)malloc(sizeof(char) * (pricision + 5))))
         return;
     tmp = rounder;
@@ -13,8 +15,29 @@ void ft_roundering(char *currResult, size_t pricision, t_len *Len)
     ft_memset((tmp + 2), '0', pricision);
     tmp[pricision + 2] = '5';
     tmp[pricision + 3] = '\0';
-    if((currResult[pricision + 1] - '0') % 2 != 0 || (currResult[pricision + 2] - '0') >= 5)
-        ft_plus_float(currResult, rounder, Len);
+    if(currResult[rounder_nbr - 1] == '.')
+    {
+        if((currResult[rounder_nbr - 2] - '0') % 2 != 0 || (currResult[rounder_nbr] - '0') >= 5)
+            ft_plus_float(currResult, rounder, Len);
+    }
+    else
+        if((currResult[rounder_nbr - 1] - '0') % 2 != 0 || (currResult[rounder_nbr] - '0') >= 5)
+            ft_plus_float(currResult, rounder, Len);
+}
+
+void ft_print_bits(unsigned short a, int bits)
+{
+    unsigned long i;
+
+    i = 1;
+    i <<= (bits - 1);
+    while(bits-- > 0)
+    {
+        ft_putchar(a & i ? '1' : '0');
+        a <<= 1;
+        if (!(bits % 4))
+            ft_putchar(' ');
+    }
 }
 
 unsigned long ft_make_mantissa(long double nbr)
@@ -47,10 +70,13 @@ unsigned long ft_make_mantissa(long double nbr)
     return (mantissa);
 }
 
-unsigned short ft_make_exponent(long double nbr)
+short ft_make_exponent(long double nbr)
 {
     unsigned short exponent;
+   // short exponet2;
     unsigned char memoryPointer;
+    short *ptr;
+
 
     exponent = 0;
     memoryPointer = *((unsigned char *)&nbr + 9);
@@ -58,15 +84,9 @@ unsigned short ft_make_exponent(long double nbr)
     exponent <<= 8;
     memoryPointer = *((unsigned char *)&nbr + 8);
     exponent |= memoryPointer;
-    exponent ^= 16384;
-    if(exponent == 32767)
-        exponent = -1;
-    if(exponent >= 16384)
-    {
-        exponent = ~ exponent;
-        exponent += 1;
-    }
-    return (exponent);
+    exponent = exponent - 16383;
+    ptr = (short*)&exponent;
+    return (*ptr);
 }
 
 char *ft_add_infOrNan(int sign, long double arg_double, t_prinlist *lst)
@@ -100,7 +120,7 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
     char *tmp_result = NULL;
     unsigned long mantissa = 0;
     unsigned char memoryPointer;
-    unsigned short exponent = 0;
+    short exponent = 0;
     int sign = 0;
 
     memoryPointer = *((unsigned char *)&arg_double + 9);
@@ -109,17 +129,11 @@ void ft_parse_double(char **result, long double arg_double, t_prinlist *lst)
         arg_double = -arg_double;
     mantissa = ft_make_mantissa(arg_double);
     exponent = ft_make_exponent(arg_double);
-    if(lst->pricision == 0 && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
+    if((lst->pricision == 0 || lst->pricision > 2000) && (lst->flag & ZERO_PRIC) != ZERO_PRIC)
         lst->pricision = 6;
-    if(exponent == 16383)
+    if(exponent == 16384)
         tmp_result = ft_add_infOrNan(sign, arg_double, lst);
     if(!(is_NanOrInf(tmp_result)))
         tmp_result = ft_add_double(mantissa, exponent, sign,  lst);
-    if(tmp_result && (lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & HASH) != HASH && !(is_NanOrInf(tmp_result)))
-            tmp_result[ft_checkLenOfInt(tmp_result)] = '\0';
-    lst->pricision = 0;
-    if(lst->flag || lst->width)
-        ft_transform_int_result(result, tmp_result, lst);
-    else
-            ft_strcpy(*result, tmp_result);
+    ft_choice_options(result, tmp_result, lst);
 }

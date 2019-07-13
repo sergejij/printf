@@ -229,7 +229,6 @@ void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
         len_all = ft_strlen(cpy_res);
         if (lst->pricision < len_all)
             cpy_res = ft_strjoin("0", cpy_res);
-
     }
     ft_transform_int_result(result, cpy_res, lst);
     if((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0' && lst->width < len)

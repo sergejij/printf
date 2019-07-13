@@ -43,7 +43,11 @@ void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst)
     }
 
     if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width < lst->len)
-        *result = ft_strjoin(" ", *result);
+    {
+        ft_strcpy(*result, " ");
+        ft_strcat(*result, cpy_num);
+    }
+
 }
 
 int    ft_ltoa_set_piace(long long arg, char **new_res)
@@ -66,13 +70,12 @@ int    ft_ltoa_set_piace(long long arg, char **new_res)
     return (i);
 }
 
-void ft_ltoa(char **result, long long arg)
+void ft_ltoa(char **result, long long arg, int i)
 {
     char **new_res;
-    int i;
-    char *tmp = *result;
+    char *tmp;
 
-    i = 0;
+    tmp = *result;
     if(!(new_res = (char **)malloc(sizeof(char*) * 5)))
         return;
     if(arg < 0)
@@ -98,9 +101,11 @@ void ft_ltoa(char **result, long long arg)
 void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
 {
     char *arg_str;
+    int i;
 
+    i = 0;
     arg_str = ft_strnew(22);
-    ft_ltoa(&arg_str, arg);
+    ft_ltoa(&arg_str, arg, i);
     if(lst->flag || lst->width || lst->pricision)
         ft_transform_int_result(result, arg_str, lst);
     else

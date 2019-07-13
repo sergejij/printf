@@ -57,6 +57,7 @@ void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst);
                     /* integer | long | long long */
 
 void ft_add_integer(char **result, int arg, t_prinlist *lst);
+void ft_ltoa(char **result, long long arg, int i);
 void ft_long_to_str(char **result, long long int arg, t_prinlist *lst);
 void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst);
 void ft_change_type_int(int *arg, t_prinlist *lst);
@@ -90,7 +91,7 @@ size_t  ft_lennum_uhex(unsigned long long int num);
 char		*ft_itoa_uhex(unsigned long long int n, char sym);
 
                         /*      float        */
-void ft_ltoa(char **result, long long arg);
+
 char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist *lst);
 void ft_parse_double(char **result, long double arg_double, t_prinlist *lst);
 void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len);
@@ -106,6 +107,7 @@ void ft_makeEven(char *curretNum, char *powerTwo);
 void ft_handle_result_f(int len, int *int_res, char *result);
 void ft_makePower(char *current_power);
 char *findPower(int power);
+void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst);
 
 
                         /*      u        */

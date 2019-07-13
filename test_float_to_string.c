@@ -34,15 +34,17 @@ void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len)
 {
     int *res;
     char *tmp_curr;
+    char *tmp_power;
 
     Len->lenOfCurrentNbr = ft_strlen(curretNum) > ft_strlen(cpyPower) ? ft_strlen(curretNum) : ft_strlen(cpyPower);
     res = malloc(sizeof(int) * (Len->lenOfCurrentNbr + 1));
     tmp_curr = curretNum;
+    tmp_power = cpyPower;
     Len->lenOfCurrentNbr = 0;
     ft_strrev(curretNum);
-    ft_strrev(cpyPower);
+    ft_strrev(tmp_power);
     Len->flagIsFloatPart = 0;
-    ft_calculate(res, tmp_curr, cpyPower, Len);
+    ft_calculate(res, tmp_curr, tmp_power, Len);
     Len->lenOfResult = 0;
     while(Len->lenOfCurrentNbr--)
     {
@@ -117,7 +119,7 @@ char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist
     Len = ft_make_len_struct();
     int_part = ft_strnew(2000);
     float_part = ft_strnew(2000);
-    exponent++;
+
     ft_binary_to_decimal(mantissa, exponent, int_part, float_part, Len);
     ft_pasteIntPlusFloat(int_part, float_part, lst->pricision, Len);
     if(sign < 0)

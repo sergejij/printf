@@ -61,3 +61,19 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
     if(ft_strlen(curretNum) > (Len->lenOfCurrentNbr > Len->lenOfPower ? Len->lenOfCurrentNbr - 2 : Len->lenOfPower - 2))
         curretNum[0] = *curretNum;
 }
+
+void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst)
+{
+    if(tmp_result && (lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & HASH) != HASH
+        && !(is_NanOrInf(tmp_result)))
+        tmp_result[ft_checkLenOfInt(tmp_result)] = '\0';
+    lst->pricision = 0;
+    if(lst->flag || lst->width)
+    {
+        if(lst->width > 2000)
+            lst->width = 0;
+        ft_transform_int_result(result, tmp_result, lst);
+    }
+    else
+        ft_strcpy(*result, tmp_result);
+}
