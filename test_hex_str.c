@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/12 18:27:43 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/13 14:58:59 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ char	*ft_itoa_uhex(unsigned long long int n, char sym)
 	return (result);
 }
 
-int	ft_if_zero(char **result, char *str, t_prinlist *lst)
+int	ft_if_zero_x(char **result, char *str, t_prinlist *lst)
 {
 	if (*str == '0' && lst->len == 1 && lst->pricision == 0)
 	{
@@ -219,7 +219,7 @@ void	ft_add_uhex_str(char **result, unsigned long long arg,
 	lst->len = ft_lennum_uhex(arg);
 	str = ft_itoa_uhex(arg, sym);
 	tmp = str;
-	if ((ft_if_zero(result, str, lst)) == 0)
+	if ((ft_if_zero_x(result, str, lst)) == 0)
 		return ;
 	ft_add_uhex_str2(result, str, sym, lst);
 }
@@ -275,7 +275,7 @@ void	ft_add_hex_str(char **result, long long int arg,
 		ft_change_type_hex(&arg, lst);
 	lst->len = arg < 0 ? 8 : ft_lennum_hex(arg);
 	str = ft_itoa_hex(arg, sym);
-	if ((ft_if_zero(result, str, lst)) == 0)
+	if ((ft_if_zero_x(result, str, lst)) == 0)
 		return ;
 	ft_add_hex_str_2(result, str, sym, lst);
 }
