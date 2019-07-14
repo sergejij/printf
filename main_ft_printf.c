@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:58:23 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:44:10 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:56:59 by ubartemi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		ft_is_type(char *c, t_prinlist *lst)
 	if (*c == 'x')
 		lst->h = x;
 	if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd'
-	|| *c == 'i' || *c == '%' || *c == 'x' || *c == 'X'
-	|| *c == 'o' || *c == 'u' || *c == 'f')
+			|| *c == 'i' || *c == '%' || *c == 'x' || *c == 'X'
+			|| *c == 'o' || *c == 'u' || *c == 'f')
 		return (1);
 	else if (*c == 'h' && lst->mod != HH)
 	{
@@ -52,9 +52,9 @@ void	ft_digit_type(char **result, va_list ap, t_prinlist *lst)
 void	ft_hex_type(char *format, char **result, va_list ap, t_prinlist *lst)
 {
 	if (lst->mod == L_ONE)
-        ft_uh(result, va_arg(ap, unsigned long int), lst, *format);
+		ft_uh(result, va_arg(ap, unsigned long int), lst, *format);
 	else if (lst->mod == LL)
-        ft_uh(result, va_arg(ap, unsigned long long int), lst, *format);
+		ft_uh(result, va_arg(ap, unsigned long long int), lst, *format);
 	else
 		ft_add_hex_str(result, va_arg(ap, int), lst, *format);
 }
@@ -94,7 +94,7 @@ void	ft_a_typ(char *format, char *res, va_list ap, t_prinlist *lst)
 	else if (*format == 'u')
 		ft_unsigned_type(&res, ap, lst);
 	else if (*format == 'f')
-        ft_parse_d(&res, va_arg(ap, double), lst);
+		ft_parse_d(&res, va_arg(ap, double), lst);
 	else if (*format == '%')
 		ft_add_char(&res, '%', lst);
 	if (!res)
@@ -208,7 +208,7 @@ void	ft_printf_1(char *result, t_prinlist *lst,
 	(*p_ap_f)++;
 	while (!(ft_is_type((char *)*p_ap_f, lst)))
 		(*p_ap_f)++;
-    ft_a_typ((char *) *p_ap_f, result, ap, lst);
+	ft_a_typ((char *)*p_ap_f, result, ap, lst);
 	(*p_ap_f)++;
 	ft_free_result_and_lst(&result, &lst);
 }
