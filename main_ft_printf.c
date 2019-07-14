@@ -6,23 +6,23 @@ int g_sym_count = 0;
 
 int ft_is_type(char *c, t_prinlist *lst)
 {
-    if(*c == 'x')
+    if (*c == 'x')
         lst->h = x;
     if (*c == 's' || *c == 'c' || *c == 'p' || *c == 'i' || *c == 'd' || *c == 'i'
     || *c == '%' || *c == 'x' || *c == 'X' || *c == 'o' || *c == 'u' || *c == 'f')
         return (1);
-    else if(*c == 'h' && lst->modifier != HH)
+    else if (*c == 'h' && lst->modifier != HH)
     {
         c++;
-        if(*c =='h')
+        if (*c =='h')
             lst->modifier = HH;
         else
             lst->modifier = H;
     }
-    else if(*c == 'l' && lst->modifier != LL)
+    else if (*c == 'l' && lst->modifier != LL)
     {
         c++;
-        if(*c =='l')
+        if (*c =='l')
             lst->modifier = LL;
         else
             lst->modifier = L_ONE;
