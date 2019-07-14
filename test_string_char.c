@@ -2,7 +2,7 @@
 
 extern int g_sym_count;
 
-char *ft_makeCpyStr(char *str_arg, t_prinlist *lst, int numSys)
+char *ft_makeCpyStr(char *str_arg, t_plist *lst, int numSys)
 {
     char *arg;
     size_t len;
@@ -30,7 +30,7 @@ char *ft_makeCpyStr(char *str_arg, t_prinlist *lst, int numSys)
     return (arg);
 }
 
-char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys)
+char *ft_add_string(char **result, char *str_arg, t_plist *lst, int numSys)
 {
     char *arg;
 
@@ -52,7 +52,7 @@ char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys)
     ft_strdel(&arg);
     return (*result);
 }
-void ft_print_full_chr_width(t_prinlist *lst)
+void ft_print_full_chr_width(t_plist *lst)
 {
     char *tmp;
 
@@ -64,7 +64,7 @@ void ft_print_full_chr_width(t_prinlist *lst)
     ft_strdel(&tmp);
 }
 
-void ft_add_zero_chr(t_prinlist *lst)
+void ft_add_zero_chr(t_plist *lst)
 {
 
     if(((lst->flag & MINUS) == MINUS))
@@ -79,7 +79,7 @@ void ft_add_zero_chr(t_prinlist *lst)
     write(1, "\0", 1);
     g_sym_count += 1;
 }
-void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst)
+void ft_add_char(char **result, int chr_arg_int, t_plist *lst)
 {
     char chr_arg;
 

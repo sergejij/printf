@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:58:23 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:56:59 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:23:28 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int g_sym_count = 0;
 
-int		ft_is_type(char *c, t_prinlist *lst)
+int		ft_is_type(char *c, t_plist *lst)
 {
 	if (*c == 'x')
 		lst->h = x;
@@ -41,7 +41,7 @@ int		ft_is_type(char *c, t_prinlist *lst)
 	return (0);
 }
 
-void	ft_digit_type(char **result, va_list ap, t_prinlist *lst)
+void	ft_digit_type(char **result, va_list ap, t_plist *lst)
 {
 	if (lst->mod == L_ONE || lst->mod == LL)
 		ft_long_to_str(result, va_arg(ap, long long int), lst);
@@ -49,7 +49,7 @@ void	ft_digit_type(char **result, va_list ap, t_prinlist *lst)
 		ft_add_integer(result, va_arg(ap, int), lst);
 }
 
-void	ft_hex_type(char *format, char **result, va_list ap, t_prinlist *lst)
+void	ft_hex_type(char *format, char **result, va_list ap, t_plist *lst)
 {
 	if (lst->mod == L_ONE)
 		ft_uh(result, va_arg(ap, unsigned long int), lst, *format);
@@ -59,7 +59,7 @@ void	ft_hex_type(char *format, char **result, va_list ap, t_prinlist *lst)
 		ft_add_hex_str(result, va_arg(ap, int), lst, *format);
 }
 
-void	ft_octal_type(char **result, va_list ap, t_prinlist *lst)
+void	ft_octal_type(char **result, va_list ap, t_plist *lst)
 {
 	if (lst->mod == L_ONE || lst->mod == LL)
 		ft_add_octal_u(result, va_arg(ap, unsigned long long), lst);
@@ -67,7 +67,7 @@ void	ft_octal_type(char **result, va_list ap, t_prinlist *lst)
 		ft_add_octal(result, va_arg(ap, unsigned int), lst);
 }
 
-void	ft_unsigned_type(char **result, va_list ap, t_prinlist *lst)
+void	ft_unsigned_type(char **result, va_list ap, t_plist *lst)
 {
 	if (lst->mod == L_ONE)
 		ft_add_unsigned(result, va_arg(ap, unsigned long int), lst);
@@ -77,7 +77,7 @@ void	ft_unsigned_type(char **result, va_list ap, t_prinlist *lst)
 		ft_add_unsigned(result, va_arg(ap, unsigned int), lst);
 }
 
-void	ft_a_typ(char *format, char *res, va_list ap, t_prinlist *lst)
+void	ft_a_typ(char *format, char *res, va_list ap, t_plist *lst)
 {
 	if (*format == 'c')
 		ft_add_char(&res, va_arg(ap, int), lst);
@@ -103,7 +103,7 @@ void	ft_a_typ(char *format, char *res, va_list ap, t_prinlist *lst)
 	g_sym_count += ft_strlen(res);
 }
 
-void	ft_delete_excess_flags(t_prinlist *lst)
+void	ft_delete_excess_flags(t_plist *lst)
 {
 	if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & ZERO) == ZERO)
 		lst->flag = lst->flag ^ ZERO;
@@ -115,7 +115,7 @@ void	ft_delete_excess_flags(t_prinlist *lst)
 		lst->flag = lst->flag ^ ZERO;
 }
 
-void	ft_analise_flags3(char **format, t_prinlist *lst, unsigned int *flag)
+void	ft_analise_flags3(char **format, t_plist *lst, unsigned int *flag)
 {
 	if (ft_isdigit(**format))
 	{
@@ -150,7 +150,7 @@ int		ft_analise_flags2(char *format, unsigned int *flag)
 	return (1);
 }
 
-int		ft_analise_flags(char *format, t_prinlist *lst)
+int		ft_analise_flags(char *format, t_plist *lst)
 {
 	unsigned int flag;
 
@@ -172,12 +172,12 @@ int		ft_analise_flags(char *format, t_prinlist *lst)
 	return (flag);
 }
 
-t_prinlist	*make_struct_for_flags(char *format)
+t_plist	*make_struct_for_flags(char *format)
 {
-	t_prinlist *new;
+	t_plist *new;
 
 	new = NULL;
-	if (!(new = (t_prinlist *)malloc(sizeof(t_prinlist))))
+	if (!(new = (t_plist *)malloc(sizeof(t_plist))))
 		return (NULL);
 	new->pr = 0;
 	new->w = 0;
@@ -188,7 +188,7 @@ t_prinlist	*make_struct_for_flags(char *format)
 	return (new);
 }
 
-void	ft_free_result_and_lst(char **result, t_prinlist **lst)
+void	ft_free_result_and_lst(char **result, t_plist **lst)
 {
 	if (*result)
 		ft_strdel(&(*result));
@@ -196,7 +196,7 @@ void	ft_free_result_and_lst(char **result, t_prinlist **lst)
 	*lst = NULL;
 }
 
-void	ft_printf_1(char *result, t_prinlist *lst,
+void	ft_printf_1(char *result, t_plist *lst,
 		const char **p_ap_f, va_list ap)
 {
 	char *tmp;
@@ -217,7 +217,7 @@ int		ft_printf(const char *apformat, ...)
 {
 	va_list			ap;
 	const char		*p_ap_f;
-	t_prinlist		*lst;
+	t_plist		*lst;
 	char			*result;
 
 	va_start(ap, apformat);

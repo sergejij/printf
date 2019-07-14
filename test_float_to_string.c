@@ -81,9 +81,9 @@ void	ft_paste_int_pl_float(char *int_p, char *f_part, size_t pric, t_len *l)
 	ft_plus_int(int_p, cur_n, l);
 	int_p[l->r] = '.';
 	len_int_part = l->r;
-	ft_strcat(int_p, f_part + ft_checkLenOfInt(f_part) + 1);
+	ft_strcat(int_p, f_part + ft_check_len_int(f_part) + 1);
 	ft_roundering(int_p, pric, l);
-	int_p[ft_checkLenOfInt(int_p) + pric + 1] = '\0';
+	int_p[ft_check_len_int(int_p) + pric + 1] = '\0';
 }
 
 void	ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_p, char *f_part, t_len *len_l)
@@ -114,7 +114,7 @@ void	ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_p, c
 	}
 }
 
-char	*ft_add_d(unsigned long mant, short exp, int sign, t_prinlist *lst)
+char	*ft_add_d(unsigned long mant, short exp, int sign, t_plist *lst)
 {
 	char	*int_part;
 	char	*float_part;

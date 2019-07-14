@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 14:24:43 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/05/25 18:29:31 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:20:23 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char		*ft_itoa_base_ul(unsigned long n)
 	return (result);
 }
 
-void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst)
+void ft_add_pointer(char **result, unsigned long arg, t_plist *lst)
 {
     char *tmp;
     size_t len;

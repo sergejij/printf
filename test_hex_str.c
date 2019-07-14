@@ -6,13 +6,13 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:55:38 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:23:28 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_change_type_hex_l(long long int *arg, t_prinlist *lst)
+void	ft_change_type_hex_l(long long int *arg, t_plist *lst)
 {
 	unsigned long				new_arg_l;
 	unsigned long long			new_arg_ll;
@@ -31,7 +31,7 @@ void	ft_change_type_hex_l(long long int *arg, t_prinlist *lst)
 	}
 }
 
-void	ft_change_type_hex(long long int *arg, t_prinlist *lst)
+void	ft_change_type_hex(long long int *arg, t_plist *lst)
 {
 	unsigned short				new_arg_h;
 	unsigned char				new_arg_hh;
@@ -52,7 +52,7 @@ void	ft_change_type_hex(long long int *arg, t_prinlist *lst)
 		ft_change_type_hex_l(arg, lst);
 }
 
-void	ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
+void	ft_pricision_hex(char *result, t_plist *lst, size_t len, char *str)
 {
 	char						*tmp;
 
@@ -165,7 +165,7 @@ char	*ft_itoa_uhex(unsigned long long int n, char sym)
 	return (result);
 }
 
-int	ft_if_zero_x(char **result, char *str, t_prinlist *lst)
+int	ft_if_zero_x(char **result, char *str, t_plist *lst)
 {
 	if (*str == '0' && lst->len == 1 && lst->pr == 0)
 	{
@@ -190,7 +190,7 @@ int	ft_if_zero_x(char **result, char *str, t_prinlist *lst)
 	return (1);
 }
 
-void	ft_add_uhex_str2(char **result, char *str, char sym, t_prinlist *lst)
+void	ft_add_uhex_str2(char **result, char *str, char sym, t_plist *lst)
 {
 	char						*tmp;
 	char						*cpy_res;
@@ -215,7 +215,7 @@ void	ft_add_uhex_str2(char **result, char *str, char sym, t_prinlist *lst)
 }
 
 void	ft_uh(char **result, unsigned long long arg,
-              t_prinlist *lst, char sym)
+              t_plist *lst, char sym)
 {
 	char						*str;
 	char						*tmp;
@@ -229,7 +229,7 @@ void	ft_uh(char **result, unsigned long long arg,
 }
 
 void	ft_add_hex_str_3(char **result, char *cpy_res,
-		t_prinlist *lst, char *str)
+		t_plist *lst, char *str)
 {
 	ft_transform_int_result(result, cpy_res, lst);
 	ft_strdel(&cpy_res);
@@ -242,7 +242,7 @@ void	ft_add_hex_str_3(char **result, char *cpy_res,
 	}
 }
 
-void	ft_add_hex_str_2(char **result, char *str, char sym, t_prinlist *lst)
+void	ft_add_hex_str_2(char **result, char *str, char sym, t_plist *lst)
 {
 	char						*tmp;
 	char						*cpy_res;
@@ -277,7 +277,7 @@ void	ft_add_hex_str_2(char **result, char *str, char sym, t_prinlist *lst)
 }
 
 void	ft_add_hex_str(char **result, long long int arg,
-		t_prinlist *lst, char sym)
+		t_plist *lst, char sym)
 {
 	char						*str;
 

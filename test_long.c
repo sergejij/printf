@@ -1,8 +1,8 @@
 #include "ft_printf.h"
 
-//void    ft_prec_plus(char **result, t_prinlist *lst, size_t len, char *arg)
+//void    ft_prec_plus(char **result, t_plist *lst, size_t len, char *arg)
 
-void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg)
+void    ft_pricision(char **result, t_plist *lst, size_t len, char *arg)
 {
     if (lst->w > len && lst->w > lst->pr)
         ft_memset(*result, ' ', arg[0] == '-' ? lst->w - (lst->pr + 1) : lst->w - lst->pr);
@@ -26,7 +26,7 @@ void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg)
 
 
 
-void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst)
+void ft_transform_int_result(char **result, char *cpy_num, t_plist *lst)
 {
     //char *cpy_num;
 
@@ -97,7 +97,7 @@ void ft_ltoa(char **result, long long arg, int i)
     free(new_res);
 }
 
-void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
+void ft_long_to_str(char **result, long long int arg, t_plist *lst)
 {
     char *arg_str;
     int i;

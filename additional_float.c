@@ -6,13 +6,13 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:39:28 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 18:44:10 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:54:53 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_checkLenOfInt(char *nbr)
+size_t	ft_check_len_int(char *nbr)
 {
 	size_t	i;
 
@@ -31,7 +31,7 @@ void	ft_make_even(char *cur_num, char *pow_two)
 
 	i_cur_len = 0;
 	i_pow_len = 0;
-	tmp = (char *)malloc(sizeof(char) * (ft_strlen(cur_num) + ft_strlen(pow_two)));
+	tmp = ft_strnew(ft_strlen(cur_num) + ft_strlen(pow_two));
 	while (cur_num[i_cur_len] != '.')
 		i_cur_len++;
 	while (pow_two[i_pow_len] != '.')

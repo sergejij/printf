@@ -6,13 +6,13 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:14:08 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:18:13 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_change_type_u_l(unsigned long long *arg, t_prinlist *lst)
+void	ft_change_type_u_l(unsigned long long *arg, t_plist *lst)
 {
 	unsigned long			new_arg_l;
 	unsigned long long		new_arg_ll;
@@ -31,7 +31,7 @@ void	ft_change_type_u_l(unsigned long long *arg, t_prinlist *lst)
 	}
 }
 
-void	ft_change_type_u(unsigned long long *arg, t_prinlist *lst)
+void	ft_change_type_u(unsigned long long *arg, t_plist *lst)
 {
 	unsigned short			new_arg_h;
 	unsigned char			new_arg_hh;
@@ -92,7 +92,7 @@ void	ft_ultoa(char **result, unsigned long long arg)
 	free(new_res);
 }
 
-void	ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
+void	ft_add_unsigned(char **result, unsigned long long arg, t_plist *lst)
 {
 	char					*arg_str;
 

@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:20:03 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:20:23 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int g_sym_count;
 
-void ft_change_type_int(int *arg, t_prinlist *lst) {
+void ft_change_type_int(int *arg, t_plist *lst) {
     short new_arg_h = 0;
     char new_arg_hh = 0;
 
@@ -30,7 +30,7 @@ void ft_change_type_int(int *arg, t_prinlist *lst) {
     }
 }
 
-void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
+void ft_add_integer(char **result, int arg_int, t_plist *lst)
 {
     size_t len;
     char *arg;

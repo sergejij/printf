@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:29:58 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 18:48:41 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:30:45 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void			ft_roundering(char *cur_res, size_t pric, t_len *len_l)
 	char			*tmp;
 	int				r_nbr;
 
-	r_nbr = ft_checkLenOfInt(cur_res) + pric + 1;
+	r_nbr = ft_check_len_int(cur_res) + pric + 1;
 	if (!(round = (char *)malloc(sizeof(char) * (pric + 5))))
 		return ;
 	tmp = round;
@@ -84,7 +84,7 @@ short			ft_make_exponent(long double nbr)
 	return (*ptr);
 }
 
-char			*ft_inf_nan(int sign, long double arg_d, t_prinlist *lst)
+char			*ft_inf_nan(int sign, long double arg_d, t_plist *lst)
 {
 	char	*res;
 
@@ -110,7 +110,7 @@ char			*ft_inf_nan(int sign, long double arg_d, t_prinlist *lst)
 	return (res);
 }
 
-void			ft_parse_d(char **result, long double arg_d, t_prinlist *lst)
+void			ft_parse_d(char **result, long double arg_d, t_plist *lst)
 {
 	char			*tmp_result;
 	unsigned long	mantissa;

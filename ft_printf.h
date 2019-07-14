@@ -24,7 +24,7 @@
 #define LL 8
 #define x 1
 
-typedef struct  s_prinlist
+typedef struct  s_plist
 {
     unsigned int flag;
     unsigned int mod;
@@ -33,7 +33,7 @@ typedef struct  s_prinlist
     size_t pr;
     size_t len;
 
-}               t_prinlist;
+}               t_plist;
 
 typedef struct s_len{
     size_t cur_n;
@@ -46,43 +46,43 @@ typedef struct s_len{
                         /* main function */
 
 int ft_printf(const char *apformat, ...);
-int ft_analise_flags(char *format, t_prinlist *lst);
-int ft_is_type(char *c, t_prinlist *lst);
-void ft_a_typ(char *format, char *res, va_list ap, t_prinlist *lst);
+int ft_analise_flags(char *format, t_plist *lst);
+int ft_is_type(char *c, t_plist *lst);
+void ft_a_typ(char *format, char *res, va_list ap, t_plist *lst);
 
                         /* string | char */
-                        char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys);
-void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst);
+                        char *ft_add_string(char **result, char *str_arg, t_plist *lst, int numSys);
+void ft_add_char(char **result, int chr_arg_int, t_plist *lst);
 
                     /* integer | long | long long */
 
-void ft_add_integer(char **result, int arg, t_prinlist *lst);
+void ft_add_integer(char **result, int arg, t_plist *lst);
 void ft_ltoa(char **result, long long arg, int i);
-void ft_long_to_str(char **result, long long int arg, t_prinlist *lst);
-void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst);
-void ft_change_type_int(int *arg, t_prinlist *lst);
+void ft_long_to_str(char **result, long long int arg, t_plist *lst);
+void ft_transform_int_result(char **result, char *cpy_num, t_plist *lst);
+void ft_change_type_int(int *arg, t_plist *lst);
 
                             /* flags */
 
-void    ft_minus(char **result, char *arg, t_prinlist *lst, size_t len);
-void    ft_minus_negative_l(char **result, char *arg, t_prinlist *lst, size_t len);
-void    ft_recording(char **result, char *arg, t_prinlist *lst, char fill);
-void    ft_recording_negative(char **result, char *arg, t_prinlist *lst, char fill);
-void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg);
-void    ft_plus(char **result, char *arg, t_prinlist *lst, size_t len);
-void    ft_plus_negative(char **result, char *arg, t_prinlist *lst, size_t len);
-void    ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str);
+void    ft_minus(char **result, char *arg, t_plist *lst, size_t len);
+void    ft_minus_negative_l(char **result, char *arg, t_plist *lst, size_t len);
+void    ft_recording(char **result, char *arg, t_plist *lst, char fill);
+void    ft_recording_negative(char **result, char *arg, t_plist *lst, char fill);
+void    ft_pricision(char **result, t_plist *lst, size_t len, char *arg);
+void    ft_plus(char **result, char *arg, t_plist *lst, size_t len);
+void    ft_plus_negative(char **result, char *arg, t_plist *lst, size_t len);
+void    ft_pricision_hex(char *result, t_plist *lst, size_t len, char *str);
 
 
                         /* %x %X | unsigned | octal */
 
-void ft_add_unsigned(char **result, unsigned long long int arg, t_prinlist *lst);
-void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst);
-void ft_add_hex_str(char **result, long long arg, t_prinlist *lst, char sym);
-void ft_uh(char **result, unsigned long long arg, t_prinlist *lst, char sym);
+void ft_add_unsigned(char **result, unsigned long long int arg, t_plist *lst);
+void ft_add_pointer(char **result, unsigned long arg, t_plist *lst);
+void ft_add_hex_str(char **result, long long arg, t_plist *lst, char sym);
+void ft_uh(char **result, unsigned long long arg, t_plist *lst, char sym);
 
-void ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst);
-void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst);
+void ft_add_octal_u(char **result, unsigned long long arg, t_plist *lst);
+void ft_add_octal(char **result, unsigned int arg, t_plist *lst);
 char	*ft_itoa_base_ul(unsigned long n);
 int		ft_lennum_base(unsigned long num);
 char	*ft_itoa_base_hex(int n);
@@ -92,24 +92,23 @@ char		*ft_itoa_uhex(unsigned long long int n, char sym);
 
                         /*      float        */
 
-char *ft_add_d(unsigned long mant, short exp, int sign, t_prinlist *lst);
-void ft_parse_d(char **result, long double arg_d, t_prinlist *lst);
+char *ft_add_d(unsigned long mant, short exp, int sign, t_plist *lst);
+void ft_parse_d(char **result, long double arg_d, t_plist *lst);
 void ft_plus_float(char *cur_n, char *powerTwo, t_len *Len);
 void ft_plus_int(char *cn, char *cp, t_len *l);
-size_t ft_checkLenOfInt(char *nbr);
+size_t ft_check_len_int(char *nbr);
 int is_nan_inf(char *dbl);
 void ft_roundering(char *cur_res, size_t pricision, t_len *Len);
 void    ft_add_neg_sign(char **float_nbr, char **buff);
 t_len *ft_make_len_struct(void);
-size_t ft_checkLenOfInt(char *nbr);
 void ft_make_even(char *cur_num, char *powerTwo);
 void ft_handle_result_f(int len, int *int_res, char *result);
 void ft_make_power(char *current_power);
 char *ft_find_power(int power);
-void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst);
+void ft_choice_options(char **result, char *tmp_result, t_plist *lst);
 
 
                         /*      u        */
-void ft_change_type_u(unsigned long long *arg, t_prinlist *lst);
+void ft_change_type_u(unsigned long long *arg, t_plist *lst);
 
 #endif //PRINTF_FT_PRINTF_H

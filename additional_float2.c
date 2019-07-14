@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:51:07 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 19:06:53 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:13:05 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,11 @@ void	ft_plus_float(char *cur_n, char *power_two, t_len *len_l)
 		cur_n[0] = *cur_n;
 }
 
-void	ft_choice_options(char **result, char *tmp_result, t_prinlist *lst)
+void	ft_choice_options(char **result, char *tmp_result, t_plist *lst)
 {
 	if (tmp_result && (lst->flag & ZERO_PRIC) == ZERO_PRIC
 			&& (lst->flag & HASH) != HASH && !(is_nan_inf(tmp_result)))
-		tmp_result[ft_checkLenOfInt(tmp_result)] = '\0';
+		tmp_result[ft_check_len_int(tmp_result)] = '\0';
 	lst->pr = 0;
 	if (lst->flag || lst->w)
 	{

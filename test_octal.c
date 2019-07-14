@@ -6,13 +6,13 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 19:22:04 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:22:06 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_change_type_oct_h(unsigned int *arg, t_prinlist *lst)
+void	ft_change_type_oct_h(unsigned int *arg, t_plist *lst)
 {
 	unsigned short				new_arg_h;
 	unsigned char				new_arg_hh;
@@ -31,7 +31,7 @@ void	ft_change_type_oct_h(unsigned int *arg, t_prinlist *lst)
 	}
 }
 
-void	ft_change_type_oct(unsigned int *arg, t_prinlist *lst)
+void	ft_change_type_oct(unsigned int *arg, t_plist *lst)
 {
 	unsigned long				new_arg_l;
 	unsigned long long			new_arg_ll;
@@ -109,7 +109,7 @@ char		*ft_itoa_octal(unsigned long long n)
 	return (result);
 }
 
-int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
+int		ft_if_zero_o(char **result, char *str, t_plist *lst)
 {
 	if (*str == '0' && lst->len == 1 && lst->pr == 0)
 	{
@@ -138,7 +138,7 @@ int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
 }
 
 /*  не используется
-	void ft_octal_zero(char **str, t_prinlist *lst, size_t len)
+	void ft_octal_zero(char **str, t_plist *lst, size_t len)
 	{
 	char *tmp;
 	char *tmp2;
@@ -178,7 +178,7 @@ int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
 /* без знаковый о
 */
 
-void	ft_add_octal_u_2(char **result, char *str, t_prinlist *lst)
+void	ft_add_octal_u_2(char **result, char *str, t_plist *lst)
 {
 	char						*tmp;
 	char						*cpy_res;
@@ -201,7 +201,7 @@ void	ft_add_octal_u_2(char **result, char *str, t_prinlist *lst)
 		*result = ft_strjoin("0", *result);
 }
 
-void	ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
+void	ft_add_octal_u(char **result, unsigned long long arg, t_plist *lst)
 {
 	char						*str;
 
@@ -214,7 +214,7 @@ void	ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
 
 /* обычный о
 */
-void	ft_add_octal_2(char **result, char *str, t_prinlist *lst)
+void	ft_add_octal_2(char **result, char *str, t_plist *lst)
 {
 	char *cpy_res;
 	size_t len_all;
@@ -239,7 +239,7 @@ void	ft_add_octal_2(char **result, char *str, t_prinlist *lst)
 	ft_strdel(&cpy_res);
 }
 
-void	ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
+void	ft_add_octal(char **result, unsigned int arg, t_plist *lst)
 {
 	char						*str;
 
