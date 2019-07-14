@@ -106,7 +106,7 @@ size_t ft_checkLenOfInt(char *nbr);
 void ft_make_even(char *cur_num, char *powerTwo);
 void ft_handle_result_f(int len, int *int_res, char *result);
 void ft_make_power(char *current_power);
-char *findPower(int power);
+char *ft_find_power(int power);
 void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst);
 
 

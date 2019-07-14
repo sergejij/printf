@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 15:58:43 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:23:41 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_change_type_oct_h(unsigned int *arg, t_prinlist *lst)
 
 	new_arg_h = 0;
 	new_arg_hh = 0;
-	if ((lst->modifier & H) == H)
+	if ((lst->mod & H) == H)
 	{
 		new_arg_h = *arg;
 		*arg = new_arg_h;
 	}
-	else if ((lst->modifier & HH) == HH)
+	else if ((lst->mod & HH) == HH)
 	{
 		new_arg_hh = *arg;
 		*arg = new_arg_hh;
@@ -38,12 +38,12 @@ void	ft_change_type_oct(unsigned int *arg, t_prinlist *lst)
 
 	new_arg_l = 0;
 	new_arg_ll = 0;
-	if ((lst->modifier & L_ONE) == L_ONE)
+	if ((lst->mod & L_ONE) == L_ONE)
 	{
 		new_arg_l = *arg;
 		*arg = new_arg_l;
 	}
-	else if ((lst->modifier & LL) == LL)
+	else if ((lst->mod & LL) == LL)
 	{
 		new_arg_ll = *arg;
 		*arg = new_arg_ll;
@@ -111,12 +111,12 @@ char		*ft_itoa_octal(unsigned long long n)
 
 int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
 {
-	if (*str == '0' && lst->len == 1 && lst->pricision == 0)
+	if (*str == '0' && lst->len == 1 && lst->pr == 0)
 	{
-		if (lst->width > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC && ((lst->flag
-			& MINUS) != MINUS) && ((lst->flag & ZERO) != ZERO) && !(lst->width))
+		if (lst->w > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC && ((lst->flag
+			& MINUS) != MINUS) && ((lst->flag & ZERO) != ZERO) && !(lst->w))
 		{
-			memset(*result, ' ', lst->width);
+			memset(*result, ' ', lst->w);
 			return (0);
 		}
 		else if ((lst->flag & ZERO_PRIC) == ZERO_PRIC)
@@ -124,11 +124,11 @@ int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
 			if (((lst->flag & HASH) != HASH))
 			{
 				*str = '\0';
-				if (!lst->width)
+				if (!lst->w)
 					return (0);
 			}
 		}
-		else if (lst->width < 2)
+		else if (lst->w < 2)
 		{
 			*result = "0";
 			return (0);
@@ -188,15 +188,15 @@ void	ft_add_octal_u_2(char **result, char *str, t_prinlist *lst)
 	ft_strcpy(cpy_res, tmp);
 	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0')
 	{
-		if (lst->pricision > lst->len)
+		if (lst->pr > lst->len)
 			ft_pricision_hex(cpy_res, lst, lst->len, str);
 		len_all = ft_strlen(cpy_res);
-		if (lst->pricision < len_all)
+		if (lst->pr < len_all)
 			cpy_res = ft_strjoin("0", cpy_res);
 	}
 	ft_transform_int_result(result, cpy_res, lst);
 	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO
-			&& *str != '0' && lst->width < lst->len)
+			&& *str != '0' && lst->w < lst->len)
 		*result = ft_strjoin("0", *result);
 }
 
@@ -220,16 +220,16 @@ void	ft_add_octal_2(char **result, char *str, t_prinlist *lst)
 
     cpy_res = ft_strnew(100);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0') {
-        if (lst->pricision > lst->len)
+        if (lst->pr > lst->len)
             ft_pricision_hex(*result, lst, lst->len, str);
         len_all = ft_strlen(str);
-        if (lst->pricision < len_all)
+        if (lst->pr < len_all)
             ft_strcpy(cpy_res, "0");
     }
     ft_strcat(cpy_res, str);
     ft_transform_int_result(result, cpy_res, lst);
     if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO
-        && *str != '0' && lst->width < lst->len) {
+        && *str != '0' && lst->w < lst->len) {
         ft_strcpy(cpy_res, "0");
         cpy_res[1] = '\0';
         ft_strcat(cpy_res, *result);
@@ -242,7 +242,7 @@ void	ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
 {
 	char						*str;
 
-	if (lst->modifier)
+	if (lst->mod)
 		ft_change_type_oct(&arg, lst);
 	lst->len = ft_lennum_octal(arg);
 	str = ft_itoa_octal(arg);

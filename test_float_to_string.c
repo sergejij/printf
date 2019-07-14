@@ -87,7 +87,7 @@ void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part
     {
         if((mantissa & oneLeftOne) == oneLeftOne)
         {
-            currNum = findPower(exponent);
+            currNum = ft_find_power(exponent);
             ft_plus_int(int_part, currNum, len_l);
         }
         exponent--;
@@ -97,7 +97,7 @@ void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part
     {
         if((mantissa & oneLeftOne) == oneLeftOne)
         {
-            currNum = findPower(exponent);
+            currNum = ft_find_power(exponent);
             ft_plus_float(float_part, currNum, len_l);
         }
         mantissa <<= 1;
