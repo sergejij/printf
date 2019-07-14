@@ -21,7 +21,7 @@ void    ft_recording_negative(char **result, char *arg, t_prinlist *lst, char fi
         if(lst->width > lst->len)
             return;
     }
-    else if (lst->width > lst->len && (fill == ' ' || ((lst->flag & ZERO) == ZERO && lst->pricision)))
+    else if (lst->width > lst->len && (fill == ' ' || ((lst->flag & ZERO) == ZERO && lst->pricision && lst->pricision < lst->len)))
     {
         ft_recording_neg_width(result, arg, lst, fill);
         return;
