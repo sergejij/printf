@@ -3,7 +3,6 @@
 
 int g_sym_count = 0;
 
-
 int ft_is_type(char *c, t_prinlist *lst)
 {
     if (*c == 'x')
@@ -30,9 +29,44 @@ int ft_is_type(char *c, t_prinlist *lst)
     return (0);
 }
 
-void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) //    а где инт вообще?
+void    ft_digit_type(char **result, va_list ap, t_prinlist *lst)
 {
+    if (lst->modifier == L_ONE || lst->modifier == LL)
+        ft_long_to_str(result, va_arg(ap, long long int), lst);
+    else
+        ft_add_integer(result, va_arg(ap, int), lst);
+}
 
+void    ft_hex_type(char *format, char **result, va_list ap, t_prinlist *lst)
+{
+    if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
+        ft_add_uhex_str(result, va_arg(ap, unsigned long int), lst, *format);
+    else if (lst->modifier == LL)
+        ft_add_uhex_str(result, va_arg(ap, unsigned long long int), lst, *format);
+    else
+        ft_add_hex_str(result, va_arg(ap, int), lst, *format);
+}
+
+void    ft_octal_type(char **result, va_list ap, t_prinlist *lst)
+{
+    if (lst->modifier == L_ONE || lst->modifier == LL)
+        ft_add_octal_u(result, va_arg(ap, unsigned long long), lst);
+    else
+        ft_add_octal(result, va_arg(ap, unsigned int), lst);
+}
+
+void    ft_unsigned_type(char **result, va_list ap, t_prinlist *lst)
+{
+    if (lst->modifier == L_ONE)
+        ft_add_unsigned(result, va_arg(ap, unsigned long int), lst);
+    else if (lst->modifier == LL)
+        ft_add_unsigned(result, va_arg(ap, unsigned long long int), lst);
+    else
+        ft_add_unsigned(result, va_arg(ap, unsigned int), lst);
+}
+
+void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst)
+{
     if(*format == 'c')
         ft_add_char(&result, va_arg(ap, int), lst);
     else if (*format == 's')
@@ -40,45 +74,21 @@ void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst) /
     else if (*format == 'p')
         ft_add_pointer(&result, va_arg(ap, unsigned long), lst);
     else if (*format == 'd' || *format == 'i')
-    {
-        if (lst->modifier == L_ONE || lst->modifier == LL)//позже убрать второй Л мы используем только 1
-            ft_long_to_str(&result, va_arg(ap, long long int), lst);
-        else
-            ft_add_integer(&result, va_arg(ap, int), lst);
-    }
+        ft_digit_type(&result, ap, lst);
     else if(*format == 'x' || *format == 'X')
-    {
-        if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
-            ft_add_uhex_str(&result, va_arg(ap, unsigned long int), lst, *format);
-        else if (lst->modifier == LL)
-            ft_add_uhex_str(&result, va_arg(ap, unsigned long long int), lst, *format);
-        else
-            ft_add_hex_str(&result, va_arg(ap, int), lst, *format);
-    }
+        ft_hex_type(format, &result, ap, lst);
     else if(*format == 'o')
-        if (lst->modifier == L_ONE || lst->modifier == LL)
-            ft_add_octal_u(&result, va_arg(ap, unsigned long long), lst);
-        else
-            ft_add_octal(&result, va_arg(ap, unsigned int), lst);
+        ft_octal_type(&result, ap, lst);
     else if(*format == 'u')
-    {
-        if (lst->modifier == L_ONE)//позже убрать второй Л мы используем только 1
-            ft_add_unsigned(&result, va_arg(ap, unsigned long int), lst);
-        else if (lst->modifier == LL)
-            ft_add_unsigned(&result, va_arg(ap, unsigned long long int), lst);
-        else
-            ft_add_unsigned(&result, va_arg(ap, unsigned int), lst);
-    }
+        ft_unsigned_type(&result, ap, lst);
     else if(*format == 'f')
         ft_parse_double(&result, va_arg(ap, double), lst);
     else if (*format == '%')
         ft_add_char(&result, '%', lst);
     if(!result)
         result = ft_strdup("(null)");
-   // if()
     ft_putstr(result);
     g_sym_count += ft_strlen(result);
-
 }
 
 void ft_delete_excess_flags(t_prinlist *lst)
@@ -93,38 +103,57 @@ void ft_delete_excess_flags(t_prinlist *lst)
         lst->flag = lst->flag ^ ZERO;
 }
 
+void    ft_analise_flags3(char **format, t_prinlist *lst, unsigned int *flag)
+{
+    if (ft_isdigit(**format))
+    {
+        lst->width = (size_t)ft_atoi(*format);
+        while(ft_isdigit(**format))
+            (*format)++;
+    }
+    else if (**format == '.')
+    {
+        lst->pricision = (size_t)ft_atoi(++(*format));
+        if (lst->pricision == 0)
+            *flag = *flag | ZERO_PRIC;
+        while(ft_isdigit(**format))
+            (*format)++;
+    }
+}
+
+int ft_analise_flags2(char *format, unsigned int *flag)
+{
+    if (*format == '#')
+        *flag = (*flag | HASH);
+    else if (*format == '0')
+        *flag = *flag | ZERO;
+    else if (*format == '-')
+        *flag = *flag | MINUS;
+    else if (*format == '+')
+        *flag = *flag | PLUS;
+    else if (*format == ' ')
+        *flag = *flag | SPACE;
+    else
+        return (0);
+    return (1);
+    
+}
+
 int ft_analise_flags(char *format, t_prinlist *lst)
 {
-    unsigned int flag = 0;
+    unsigned int flag;
+    
+    flag = 0;
     format++;
     while(*format && !(ft_is_type(format, lst)))
     {
-        if (*format == '#')
-            flag = (flag | HASH);
-        else if (*format == '0')
-            flag = flag | ZERO;
-        else if (*format == '-')
-            flag = flag | MINUS;
-        else if (*format == '+')
-            flag = flag | PLUS;
-        else if (*format == ' ')
-            flag = flag | SPACE;
-        else if (ft_isdigit(*format))//записываем ширину
+        if (ft_analise_flags2(format, &flag))
+            ;
+        else if (ft_isdigit(*format) || *format == '.')
         {
-            lst->width = (size_t)ft_atoi(format);
-            while(ft_isdigit(*format))
-                format++;
+            ft_analise_flags3(&format, lst, &flag);
             continue ;
-        }
-        else if (*format == '.')//записываем точность
-        {
-            lst->pricision = (size_t)ft_atoi(++format);
-            if (lst->pricision == 0)
-                flag = flag | ZERO_PRIC;
-            while(ft_isdigit(*format))
-                format++;
-            continue ;
-        }
+        }        
         format++;
     }
     lst->flag = flag;

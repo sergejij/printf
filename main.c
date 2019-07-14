@@ -13,19 +13,23 @@ int main()
 
     int a = 111111;
 //    int a_neg = -5;
-    ft_printf("%-#23.5hhX|%-023.5hhX|%#023.5hhX|%-#023.5hhX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-    printf("%-#23.5hhX|%-023.5hhX|%#023.5hhX|%-#023.5hhX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+//    ft_printf("%03.2d\n", -1);
+//    printf("%03.2d\n", -1);
 
 
-    printf("My funk\n");
-    ft_printf("%-#10.5hx|%-023.5hx|%#023.5hx|%-#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
+
+
+ //ОЧЕНЬ ВАЖНЫЙ БАГ
+
+     printf("My funk\n");
+    ft_printf("% u\n", 4294967295);
     printf("origin:\n");
-    printf("%-#10.5hx|%-023.5hx|%#023.5hx|%-#023.5hx|\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
-    printf("My funk\n");
-    ft_printf("%-#x|%-0x|%#0x|%-#0x\n", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX);
-    printf("origin:\n");
-    printf("%-#x|%-0x|%#0x|%-#0x\n", UINT_MAX, UINT_MAX, UINT_MAX, UINT_MAX);
-
+     printf("% u\n", 4294967295);
+//   printf("My funk\n");
+//   ft_printf("%-#23.5hX\n", ULLONG_MAX);
+//   printf("origin:\n");
+//   printf("%-#23.5hX\n",  ULLONG_MAX);
+//
 //   printf("My funk\n");
 //    ft_printf("%23.5i|%-23.5i|%+23.5i|% 23.5i|%023.5i\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
 //    printf("origin:\n");
