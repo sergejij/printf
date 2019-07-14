@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 14:50:53 by ubartemi         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:21:21 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
 		else
 			arg_str[0] = '\0';
 	}
-	if (lst->flag || lst->width || lst->pricision)
+	if ((lst->flag || lst->width || lst->pricision) && (lst->flag & SPACE) != SPACE)
 		ft_transform_int_result(result, arg_str, lst);
 	else
 		ft_strcpy(*result, arg_str);

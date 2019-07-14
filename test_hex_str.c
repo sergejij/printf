@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 14:49:27 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 17:04:19 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,16 @@ void	ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 {
 	char						*tmp;
 
-	tmp = (char*)malloc(sizeof(char) * (lst->pricision - len));
+	tmp = (char*)malloc(sizeof(char) * (lst->pricision + len + lst->width + 1));
 	if (lst->width > lst->pricision + len)
 	{
 		ft_memset(tmp, ' ', lst->width - lst->pricision);
 		if ((lst->flag & MINUS) == MINUS)
 		{
-			ft_strcpy(result, "0");
+		    if(lst->pricision > len)
+		        ft_memset(result, '0', lst->pricision - len);
+		    else
+		        ft_strcpy(result, "0");
 			ft_strcat(result, str);
 			ft_strcat(result, tmp);
 		}
@@ -79,6 +82,7 @@ void	ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str)
 		ft_strcpy(result, tmp);
 		ft_strcat(result, str);
 	}
+	ft_strdel(&tmp);
 }
 
 size_t	ft_lennum_uhex(unsigned long long int num)
@@ -260,6 +264,12 @@ void	ft_add_hex_str_2(char **result, char *str, char sym, t_prinlist *lst)
 			ft_strcat(cpy_res, sym == 'x' ? "0x" : "0X");
 			ft_strcat(cpy_res, tmp);
 		}
+		else if(lst->width > lst->len && lst->pricision > lst->len
+                && (lst->flag & MINUS) == MINUS)
+        {
+            cpy_res[lst->len + lst->width - lst->pricision - 2] = '\0';
+            cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
+        }
 		else
 			cpy_res = ft_strjoin(sym == 'x' ? "0x" : "0X", cpy_res);
 	}
@@ -275,7 +285,7 @@ void	ft_add_hex_str(char **result, long long int arg,
 		ft_change_type_hex(&arg, lst);
 	lst->len = arg < 0 ? 8 : ft_lennum_hex(arg);
 	str = ft_itoa_hex(arg, sym);
-	if ((ft_if_zero_x(result, str, lst)) == 0)
-		return ;
-	ft_add_hex_str_2(result, str, sym, lst);
+	if ((ft_if_zero_x(result, str, lst)) != 0)
+	    ft_add_hex_str_2(result, str, sym, lst);
+	ft_strdel(&str);
 }
