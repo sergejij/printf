@@ -41,7 +41,6 @@ void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst)
     {
         ft_recording(result, cpy_num, lst, ' ');
     }
-
     if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width < lst->len)
     {
         ft_strcpy(*result, " ");
