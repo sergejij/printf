@@ -36,11 +36,11 @@ typedef struct  s_prinlist
 }               t_prinlist;
 
 typedef struct s_len{
-    size_t lenOfCurrentNbr;
-    size_t lenOfResult;
-    size_t lenOfPower;
-    size_t lenOfIntPart;
-    int flagIsFloatPart;
+    size_t cur_n;
+    size_t r;
+    size_t pow;
+    size_t i_part;
+    int is_float_p;
 } t_len;
 
                         /* main function */
@@ -92,15 +92,14 @@ char		*ft_itoa_uhex(unsigned long long int n, char sym);
 
                         /*      float        */
 
-char *ft_add_d(unsigned long mantissa, short exponent, int sign, t_prinlist *lst);
+char *ft_add_d(unsigned long mant, short exp, int sign, t_prinlist *lst);
 void ft_parse_d(char **result, long double arg_d, t_prinlist *lst);
-void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len);
-void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len);
+void ft_plus_float(char *cur_n, char *powerTwo, t_len *Len);
+void ft_plus_int(char *cn, char *cp, t_len *l);
 size_t ft_checkLenOfInt(char *nbr);
-int is_NanOrInf(char *dbl);
+int is_nan_inf(char *dbl);
 void ft_roundering(char *cur_res, size_t pricision, t_len *Len);
 void    ft_add_neg_sign(char **float_nbr, char **buff);
-int is_NanOrInf(char *dbl);
 t_len *ft_make_len_struct(void);
 size_t ft_checkLenOfInt(char *nbr);
 void ft_make_even(char *cur_num, char *powerTwo);

@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 17:29:58 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 18:44:10 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:48:41 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void			ft_parse_d(char **result, long double arg_d, t_prinlist *lst)
 		lst->pr = 6;
 	if (exponent == 16384)
 		tmp_result = ft_inf_nan(sign, arg_d, lst);
-	if (!(is_NanOrInf(tmp_result)))
+	if (!(is_nan_inf(tmp_result)))
 		tmp_result = ft_add_d(mantissa, exponent, sign, lst);
 	ft_choice_options(result, tmp_result, lst);
 }

@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:39:28 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 18:42:53 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:44:10 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_checkLenOfInt(char *nbr)
 	size_t	i;
 
 	i = 0;
-	if (nbr && !(is_NanOrInf(nbr)))
+	if (nbr && !(is_nan_inf(nbr)))
 		while (nbr[i] != '.')
 			i++;
 	return (i);

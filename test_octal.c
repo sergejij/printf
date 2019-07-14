@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 18:01:40 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:23:41 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 19:22:04 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
 	if (*str == '0' && lst->len == 1 && lst->pr == 0)
 	{
 		if (lst->w > 0 && (lst->flag & ZERO_PRIC) == ZERO_PRIC && ((lst->flag
-			& MINUS) != MINUS) && ((lst->flag & ZERO) != ZERO) && !(lst->w))
+						& MINUS) != MINUS) && ((lst->flag & ZERO) != ZERO) && !(lst->w))
 		{
 			memset(*result, ' ', lst->w);
 			return (0);
@@ -175,7 +175,8 @@ int		ft_if_zero_o(char **result, char *str, t_prinlist *lst)
  ft_strdel(&tmp2);
  } */
 
-// без знаковый о
+/* без знаковый о
+*/
 
 void	ft_add_octal_u_2(char **result, char *str, t_prinlist *lst)
 {
@@ -211,31 +212,31 @@ void	ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst)
 	ft_add_octal_u_2(result, str, lst);
 }
 
-// обычный о
-
+/* обычный о
+*/
 void	ft_add_octal_2(char **result, char *str, t_prinlist *lst)
 {
-    char *cpy_res;
-    size_t len_all;
+	char *cpy_res;
+	size_t len_all;
 
-    cpy_res = ft_strnew(100);
-    if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0') {
-        if (lst->pr > lst->len)
-            ft_pricision_hex(*result, lst, lst->len, str);
-        len_all = ft_strlen(str);
-        if (lst->pr < len_all)
-            ft_strcpy(cpy_res, "0");
-    }
-    ft_strcat(cpy_res, str);
-    ft_transform_int_result(result, cpy_res, lst);
-    if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO
-        && *str != '0' && lst->w < lst->len) {
-        ft_strcpy(cpy_res, "0");
-        cpy_res[1] = '\0';
-        ft_strcat(cpy_res, *result);
-        ft_strcpy(*result, cpy_res);
-    }
-    ft_strdel(&cpy_res);
+	cpy_res = ft_strnew(100);
+	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) != ZERO && *str != '0') {
+		if (lst->pr > lst->len)
+			ft_pricision_hex(*result, lst, lst->len, str);
+		len_all = ft_strlen(str);
+		if (lst->pr < len_all)
+			ft_strcpy(cpy_res, "0");
+	}
+	ft_strcat(cpy_res, str);
+	ft_transform_int_result(result, cpy_res, lst);
+	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO
+			&& *str != '0' && lst->w < lst->len) {
+		ft_strcpy(cpy_res, "0");
+		cpy_res[1] = '\0';
+		ft_strcat(cpy_res, *result);
+		ft_strcpy(*result, cpy_res);
+	}
+	ft_strdel(&cpy_res);
 }
 
 void	ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
@@ -247,6 +248,6 @@ void	ft_add_octal(char **result, unsigned int arg, t_prinlist *lst)
 	lst->len = ft_lennum_octal(arg);
 	str = ft_itoa_octal(arg);
 	if ((ft_if_zero_o(result, str, lst)) != 0)
-	    ft_add_octal_2(result, str, lst);
+		ft_add_octal_2(result, str, lst);
 	ft_strdel(&str);
 }
