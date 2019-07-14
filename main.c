@@ -13,11 +13,11 @@ int main()
 
     int a = 111111;
 //    int a_neg = -5;
-    ft_printf("%lf|%-lf|%+lf|% lf|%#lf|%0lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
-    printf("%lf|%-lf|%+lf|% lf|%#lf|%0lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
+    ft_printf("%-23X\n",  0U);
+    printf("%-23X|%#X|%023X\n", 0U, 0U, 0U, 0U);
 
 
- printf("My funk\n");
+ /*printf("My funk\n");
  ft_printf("%.1f|%.2f|%.5f|%.12f\n", 999.99999, 999.99999, 999.99999, 999.99999, 999.99999);
  printf("origin:\n");
  printf("%.1f|%.2f|%.5f|%.12f\n", 999.99999, 999.99999, 999.99999, 999.99999, 999.99999);
@@ -31,7 +31,7 @@ int main()
    printf("My funk\n");
    ft_printf("%-#23.5hX\n", ULLONG_MAX);
    printf("origin:\n");
-   printf("%-#23.5hX\n",  ULLONG_MAX);
+   printf("%-#23.5hX\n",  ULLONG_MAX);*/
 //
    /* printf("My funk\n");
     ft_printf("%-#23.5hx|%-023.5hx|%#023.5hx|%-#023.5hx\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX);
