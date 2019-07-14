@@ -25,41 +25,41 @@ int is_NanOrInf(char *dbl)
 
 t_len *ft_make_len_struct(void)
 {
-    t_len *Len;
+    t_len *len_l;
 
-    Len = malloc(sizeof(t_len));
-    Len->lenOfResult = 0;
-    Len->lenOfPower = 0;
-    Len->lenOfCurrentNbr = 0;
-    Len->lenOfIntPart = 0;
-    Len->flagIsFloatPart = 0;
-    return (Len);
+    len_l = malloc(sizeof(t_len));
+    len_l->lenOfResult = 0;
+    len_l->lenOfPower = 0;
+    len_l->lenOfCurrentNbr = 0;
+    len_l->lenOfIntPart = 0;
+    len_l->flagIsFloatPart = 0;
+    return (len_l);
 }
 
-void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len)
+void ft_plus_float(char *curret_num, char *power_two,t_len *len_l)
 {
-    if(!(*curretNum))
+    if(!(*curret_num))
     {
-        ft_strcpy(curretNum, powerTwo);
+        ft_strcpy(curret_num, power_two);
         return;
     }
-    ft_makeEven(curretNum, powerTwo);
-    Len->lenOfCurrentNbr = ft_strlen(curretNum);
-    Len->lenOfPower = ft_strlen(powerTwo);
-    if(Len->lenOfCurrentNbr < Len->lenOfPower)
+    ft_make_even(curret_num, power_two);
+    len_l->lenOfCurrentNbr = ft_strlen(curret_num);
+    len_l->lenOfPower = ft_strlen(power_two);
+    if(len_l->lenOfCurrentNbr < len_l->lenOfPower)
     {
-        ft_memset((curretNum) + (Len->lenOfCurrentNbr),'0', (Len->lenOfPower - Len->lenOfCurrentNbr));
-        Len->lenOfCurrentNbr += Len->lenOfPower - Len->lenOfCurrentNbr;
+        ft_memset((curret_num) + (len_l->lenOfCurrentNbr),'0', (len_l->lenOfPower - len_l->lenOfCurrentNbr));
+        len_l->lenOfCurrentNbr += len_l->lenOfPower - len_l->lenOfCurrentNbr;
     }
-    if(Len->lenOfCurrentNbr > Len->lenOfPower)
+    if(len_l->lenOfCurrentNbr > len_l->lenOfPower)
     {
-        ft_memset((powerTwo) + (Len->lenOfPower),'0', (Len->lenOfCurrentNbr - Len->lenOfPower));
-        Len->lenOfPower += Len->lenOfCurrentNbr - Len->lenOfPower;
+        ft_memset((power_two) + (len_l->lenOfPower),'0', (len_l->lenOfCurrentNbr - len_l->lenOfPower));
+        len_l->lenOfPower += len_l->lenOfCurrentNbr - len_l->lenOfPower;
     }
-    Len->flagIsFloatPart = 1;
-    ft_plus_int(curretNum, powerTwo, Len);
-    if(ft_strlen(curretNum) > (Len->lenOfCurrentNbr > Len->lenOfPower ? Len->lenOfCurrentNbr - 2 : Len->lenOfPower - 2))
-        curretNum[0] = *curretNum;
+    len_l->flagIsFloatPart = 1;
+    ft_plus_int(curret_num, power_two, len_l);
+    if(ft_strlen(curret_num) > (len_l->lenOfCurrentNbr > len_l->lenOfPower ? len_l->lenOfCurrentNbr - 2 : len_l->lenOfPower - 2))
+        curret_num[0] = *curret_num;
 }
 
 void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst)
@@ -67,11 +67,11 @@ void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst)
     if(tmp_result && (lst->flag & ZERO_PRIC) == ZERO_PRIC && (lst->flag & HASH) != HASH
         && !(is_NanOrInf(tmp_result)))
         tmp_result[ft_checkLenOfInt(tmp_result)] = '\0';
-    lst->pricision = 0;
-    if(lst->flag || lst->width)
+    lst->pr = 0;
+    if(lst->flag || lst->w)
     {
-        if(lst->width > 2000)
-            lst->width = 0;
+        if(lst->w > 2000)
+            lst->w = 0;
         ft_transform_int_result(result, tmp_result, lst);
     }
     else

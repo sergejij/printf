@@ -27,10 +27,10 @@
 typedef struct  s_prinlist
 {
     unsigned int flag;
-    unsigned int modifier;
+    unsigned int mod;
     unsigned int h;
-    size_t width;
-    size_t pricision;
+    size_t w;
+    size_t pr;
     size_t len;
 
 }               t_prinlist;
@@ -98,14 +98,14 @@ void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len);
 void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len);
 size_t ft_checkLenOfInt(char *nbr);
 int is_NanOrInf(char *dbl);
-void ft_roundering(char *currResult, size_t pricision, t_len *Len);
+void ft_roundering(char *cur_res, size_t pricision, t_len *Len);
 void    ft_add_neg_sign(char **float_nbr, char **buff);
 int is_NanOrInf(char *dbl);
 t_len *ft_make_len_struct(void);
 size_t ft_checkLenOfInt(char *nbr);
-void ft_makeEven(char *curretNum, char *powerTwo);
+void ft_make_even(char *cur_num, char *powerTwo);
 void ft_handle_result_f(int len, int *int_res, char *result);
-void ft_makePower(char *current_power);
+void ft_make_power(char *current_power);
 char *findPower(int power);
 void ft_choice_options(char **result, char *tmp_result, t_prinlist *lst);
 

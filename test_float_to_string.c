@@ -1,62 +1,58 @@
 
 #include "ft_printf.h"
 
-void    ft_calculate(int *res, char *curretNum, char *cpyPower, t_len *Len)
+void    ft_calculate(int *res, char *cur_num, char *cpy_pow, t_len *len_l)
 {
-    while(*curretNum || *cpyPower)
+    while(*cur_num || *cpy_pow)
     {
-        if(*curretNum == '.' && *cpyPower == '.')
+        if(*cur_num == '.' && *cpy_pow == '.')
         {
-            res[Len->lenOfCurrentNbr++] = '.' - '0';
-            curretNum++;
-            cpyPower++;
+            res[len_l->lenOfCurrentNbr++] = '.' - '0';
+            cur_num++;
+            cpy_pow++;
         }
-        if(*curretNum && *cpyPower)
-            res[Len->lenOfCurrentNbr] = (((*cpyPower++ - '0') + (*curretNum++ - '0')) + Len->flagIsFloatPart);
-        else if(!(*curretNum) && *cpyPower)
-            res[Len->lenOfCurrentNbr] = *cpyPower++ - '0' + Len->flagIsFloatPart;
+        if(*cur_num && *cpy_pow)
+            res[len_l->lenOfCurrentNbr] = (((*cpy_pow++ - '0') + (*cur_num++ - '0')) + len_l->flagIsFloatPart);
+        else if(!(*cur_num) && *cpy_pow)
+            res[len_l->lenOfCurrentNbr] = *cpy_pow++ - '0' + len_l->flagIsFloatPart;
         else
-            res[Len->lenOfCurrentNbr] = *curretNum++ -'0' + Len->flagIsFloatPart;
-        Len->flagIsFloatPart = 0;
-        if(res[Len->lenOfCurrentNbr] > 9)
+            res[len_l->lenOfCurrentNbr] = *cur_num++ -'0' + len_l->flagIsFloatPart;
+        len_l->flagIsFloatPart = 0;
+        if(res[len_l->lenOfCurrentNbr] > 9)
         {
-            Len->flagIsFloatPart = res[Len->lenOfCurrentNbr] / 10;
-            res[Len->lenOfCurrentNbr] %= 10;
+            len_l->flagIsFloatPart = res[len_l->lenOfCurrentNbr] / 10;
+            res[len_l->lenOfCurrentNbr] %= 10;
         }
-        Len->lenOfCurrentNbr++;
+        len_l->lenOfCurrentNbr++;
     }
-    if (Len->flagIsFloatPart)
-        res[Len->lenOfCurrentNbr++] = Len->flagIsFloatPart;
-    Len->flagIsFloatPart = 0;
+    if (len_l->flagIsFloatPart)
+        res[len_l->lenOfCurrentNbr++] = len_l->flagIsFloatPart;
+    len_l->flagIsFloatPart = 0;
 }
 
-void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len)
+void ft_plus_int(char *cur_num, char *cpy_pow, t_len *len_l)
 {
     int *res;
     char *tmp_curr;
     char *tmp_power;
 
-    Len->lenOfCurrentNbr = ft_strlen(curretNum) > ft_strlen(cpyPower) ? ft_strlen(curretNum) : ft_strlen(cpyPower);
-    res = malloc(sizeof(int) * (Len->lenOfCurrentNbr + 1));
-    tmp_curr = curretNum;
-    tmp_power = cpyPower;
-    Len->lenOfCurrentNbr = 0;
-    ft_strrev(curretNum);
+    len_l->lenOfCurrentNbr = ft_strlen(cur_num) > ft_strlen(cpy_pow) ? ft_strlen(cur_num) : ft_strlen(cpy_pow);
+    res = malloc(sizeof(int) * (len_l->lenOfCurrentNbr + 1));
+    tmp_curr = cur_num;
+    tmp_power = cpy_pow;
+    len_l->lenOfCurrentNbr = 0;
+    ft_strrev(cur_num);
     ft_strrev(tmp_power);
-    Len->flagIsFloatPart = 0;
-    ft_calculate(res, tmp_curr, tmp_power, Len);
-    Len->lenOfResult = 0;
-    while(Len->lenOfCurrentNbr--)
+    len_l->flagIsFloatPart = 0;
+    ft_calculate(res, tmp_curr, tmp_power, len_l);
+    len_l->lenOfResult = 0;
+    while(len_l->lenOfCurrentNbr--)
     {
-        curretNum[Len->lenOfResult] = (char) (res[Len->lenOfCurrentNbr] + '0');
-        Len->lenOfResult++;
+        cur_num[len_l->lenOfResult] = (char) (res[len_l->lenOfCurrentNbr] + '0');
+        len_l->lenOfResult++;
     }
-    curretNum[Len->lenOfResult] = '\0';
+    cur_num[len_l->lenOfResult] = '\0';
 }
-
-
-
-
 
 void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_len *Len)
 {
@@ -81,7 +77,7 @@ void ft_pasteIntPlusFloat(char *int_part, char *float_part, size_t pricision, t_
 
 
 
-void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part, char *float_part, t_len *Len)
+void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part, char *float_part, t_len *len_l)
 {
     unsigned long oneLeftOne;
     char *currNum;
@@ -92,7 +88,7 @@ void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part
         if((mantissa & oneLeftOne) == oneLeftOne)
         {
             currNum = findPower(exponent);
-            ft_plus_int(int_part, currNum, Len);
+            ft_plus_int(int_part, currNum, len_l);
         }
         exponent--;
         mantissa <<= 1;
@@ -102,7 +98,7 @@ void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part
         if((mantissa & oneLeftOne) == oneLeftOne)
         {
             currNum = findPower(exponent);
-            ft_plus_float(float_part, currNum, Len);
+            ft_plus_float(float_part, currNum, len_l);
         }
         mantissa <<= 1;
         exponent--;
@@ -121,7 +117,7 @@ char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist
     float_part = ft_strnew(2000);
 
     ft_binary_to_decimal(mantissa, exponent, int_part, float_part, Len);
-    ft_pasteIntPlusFloat(int_part, float_part, lst->pricision, Len);
+    ft_pasteIntPlusFloat(int_part, float_part, lst->pr, Len);
     if(sign < 0)
         ft_add_neg_sign(&int_part, &float_part);
     return (int_part);

@@ -98,7 +98,7 @@ char *ft_floatHandleRes(char *dest, char* src, size_t intLen)
     return (dest);
 }
 
-void ft_makeEven(char *curretNum, char *powerTwo)
+void ft_make_even(char *curretNum, char *powerTwo)
 {
     size_t intCurrLen;
     size_t intPowLen;

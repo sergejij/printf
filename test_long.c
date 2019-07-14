@@ -4,23 +4,23 @@
 
 void    ft_pricision(char **result, t_prinlist *lst, size_t len, char *arg)
 {
-    if (lst->width > len && lst->width > lst->pricision)
-        ft_memset(*result, ' ', arg[0] == '-' ? lst->width - (lst->pricision + 1) : lst->width - lst->pricision);
-    else if (lst->width < lst->pricision && lst->pricision >= len)
+    if (lst->w > len && lst->w > lst->pr)
+        ft_memset(*result, ' ', arg[0] == '-' ? lst->w - (lst->pr + 1) : lst->w - lst->pr);
+    else if (lst->w < lst->pr && lst->pr >= len)
     {
-        ft_memset(*result, '0', arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len);
-        (*result)[arg[0] == '-' ? lst->pricision - (len - 1) : lst->pricision - len] = '\0';
+        ft_memset(*result, '0', arg[0] == '-' ? lst->pr - (len - 1) : lst->pr - len);
+        (*result)[arg[0] == '-' ? lst->pr - (len - 1) : lst->pr - len] = '\0';
         return;
     }
     if(ft_strncmp(arg, "-", 1) == 0)
     {
         ft_strcat(*result, "-");
-        ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - (len - 1));
-        if(lst->width > lst->len)
+        ft_memset(*result + (lst->w - lst->pr), '0', lst->pr  - (len - 1));
+        if(lst->w > lst->len)
             ft_strcat(*result, arg + 1);
     }
     else
-        ft_memset(*result + (lst->width - lst->pricision), '0', lst->pricision  - len);
+        ft_memset(*result + (lst->w - lst->pr), '0', lst->pr  - len);
 
 }
 
@@ -41,7 +41,7 @@ void ft_transform_int_result(char **result, char *cpy_num, t_prinlist *lst)
     {
         ft_recording(result, cpy_num, lst, ' ');
     }
-    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->width < lst->len)
+    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  **result != '-' && lst->w < lst->len)
     {
         ft_strcpy(*result, " ");
         ft_strcat(*result, cpy_num);
@@ -105,7 +105,7 @@ void ft_long_to_str(char **result, long long int arg, t_prinlist *lst)
     i = 0;
     arg_str = ft_strnew(22);
     ft_ltoa(&arg_str, arg, i);
-    if(lst->flag || lst->width || lst->pricision)
+    if(lst->flag || lst->w || lst->pr)
         ft_transform_int_result(result, arg_str, lst);
     else
         ft_strcpy(*result, arg_str);

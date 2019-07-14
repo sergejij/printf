@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 16:13:07 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 15:21:21 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:14:08 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_change_type_u_l(unsigned long long *arg, t_prinlist *lst)
 
 	new_arg_l = 0;
 	new_arg_ll = 0;
-	if ((lst->modifier & L_ONE) == L_ONE)
+	if ((lst->mod & L_ONE) == L_ONE)
 	{
 		new_arg_l = *arg;
 		*arg = new_arg_l;
 	}
-	else if ((lst->modifier & LL) == LL)
+	else if ((lst->mod & LL) == LL)
 	{
 		new_arg_ll = *arg;
 		*arg = new_arg_ll;
@@ -38,12 +38,12 @@ void	ft_change_type_u(unsigned long long *arg, t_prinlist *lst)
 
 	new_arg_h = 0;
 	new_arg_hh = 0;
-	if ((lst->modifier & H) == H)
+	if ((lst->mod & H) == H)
 	{
 		new_arg_h = *arg;
 		*arg = new_arg_h;
 	}
-	else if ((lst->modifier & HH) == HH)
+	else if ((lst->mod & HH) == HH)
 	{
 		new_arg_hh = *arg;
 		*arg = new_arg_hh;
@@ -97,19 +97,19 @@ void	ft_add_unsigned(char **result, unsigned long long arg, t_prinlist *lst)
 	char					*arg_str;
 
 	arg_str = ft_strnew(22);
-	if (lst->modifier)
+	if (lst->mod)
 		ft_change_type_u(&arg, lst);
 	ft_ultoa(&arg_str, arg);
 	if ((lst->flag & PLUS) == PLUS)
 		lst->flag = lst->flag ^ PLUS;
 	if ((lst->flag & ZERO_PRIC) == ZERO_PRIC && arg_str[0] == '0')
 	{
-		if (lst->width)
+		if (lst->w)
 			arg_str[0] = ' ';
 		else
 			arg_str[0] = '\0';
 	}
-	if ((lst->flag || lst->width || lst->pricision) && (lst->flag & SPACE) != SPACE)
+	if ((lst->flag || lst->w || lst->pr) && (lst->flag & SPACE) != SPACE)
 		ft_transform_int_result(result, arg_str, lst);
 	else
 		ft_strcpy(*result, arg_str);

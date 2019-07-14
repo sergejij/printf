@@ -21,10 +21,10 @@ char *ft_makeCpyStr(char *str_arg, t_prinlist *lst, int numSys)
             exit(1);
         ft_strcpy(arg, str_arg);
     }
-    if(lst->pricision && lst->pricision < len && numSys != 16)
+    if(lst->pr && lst->pr < len && numSys != 16)
     {
-        arg[lst->pricision] = '\0';
-        len = lst->pricision;
+        arg[lst->pr] = '\0';
+        len = lst->pr;
     }
     lst->len = len;
     return (arg);
@@ -37,15 +37,15 @@ char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys)
     arg = NULL;
 
     arg = ft_makeCpyStr(str_arg, lst, numSys);
-    if(lst->width > lst->len && ((lst->flag & MINUS) == MINUS))// сдвигаем влево
+    if(lst->w > lst->len && ((lst->flag & MINUS) == MINUS))// сдвигаем влево
     {
         ft_strcpy(*result, arg);
-        ft_memset((*result) + lst->len, ' ', lst->width - lst->len);
+        ft_memset((*result) + lst->len, ' ', lst->w - lst->len);
     }
-    else if(lst->width && lst->width > lst->len) // сдвигаем вправо
+    else if(lst->w && lst->w > lst->len) // сдвигаем вправо
     {
-        ft_memset(&((*result)[0]), ' ', lst->width - lst->len);
-        ft_strcpy((*result) + (lst->width - lst->len), arg);
+        ft_memset(&((*result)[0]), ' ', lst->w - lst->len);
+        ft_strcpy((*result) + (lst->w - lst->len), arg);
     }
     else
         ft_strcpy(*result, arg);
@@ -57,10 +57,10 @@ void ft_print_full_chr_width(t_prinlist *lst)
     char *tmp;
 
     tmp = NULL;
-    tmp = (char*)malloc(sizeof(char) * lst->width - 1);
-    ft_memset(tmp, ' ', lst->width - 1);
-    write(1, tmp, lst->width - 1);
-    g_sym_count += lst->width - 1;
+    tmp = (char*)malloc(sizeof(char) * lst->w - 1);
+    ft_memset(tmp, ' ', lst->w - 1);
+    write(1, tmp, lst->w - 1);
+    g_sym_count += lst->w - 1;
     ft_strdel(&tmp);
 }
 
@@ -70,11 +70,11 @@ void ft_add_zero_chr(t_prinlist *lst)
     if(((lst->flag & MINUS) == MINUS))
     {
         write(1, "\0", 1);
-        if(lst->width > 1)
+        if(lst->w > 1)
             ft_print_full_chr_width(lst);
         return;
     }
-    else if(lst->width > 1)
+    else if(lst->w > 1)
         ft_print_full_chr_width(lst);
     write(1, "\0", 1);
     g_sym_count += 1;
@@ -88,15 +88,15 @@ void ft_add_char(char **result, int chr_arg_int, t_prinlist *lst)
         ft_add_zero_chr(lst);
     else
     {
-        if(lst->width > 1)
+        if(lst->w > 1)
         {
-            ft_memset(*result, ' ', lst->width);
+            ft_memset(*result, ' ', lst->w);
             if((lst->flag & MINUS) == MINUS)
                 (*result)[0] = chr_arg;
             else
-                (*result)[lst->width - 1] = chr_arg;
+                (*result)[lst->w - 1] = chr_arg;
         }
         else
-            (*result)[lst->width] = chr_arg; // мб просто от 0 написать?
+            (*result)[lst->w] = chr_arg; // мб просто от 0 написать?
     }
 }

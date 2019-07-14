@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 19:01:20 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 14:49:23 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:20:03 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void ft_change_type_int(int *arg, t_prinlist *lst) {
     short new_arg_h = 0;
     char new_arg_hh = 0;
 
-    if((lst->modifier & H) == H)
+    if((lst->mod & H) == H)
     {
         new_arg_h = *arg;
         *arg = new_arg_h;
     }
-    else if((lst->modifier & HH) == HH)
+    else if((lst->mod & HH) == HH)
     {
         new_arg_hh = *arg;
         *arg = new_arg_hh;
@@ -36,7 +36,7 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
     char *arg;
 
     arg = NULL;
-    if(lst->modifier)
+    if(lst->mod)
         ft_change_type_int(&arg_int, lst);
     arg = ft_itoa(arg_int);
     len = ft_strlen(arg);
@@ -57,7 +57,7 @@ void ft_add_integer(char **result, int arg_int, t_prinlist *lst)
         ft_recording(result, arg, lst, '0');
     else
         ft_recording(result, arg, lst, ' ');
-    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  arg_int >=0 && lst->width <= len)
+    if ((lst->flag & SPACE) == SPACE && (lst->flag & PLUS) != PLUS &&  arg_int >=0 && lst->w <= len)
         *result = ft_strjoin(" ", *result);
     //ft_strdel(&arg); // распечатать когда уберем все strjoin
 }

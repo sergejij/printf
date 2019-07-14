@@ -11,30 +11,30 @@ size_t ft_checkLenOfInt(char *nbr)
     return (i);
 }
 
-void ft_makeEven(char *curretNum, char *powerTwo)
+void ft_make_even(char *cur_num,char *pow_two)
 {
-    size_t intCurrLen;
-    size_t intPowLen;
+    size_t i_cur_len;
+    size_t i_pow_len;
     char *tmp;
 
-    intCurrLen = 0;
-    intPowLen = 0;
-    tmp = (char *)malloc(sizeof(char) * (ft_strlen(curretNum) + ft_strlen(powerTwo)));
-    while(curretNum[intCurrLen] != '.')
-        intCurrLen++;
-    while(powerTwo[intPowLen] != '.')
-        intPowLen++;
-    if(intCurrLen > intPowLen)
+    i_cur_len = 0;
+    i_pow_len = 0;
+    tmp = (char *)malloc(sizeof(char) * (ft_strlen(cur_num) + ft_strlen(pow_two)));
+    while(cur_num[i_cur_len] != '.')
+        i_cur_len++;
+    while(pow_two[i_pow_len] != '.')
+        i_pow_len++;
+    if(i_cur_len > i_pow_len)
     {
-        ft_memset(tmp, '0', intCurrLen - intPowLen);
-        ft_strcat(tmp, powerTwo);
-        ft_strcpy(powerTwo, tmp);
+        ft_memset(tmp, '0', i_cur_len - i_pow_len);
+        ft_strcat(tmp, pow_two);
+        ft_strcpy(pow_two, tmp);
     }
-    else if (intPowLen > intCurrLen)
+    else if (i_pow_len > i_cur_len)
     {
-        ft_memset(tmp, '0', intPowLen - intCurrLen);
-        ft_strcat(tmp, curretNum);
-        ft_strcpy(curretNum, tmp);
+        ft_memset(tmp, '0', i_pow_len - i_cur_len);
+        ft_strcat(tmp, cur_num);
+        ft_strcpy(cur_num, tmp);
     }
 }
 
@@ -52,7 +52,7 @@ void ft_handle_result_f(int len, int *int_res, char *result)
     result[j] = '\0';
 }
 
-void ft_makePower(char *current_power)
+void ft_make_power(char *current_power)
 {
     int *res;
     char *tmp;
@@ -81,30 +81,30 @@ void ft_makePower(char *current_power)
     ft_handle_result_f(len, res, current_power);
 }
 
-char *findPower(int power)
+char *ft_find_power(int power)
 {
-    char *posPow = NULL;
-    char *negPow = NULL;
+    char *pos_pow= NULL;
+    char *neg_pow = NULL;
     char *result = NULL;
     char *tmp;
 
-    posPow = ft_strdup("2");
-    negPow = ft_strdup("00000000000000000000000082718061255302767487140869206996285356581211090087890625");
+    pos_pow = ft_strdup("2");
+    neg_pow = ft_strdup("00000000000000000000000082718061255302767487140869206996285356581211090087890625");
     tmp = NULL;
     result = (char *)malloc(sizeof(char) * 310);
     if(power == 0)
         ft_strcpy(result, "1");
     else if(power > 0)
     {
-        ft_strcpy(result, posPow);
+        ft_strcpy(result, pos_pow);
         while(power-- > 1)
-            ft_makePower(result);
+            ft_make_power(result);
     }
     else if (power < 0)
     {
-        ft_strcpy(result, negPow);
+        ft_strcpy(result, neg_pow);
         while(power-- > -80)
-            ft_makePower(result);
+            ft_make_power(result);
         tmp = result;
         result = ft_strjoin("0.", tmp);
     }

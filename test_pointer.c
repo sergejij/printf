@@ -62,16 +62,16 @@ void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst)
     new_result = ft_strjoin("0x" , new_result);
     ft_strdel(&tmp);
     len = ft_strlen(new_result);
-    if (lst->width > len && ((lst->flag & 4) == 4))// сдвигаем влево
+    if (lst->w > len && ((lst->flag & 4) == 4))// сдвигаем влево
     {
         *result = ft_strjoin(*result, new_result);
         tmp = *result + len;
-        ft_memset(tmp, ' ', lst->width - len);
+        ft_memset(tmp, ' ', lst->w - len);
     }
-    else if (lst->width && lst->width > len) // сдвигаем вправо
+    else if (lst->w && lst->w > len) // сдвигаем вправо
     {
-        ft_memset(*result, ' ', lst->width - len);
-        tmp = *result + (lst->width - len);
+        ft_memset(*result, ' ', lst->w - len);
+        tmp = *result + (lst->w - len);
         tmp = ft_strcpy(tmp, new_result);
     }
     else
