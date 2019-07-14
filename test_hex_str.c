@@ -6,7 +6,7 @@
 /*   By: ubartemi <ubartemi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 12:02:53 by ubartemi          #+#    #+#             */
-/*   Updated: 2019/07/14 18:18:25 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/14 18:20:23 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,8 +214,8 @@ void	ft_add_uhex_str2(char **result, char *str, char sym, t_prinlist *lst)
 	}
 }
 
-void	ft_add_uhex_str(char **result, unsigned long long arg,
-		t_prinlist *lst, char sym)
+void	ft_uh(char **result, unsigned long long arg,
+              t_prinlist *lst, char sym)
 {
 	char						*str;
 	char						*tmp;

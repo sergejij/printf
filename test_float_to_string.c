@@ -105,7 +105,7 @@ void ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_part
     }
 }
 
-char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist *lst)
+char *ft_add_d(unsigned long mantissa, short exponent, int sign, t_prinlist *lst)
 {
 
     char *int_part;

@@ -48,7 +48,7 @@ typedef struct s_len{
 int ft_printf(const char *apformat, ...);
 int ft_analise_flags(char *format, t_prinlist *lst);
 int ft_is_type(char *c, t_prinlist *lst);
-void ft_analise_types(char *format, char *result, va_list ap, t_prinlist *lst);
+void ft_a_typ(char *format, char *res, va_list ap, t_prinlist *lst);
 
                         /* string | char */
                         char *ft_add_string(char **result, char *str_arg, t_prinlist *lst, int numSys);
@@ -79,7 +79,7 @@ void    ft_pricision_hex(char *result, t_prinlist *lst, size_t len, char *str);
 void ft_add_unsigned(char **result, unsigned long long int arg, t_prinlist *lst);
 void ft_add_pointer(char **result, unsigned long arg, t_prinlist *lst);
 void ft_add_hex_str(char **result, long long arg, t_prinlist *lst, char sym);
-void ft_add_uhex_str(char **result, unsigned long long arg, t_prinlist *lst, char sym);
+void ft_uh(char **result, unsigned long long arg, t_prinlist *lst, char sym);
 
 void ft_add_octal_u(char **result, unsigned long long arg, t_prinlist *lst);
 void ft_add_octal(char **result, unsigned int arg, t_prinlist *lst);
@@ -92,8 +92,8 @@ char		*ft_itoa_uhex(unsigned long long int n, char sym);
 
                         /*      float        */
 
-char *ft_add_double(unsigned long mantissa, short exponent, int sign, t_prinlist *lst);
-void ft_parse_double(char **result, long double arg_double, t_prinlist *lst);
+char *ft_add_d(unsigned long mantissa, short exponent, int sign, t_prinlist *lst);
+void ft_parse_d(char **result, long double arg_d, t_prinlist *lst);
 void ft_plus_float(char *curretNum, char *powerTwo, t_len *Len);
 void ft_plus_int(char *curretNum, char *cpyPower, t_len *Len);
 size_t ft_checkLenOfInt(char *nbr);
