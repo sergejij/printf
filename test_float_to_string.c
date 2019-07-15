@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:02:26 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 19:22:04 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:06:33 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,32 +86,32 @@ void	ft_paste_int_pl_float(char *int_p, char *f_part, size_t pric, t_len *l)
 	int_p[ft_check_len_int(int_p) + pric + 1] = '\0';
 }
 
-void	ft_binary_to_decimal(unsigned long mantissa, short exponent, char *int_p, char *f_part, t_len *len_l)
+char	*ft_bi_t_dc(unsigned long mant, short exp, char *f_part, t_len *len_l)
 {
-	unsigned long	one_left_one;
-	char			*cur_n;
+	char	*cur_n;
+	char	*int_p;
 
-	one_left_one = 0x8000000000000000;
-	while (mantissa && exponent >= 0)
+	int_p = ft_strnew(2000);
+	while (mant && exp-- > 0)
 	{
-		if ((mantissa & one_left_one) == one_left_one)
+		if ((mant & len_l->one_left_one) == len_l->one_left_one)
 		{
-			cur_n = ft_find_power(exponent);
+			cur_n = ft_find_power(exp);
 			ft_plus_int(int_p, cur_n, len_l);
 		}
-		exponent--;
-		mantissa <<= 1;
+		mant <<= 1;
 	}
-	while (mantissa)
+	while (mant)
 	{
-		if ((mantissa & one_left_one) == one_left_one)
+		if ((mant & len_l->one_left_one) == len_l->one_left_one)
 		{
-			cur_n = ft_find_power(exponent);
+			cur_n = ft_find_power(exp);
 			ft_plus_float(f_part, cur_n, len_l);
 		}
-		mantissa <<= 1;
-		exponent--;
+		mant <<= 1;
+		exp--;
 	}
+	return (int_p);
 }
 
 char	*ft_add_d(unsigned long mant, short exp, int sign, t_plist *lst)
@@ -121,9 +121,9 @@ char	*ft_add_d(unsigned long mant, short exp, int sign, t_plist *lst)
 	t_len	*len_l;
 
 	len_l = ft_make_len_struct();
-	int_part = ft_strnew(2000);
+	int_part = NULL;
 	float_part = ft_strnew(2000);
-	ft_binary_to_decimal(mant, exp, int_part, float_part, len_l);
+	int_part = ft_bi_t_dc(mant, ++exp, float_part, len_l);
 	ft_paste_int_pl_float(int_part, float_part, lst->pr, len_l);
 	if (sign < 0)
 		ft_add_neg_sign(&int_part, &float_part);

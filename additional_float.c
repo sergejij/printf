@@ -6,22 +6,11 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:39:28 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 19:54:53 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/15 15:42:51 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-size_t	ft_check_len_int(char *nbr)
-{
-	size_t	i;
-
-	i = 0;
-	if (nbr && !(is_nan_inf(nbr)))
-		while (nbr[i] != '.')
-			i++;
-	return (i);
-}
 
 void	ft_make_even(char *cur_num, char *pow_two)
 {
@@ -93,28 +82,41 @@ void	ft_make_power(char *current_power)
 	ft_handle_result_f(len, res, current_power);
 }
 
-char	*ft_find_power(int power)
+char	*ft_prop(int power)
 {
-	char	*pos_pow= NULL;
-	char	*neg_pow = NULL;
-	char	*result = NULL;
+	char	*res;
 	char	*tmp;
 
-	pos_pow = ft_strdup("2");
-	neg_pow = ft_strdup("00000000000000000000000082718061255302767487140869206996285356581211090087890625");
+	res = ft_strnew(311);
 	tmp = NULL;
-	result = (char *)malloc(sizeof(char) * 310);
 	if (power == 0)
-		ft_strcpy(result, "1");
+		ft_strcpy(res, "1");
 	else if (power > 0)
+		ft_strcpy(res, "2");
+	else if (power < 0)
 	{
-		ft_strcpy(result, pos_pow);
+		ft_strcpy(res, "0000000000000000000000008271806125530276");
+		tmp = ft_strdup("7487140869206996285356581211090087890625");
+		ft_strcat(res, tmp);
+	}
+	return (res);
+}
+
+char	*ft_find_power(int power)
+{
+	char	*result;
+	char	*tmp;
+
+	tmp = NULL;
+	result = NULL;
+	result = ft_prop(power);
+	if (power > 0)
+	{
 		while (power-- > 1)
 			ft_make_power(result);
 	}
 	else if (power < 0)
 	{
-		ft_strcpy(result, neg_pow);
 		while (power-- > -80)
 			ft_make_power(result);
 		tmp = result;

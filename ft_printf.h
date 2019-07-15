@@ -35,12 +35,14 @@ typedef struct  s_plist
 
 }               t_plist;
 
-typedef struct s_len{
+typedef struct s_len
+{
     size_t cur_n;
     size_t r;
     size_t pow;
     size_t i_part;
     int is_float_p;
+    unsigned long one_left_one;
 } t_len;
 
                         /* main function */

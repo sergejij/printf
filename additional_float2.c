@@ -46,6 +46,7 @@ t_len	*ft_make_len_struct(void)
 	len_l->cur_n = 0;
 	len_l->i_part = 0;
 	len_l->is_float_p = 0;
+	len_l->one_left_one = 0x8000000000000000;
 	return (len_l);
 }
 

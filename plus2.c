@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 19:34:29 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 19:42:40 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:08:07 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,17 @@ void	ft_plus_negative_width(char **res, char *arg, t_plist *lst, size_t len)
 		ft_memset(*res, ' ', lst->w - lst->len);
 		ft_strcpy(*res + lst->w - lst->len, arg);
 	}
+}
+
+size_t	ft_check_len_int(char *nbr)
+{
+	size_t	i;
+
+	i = 0;
+	if (nbr && !(is_nan_inf(nbr)))
+		while (nbr[i] != '.')
+			i++;
+	return (i);
 }
 
 void	ft_plus_negative(char **result, char *arg, t_plist *lst, size_t len)
