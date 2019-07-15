@@ -22,9 +22,9 @@ int main()
  //ОЧЕНЬ ВАЖНЫЙ БАГ
 
      printf("My funk\n");
-    ft_printf("%.50f\n", 38546.5849);
+    ft_printf("% u\n", 4294967295);
     printf("origin:\n");
-     printf("%.50f\n", 38546.5849);
+     printf("% u\n", 4294967295);
 //   printf("My funk\n");
 //   ft_printf("%-#23.5hX\n", ULLONG_MAX);
 //   printf("origin:\n");
