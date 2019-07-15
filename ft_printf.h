@@ -53,7 +53,7 @@ int ft_is_type(char *c, t_plist *lst);
 void ft_a_typ(char *format, char *res, va_list ap, t_plist *lst);
 
                         /* string | char */
-                        char *ft_add_string(char **result, char *str_arg, t_plist *lst, int numSys);
+                        char *ft_add_string(char **result, char *str_arg, t_plist *lst, int num_s);
 void ft_add_char(char **result, int chr_arg_int, t_plist *lst);
 
                     /* integer | long | long long */
@@ -70,7 +70,7 @@ void    ft_minus(char **result, char *arg, t_plist *lst, size_t len);
 void    ft_minus_negative_l(char **result, char *arg, t_plist *lst, size_t len);
 void    ft_recording(char **result, char *arg, t_plist *lst, char fill);
 void    ft_recording_negative(char **result, char *arg, t_plist *lst, char fill);
-void    ft_pricision(char **result, t_plist *lst, size_t len, char *arg);
+void    ft_pricision(char **res, t_plist *lst, size_t len, char *arg);
 void    ft_plus(char **result, char *arg, t_plist *lst, size_t len);
 void    ft_plus_negative(char **result, char *arg, t_plist *lst, size_t len);
 void    ft_pricision_hex(char *result, t_plist *lst, size_t len, char *str);
