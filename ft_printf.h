@@ -101,6 +101,11 @@ char	*ft_itoa_uhex(unsigned long long int n, char sym);
 int     ft_if_zero_x(char **result, char *str, t_plist *lst);
 void	ft_add_uhex_str2(char **result, char *str, char sym, t_plist *lst);
 
+void	ft_change_type_oct_h(unsigned int *arg, t_plist *lst);
+void	ft_change_type_oct(unsigned int *arg, t_plist *lst);
+size_t	ft_lennum_octal(long long num);
+size_t	ft_lennum_octal_u(unsigned long long num);
+char		*ft_itoa_octal(unsigned long long n);
                         /*      float        */
 
 char *ft_add_d(unsigned long mant, short exp, int sign, t_plist *lst);

@@ -21,10 +21,10 @@ int main()
 
  //ОЧЕНЬ ВАЖНЫЙ БАГ
 
-
-    printf("%d\n", ft_printf("%-#hX|%-0hX|%#0hX|%-#0hX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
-
-    printf("%d\n", printf("%-#hX|%-0hX|%#0hX|%-#0hX\n", ULLONG_MAX, ULLONG_MAX, ULLONG_MAX, ULLONG_MAX));
+     printf("My funk\n");
+    ft_printf("% u\n", 4294967295);
+    printf("origin:\n");
+     printf("% u\n", 4294967295);
 //   printf("My funk\n");
 //   ft_printf("%-#23.5hX\n", ULLONG_MAX);
 //   printf("origin:\n");
