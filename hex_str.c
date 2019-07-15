@@ -43,9 +43,9 @@ void	ft_add_hex_str_3(char **result, char *cpy_res,
 	if ((lst->flag & HASH) == HASH && (lst->flag & ZERO) == ZERO && *str != '0')
 	{
 		if (lst->w > lst->len)
-			*result = ft_strjoin((lst->h & x) == x ? "0x" : "0X", *result + 2);
+			*result = ft_strjoin((lst->h & X) == X ? "0x" : "0X", *result + 2);
 		else
-			*result = ft_strjoin((lst->h & x) == x ? "0x" : "0X", *result);
+			*result = ft_strjoin((lst->h & X) == X ? "0x" : "0X", *result);
 	}
 }
 

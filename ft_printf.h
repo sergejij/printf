@@ -22,7 +22,7 @@
 #define L_ONE 2
 #define HH 4
 #define LL 8
-#define x 1
+#define X 1
 
 typedef struct  s_plist
 {
@@ -51,6 +51,11 @@ int ft_printf(const char *apformat, ...);
 int ft_analise_flags(char *format, t_plist *lst);
 int ft_is_type(char *c, t_plist *lst);
 void ft_a_typ(char *format, char *res, va_list ap, t_plist *lst);
+void	ft_hex_type(char *format, char **result, va_list ap, t_plist *lst);
+void	ft_digit_type(char **result, va_list ap, t_plist *lst);
+void	ft_octal_type(char **result, va_list ap, t_plist *lst);
+void	ft_unsigned_type(char **result, va_list ap, t_plist *lst);
+t_plist	*make_struct_for_flags(char *format);
 
                         /* string | char */
                         char *ft_add_string(char **result, char *str_arg, t_plist *lst, int num_s);
@@ -76,7 +81,7 @@ void    ft_plus_negative(char **result, char *arg, t_plist *lst, size_t len);
 void    ft_pricision_hex(char *result, t_plist *lst, size_t len, char *str);
 
 
-                        /* %x %X | unsigned | octal */
+                        /* %X %X | unsigned | octal */
 
 void ft_add_unsigned(char **result, unsigned long long int arg, t_plist *lst);
 void ft_add_pointer(char **result, unsigned long arg, t_plist *lst);
