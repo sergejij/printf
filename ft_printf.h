@@ -88,7 +88,16 @@ int		ft_lennum_base(unsigned long num);
 char	*ft_itoa_base_hex(int n);
 size_t  ft_lennum_hex(long long int num);
 size_t  ft_lennum_uhex(unsigned long long int num);
-char		*ft_itoa_uhex(unsigned long long int n, char sym);
+
+void	ft_change_type_hex_l(long long int *arg, t_plist *lst);
+void	ft_change_type_hex(long long int *arg, t_plist *lst);
+void	ft_pricision_hex2(char *result, t_plist *lst, size_t len, char *str);
+void	ft_change_type_hex(long long int *arg, t_plist *lst);
+void	ft_pricision_hex(char *result, t_plist *lst, size_t len, char *str);
+char	*ft_itoa_hex(long long int n, char sym);
+char	*ft_itoa_uhex(unsigned long long int n, char sym);
+int     ft_if_zero_x(char **result, char *str, t_plist *lst);
+void	ft_add_uhex_str2(char **result, char *str, char sym, t_plist *lst);
 
                         /*      float        */
 
