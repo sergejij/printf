@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void			ft_roundering(char *cur_res, size_t pric, t_len *len_l)
+void			ft_roundering(char *cur_res, size_t pric, t_len *l)
 {
 	char			*round;
 	char			*tmp;
@@ -29,12 +29,12 @@ void			ft_roundering(char *cur_res, size_t pric, t_len *len_l)
 	if (cur_res[r_nbr - 1] == '.')
 	{
 		if ((cur_res[r_nbr - 2] - '0') % 2 != 0 || (cur_res[r_nbr] - '0') >= 5)
-			ft_plus_float(cur_res, round, len_l);
+			ft_plus_float(cur_res, round, l);
 	}
 	else
 	{
 		if ((cur_res[r_nbr - 1] - '0') % 2 != 0 || (cur_res[r_nbr] - '0') >= 5)
-			ft_plus_float(cur_res, round, len_l);
+			ft_plus_float(cur_res, round, l);
 	}
 }
 

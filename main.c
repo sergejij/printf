@@ -11,35 +11,25 @@ int main()
 {
 
 
-    int a = 111111;
-//    int a_neg = -5;
-//    ft_printf("%03.2d\n", -1);
-//    printf("%03.2d\n", -1);
+    short int a = 1;
 
-
-
-
- //ОЧЕНЬ ВАЖНЫЙ БАГ
-
-     printf("My funk\n");
-    ft_printf("% u\n", 4294967295);
+    printf("My funk\n");
+    ft_printf("%hd\n", a);
     printf("origin:\n");
-     printf("% u\n", 4294967295);
-//   printf("My funk\n");
-//   ft_printf("%-#23.5hX\n", ULLONG_MAX);
-//   printf("origin:\n");
-//   printf("%-#23.5hX\n",  ULLONG_MAX);
-//
-//   printf("My funk\n");
-//    ft_printf("%23.5i|%-23.5i|%+23.5i|% 23.5i|%023.5i\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
-//    printf("origin:\n");
-//    printf("%23.5i|%-23.5i|%+23.5i|% 23.5i|%023.5i\n", INT_MIN, INT_MIN, INT_MIN, INT_MIN, INT_MIN);
+    printf("%hd\n", a);
 
-// ОЧЕНЬ ВАЖНЫЙ БАГ
-//    printf("3My funk\n");
-//    ft_printf("%.lf|%-.lf|%+.lf|% .lf|%#.lf|%0.lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
-//    printf("origin:\n");
-//    printf("%.lf|%-.lf|%+.lf|% .lf|%#.lf|%0.lf\n", 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849, 38546.5849);
+
+    printf("My funk\n");
+    ft_printf("%f\n", DBL_MAX);
+    printf("origin:\n");
+    printf("%f\n", DBL_MAX);
+
+    printf("My funk\n");
+    ft_printf("%020o|%u|%x|%X\n", 42, 42, 42, 42);
+    printf("origin:\n");
+    printf("%020o|%u|%x|%X\n", 42, 42, 42, 42);
+
+
 
     return  0;
 }

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	ft_make_even(char *cur_num, char *pow_two)
+void	ft_make_even(char *cur_num, char *power_two)
 {
 	size_t	i_cur_len;
 	size_t	i_pow_len;
@@ -20,16 +20,16 @@ void	ft_make_even(char *cur_num, char *pow_two)
 
 	i_cur_len = 0;
 	i_pow_len = 0;
-	tmp = ft_strnew(ft_strlen(cur_num) + ft_strlen(pow_two));
+	tmp = ft_strnew(ft_strlen(cur_num) + ft_strlen(power_two));
 	while (cur_num[i_cur_len] != '.')
 		i_cur_len++;
-	while (pow_two[i_pow_len] != '.')
+	while (power_two[i_pow_len] != '.')
 		i_pow_len++;
 	if (i_cur_len > i_pow_len)
 	{
 		ft_memset(tmp, '0', i_cur_len - i_pow_len);
-		ft_strcat(tmp, pow_two);
-		ft_strcpy(pow_two, tmp);
+		ft_strcat(tmp, power_two);
+		ft_strcpy(power_two, tmp);
 	}
 	else if (i_pow_len > i_cur_len)
 	{

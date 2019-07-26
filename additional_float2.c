@@ -6,7 +6,7 @@
 /*   By: aestella <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/14 18:51:07 by aestella          #+#    #+#             */
-/*   Updated: 2019/07/14 19:13:05 by aestella         ###   ########.fr       */
+/*   Updated: 2019/07/15 16:02:43 by aestella         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_len	*ft_make_len_struct(void)
 	return (len_l);
 }
 
-void	ft_plus_float(char *cur_n, char *power_two, t_len *len_l)
+void	ft_plus_float(char *cur_n, char *power_two, t_len *l)
 {
 	if (!(*cur_n))
 	{
@@ -58,22 +58,22 @@ void	ft_plus_float(char *cur_n, char *power_two, t_len *len_l)
 		return ;
 	}
 	ft_make_even(cur_n, power_two);
-	len_l->cur_n = ft_strlen(cur_n);
-	len_l->pow = ft_strlen(power_two);
-	if (len_l->cur_n < len_l->pow)
+	l->cur_n = ft_strlen(cur_n);
+	l->pow = ft_strlen(power_two);
+	if (l->cur_n < l->pow)
 	{
-		ft_memset((cur_n) + (len_l->cur_n), '0', (len_l->pow - len_l->cur_n));
-		len_l->cur_n += len_l->pow - len_l->cur_n;
+		ft_memset((cur_n) + (l->cur_n), '0', (l->pow - l->cur_n));
+		l->cur_n += l->pow - l->cur_n;
 	}
-	if (len_l->cur_n > len_l->pow)
+	if (l->cur_n > l->pow)
 	{
-		ft_memset((power_two) + (len_l->pow), '0', (len_l->cur_n - len_l->pow));
-		len_l->pow += len_l->cur_n - len_l->pow;
+		ft_memset((power_two) + (l->pow), '0', (l->cur_n - l->pow));
+		l->pow += l->cur_n - l->pow;
 	}
-	len_l->is_float_p = 1;
-	ft_plus_int(cur_n, power_two, len_l);
-	if (ft_strlen(cur_n) > (len_l->cur_n > len_l->pow ?
-				len_l->cur_n - 2 : len_l->pow - 2))
+	l->is_float_p = 1;
+	ft_plus_int(cur_n, power_two, l);
+	if (ft_strlen(cur_n) > (l->cur_n > l->pow ?
+				l->cur_n - 2 : l->pow - 2))
 		cur_n[0] = *cur_n;
 }
 
